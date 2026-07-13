@@ -1,0 +1,596 @@
+<title>広島学生AIハッカソン 2026 | 9.19 SAT</title>
+<style>
+  /* ============ 広島レッド × もみじ × 丸ゴシック ============ */
+  :root{
+    --cream:#FFF9F3;
+    --cream-alt:#FBEFE6;
+    --white:#FFFFFF;
+    --ink:#463832;
+    --ink-strong:#332622;
+    --muted:#8C7A70;
+    --red:#D62839;
+    --red-deep:#B01E2E;
+    --momiji:#F2762E;
+    --gold:#E8A13B;
+    --green:#4C956C;
+    --card-line:#F3E4D8;
+    --maru:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","HG Maru Gothic M-PRO","Yu Gothic UI","Yu Gothic",sans-serif;
+    --mono:ui-monospace,"SFMono-Regular","Menlo","Consolas",monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  .lp{background:var(--white);color:var(--ink);font-family:var(--maru);line-height:1.9;
+      -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{width:100%;max-width:1000px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{margin:0;line-height:1.35;text-wrap:balance;color:var(--ink-strong)}
+  a{color:inherit}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- header ---------- */
+  .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);
+       box-shadow:0 1px 0 rgba(70,56,50,.1)}
+  .bar .wrap{display:flex;align-items:center;gap:16px;height:62px}
+  .brand{font-weight:800;font-size:1rem;color:var(--ink-strong)}
+  .brand .o{color:var(--red)}
+  .bar .date{margin-left:auto;font-size:.78rem;color:var(--muted);display:none;font-weight:700}
+  @media(min-width:680px){.bar .date{display:block}}
+
+  .btn{display:inline-block;text-decoration:none;font-weight:800;text-align:center;font-family:var(--maru);
+    background:var(--red);color:#fff;border:none;border-radius:999px;cursor:pointer;
+    padding:.6em 1.5em;font-size:.9rem;box-shadow:0 4px 14px rgba(214,40,57,.3);
+    transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
+  .btn:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 8px 20px rgba(176,30,46,.38)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .btn.big{font-size:1.12rem;padding:.95em 2.8em}
+  .btn.sub{background:#fff;color:var(--red);border:2px solid var(--red);box-shadow:none}
+  .btn.sub:hover{background:#FDECEA;transform:translateY(-2px)}
+
+  /* ---------- momiji ---------- */
+  .momiji{position:absolute;pointer-events:none}
+  @media(prefers-reduced-motion:no-preference){
+    .momiji{animation:sway 9s ease-in-out infinite alternate;transform-origin:center}
+    @keyframes sway{
+      from{transform:rotate(var(--rot,0deg)) translateY(0)}
+      to{transform:rotate(calc(var(--rot,0deg) + 14deg)) translateY(14px)}
+    }
+  }
+  @media(prefers-reduced-motion:reduce){.momiji{animation:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;text-align:center;
+    background:linear-gradient(180deg,var(--cream-alt) 0%,var(--cream) 55%,var(--white) 100%);
+    padding:76px 0 92px}
+  .hero .wrap{position:relative;z-index:2}
+  .hero .when{display:inline-block;background:var(--red);color:#fff;font-weight:800;
+    border-radius:999px;padding:.45em 1.5em;font-size:.92rem;letter-spacing:.04em;
+    box-shadow:0 4px 12px rgba(214,40,57,.25)}
+  .hero .when .mono{color:#FFE3B8}
+  .hero h1{margin-top:1em;font-weight:800;font-size:clamp(2.4rem,7.6vw,4.5rem);line-height:1.3;letter-spacing:.02em}
+  .hero h1 .row{display:block}
+  .hero h1 .row.top{font-size:.42em;letter-spacing:.12em;color:var(--muted)}
+  .hero h1 .row.mid{font-size:.62em;margin:.5em 0 .45em;line-height:1.5}
+  .hero h1 .em{color:var(--red)}
+  .hero h1 .stroke{display:inline-block;background:#fff;border-radius:.35em;padding:.02em .35em;
+    box-shadow:0 3px 12px rgba(70,56,50,.1)}
+  .hero .lead{max-width:34em;margin:1.8em auto 0;font-size:clamp(.96rem,2vw,1.1rem);font-weight:700;color:var(--ink)}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:2.2em}
+  .hero .cap{width:100%;font-size:.85rem;color:var(--muted);font-weight:700}
+
+  .pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:2.4em}
+  .pill{background:#fff;border-radius:999px;padding:.45em 1.2em;font-size:.82rem;font-weight:800;
+    color:var(--ink);box-shadow:0 2px 8px rgba(70,56,50,.1)}
+  .pill b{color:var(--red)}
+
+  /* ---------- tools ---------- */
+  .tools{padding:34px 0 10px;text-align:center}
+  .tools .t-label{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.14em}
+  .tools .row{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;margin-top:14px}
+  .tool{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--ink);
+    background:var(--cream-alt);border-radius:10px;padding:.5em 1em}
+
+  /* ---------- section base ---------- */
+  section{padding:84px 0}
+  section.alt{background:var(--cream)}
+  .sec-head{text-align:center;max-width:44em;margin:0 auto}
+  .sec-head .en{font-family:var(--mono);font-size:.74rem;letter-spacing:.26em;color:var(--red);
+    text-transform:uppercase;font-weight:700}
+  .sec-head h2{font-size:clamp(1.6rem,4.4vw,2.4rem);font-weight:800;margin-top:.5em}
+  .sec-head h2 .em{color:var(--red)}
+  .sec-head .under{display:block;width:64px;height:5px;border-radius:99px;background:var(--red);margin:.9em auto 0}
+  .sec-head p{color:var(--muted);font-weight:700;margin:1.2em 0 0;font-size:.98rem}
+
+  /* ---------- features ---------- */
+  .feats{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
+  @media(min-width:640px){.feats{grid-template-columns:1fr 1fr}}
+  @media(min-width:960px){.feats{grid-template-columns:repeat(4,1fr)}}
+  .feat{background:#fff;border-radius:20px;padding:30px 22px;text-align:center;
+    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line);
+    transition:transform .2s ease}
+  .feat:hover{transform:translateY(-5px)}
+  .feat .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;
+    font-size:1.7rem;background:var(--cream-alt)}
+  .feat h3{font-size:1.08rem;font-weight:800;margin-top:.9em}
+  .feat p{font-size:.88rem;color:var(--muted);font-weight:700;margin:.5em 0 0;line-height:1.8}
+
+  /* ---------- steps ---------- */
+  .steps{display:grid;gap:22px;grid-template-columns:1fr;margin-top:52px}
+  @media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{background:#fff;border-radius:20px;padding:34px 26px 30px;position:relative;
+    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line)}
+  .step .n{position:absolute;top:-18px;left:22px;width:44px;height:44px;border-radius:50%;
+    background:var(--red);color:#fff;font-weight:800;display:grid;place-items:center;
+    font-size:1.15rem;box-shadow:0 4px 12px rgba(214,40,57,.33)}
+  .step h3{font-size:1.2rem;font-weight:800;margin-top:.3em}
+  .step p{font-size:.92rem;color:var(--muted);font-weight:700;margin:.6em 0 0}
+
+  /* ---------- timetable ---------- */
+  .tt{max-width:680px;margin:52px auto 0;position:relative;padding-left:30px}
+  .tt::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:4px;border-radius:99px;
+    background:var(--cream-alt)}
+  .tt-row{position:relative;display:grid;grid-template-columns:86px 1fr;gap:14px;padding:12px 0;align-items:baseline}
+  @media(min-width:560px){.tt-row{grid-template-columns:104px 1fr}}
+  .tt-row::before{content:"";position:absolute;left:-27px;top:1.15em;width:14px;height:14px;border-radius:50%;
+    background:#fff;border:4px solid var(--gold)}
+  .tt-row.key::before{border-color:var(--red)}
+  .tt-row .t{font-family:var(--mono);font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+  .tt-row .d{font-weight:800;color:var(--ink-strong)}
+  .tt-row .d small{display:block;font-weight:700;color:var(--muted);font-size:.85rem;margin-top:.1em}
+  .tt-row .tag{display:inline-block;background:var(--red);color:#fff;font-size:.68rem;font-weight:800;
+    border-radius:999px;padding:.18em .8em;margin-left:.6em;vertical-align:.15em}
+
+  /* ---------- themes ---------- */
+  .themes{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
+  @media(min-width:680px){.themes{grid-template-columns:1fr 1fr}}
+  .th{background:#fff;border-radius:20px;padding:30px 28px;border:1px solid var(--card-line);
+    box-shadow:0 6px 22px rgba(70,56,50,.08);transition:transform .2s ease}
+  .th:hover{transform:translateY(-5px)}
+  .th .k{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#fff;
+    background:var(--tcolor,var(--red));border-radius:999px;padding:.25em 1em;text-transform:uppercase;
+    font-family:var(--mono)}
+  .th h3{font-size:1.2rem;font-weight:800;margin:.7em 0 .3em}
+  .th p{font-size:.92rem;color:var(--muted);font-weight:700;margin:0}
+
+  /* ---------- prize ---------- */
+  .prize-hero{max-width:760px;margin:52px auto 0;background:#fff;border-radius:26px;overflow:hidden;
+    box-shadow:0 10px 34px rgba(70,56,50,.12);border:1px solid var(--card-line);text-align:center}
+  .prize-hero .top{background:linear-gradient(135deg,var(--red),var(--momiji));color:#fff;padding:34px 20px 30px}
+  .prize-hero .top .lab{font-weight:800;letter-spacing:.2em;font-size:.85rem}
+  .prize-hero .top .amt{font-family:var(--mono);font-weight:700;font-size:clamp(2.8rem,8vw,4.2rem);
+    line-height:1.1;margin-top:.1em;font-variant-numeric:tabular-nums;text-shadow:0 2px 8px rgba(0,0,0,.14)}
+  .prize-hero .top p{margin:.4em 0 0;font-weight:800;font-size:.95rem}
+  .prize-hero .bottom{display:grid;grid-template-columns:1fr;gap:0}
+  .prize-hero .cell{padding:26px 24px;border-top:1px solid var(--card-line)}
+  .prize-hero .cell b{font-size:1.05rem;color:var(--ink-strong)}
+  .prize-hero .cell p{font-size:.88rem;color:var(--muted);font-weight:700;margin:.4em 0 0}
+
+  /* ---------- judge ---------- */
+  .judge{max-width:860px;margin:40px auto 0}
+  .judge h3{text-align:center;font-size:1.25rem;font-weight:800;color:var(--ink-strong)}
+  .jd-grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:24px}
+  @media(min-width:560px){.jd-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:880px){.jd-grid{grid-template-columns:repeat(3,1fr)}}
+  .jd{background:#fff;border:2px solid var(--jc,var(--red));border-radius:16px;overflow:hidden;
+    box-shadow:0 5px 18px rgba(70,56,50,.08)}
+  .jd .hd{background:var(--jc,var(--red));color:#fff;font-weight:800;text-align:center;
+    padding:.5em .4em;font-size:1.02rem;letter-spacing:.06em}
+  .jd ul{list-style:none;margin:0;padding:14px 14px 16px;text-align:center}
+  .jd li{font-weight:800;color:var(--ink);font-size:.92rem;line-height:1.9}
+  .jd li small{font-weight:700;color:var(--muted);font-size:.78rem;display:block;line-height:1.6}
+  .jd-gate{margin-top:24px;background:var(--red);color:#fff;border-radius:14px;text-align:center;
+    padding:20px 18px}
+  .jd-gate .g-label{display:inline-block;background:#fff;color:var(--red);font-weight:800;
+    border-radius:999px;padding:.25em 1.2em;font-size:.8rem;letter-spacing:.14em}
+  .jd-gate .g-main{display:block;font-weight:800;font-size:clamp(1.2rem,3.2vw,1.6rem);margin-top:.4em}
+  .jd-gate small{display:block;margin-top:.4em;font-weight:700;font-size:.86rem;color:#FFD9DD}
+  .ugoite{margin-top:16px;background:#FFF23D;color:#2A2416;font-weight:800;text-align:center;
+    font-size:clamp(1.3rem,3.6vw,1.8rem);padding:.55em .5em;border-radius:12px;letter-spacing:.1em}
+  .j-note{margin-top:16px;text-align:center;font-size:.86rem;font-weight:800;color:var(--red)}
+
+  /* ---------- members ---------- */
+  .members{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
+  @media(min-width:560px){.members{grid-template-columns:1fr 1fr}}
+  @media(min-width:960px){.members{grid-template-columns:repeat(3,1fr)}}
+  .mem{background:#fff;border-radius:20px;padding:30px 20px 26px;text-align:center;
+    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line);
+    transition:transform .2s ease}
+  .mem:hover{transform:translateY(-5px)}
+  .mem .ph{width:112px;height:112px;margin:0 auto;border-radius:50%;background:var(--cream-alt);
+    display:grid;place-items:center;overflow:hidden;border:3px solid var(--card-line)}
+  .mem .ph img{width:100%;height:100%;object-fit:cover}
+  .mem .ph .q{font-size:2.8rem;font-weight:800;color:#D9C8B8;font-family:var(--maru)}
+  .mem .role{display:inline-block;margin-top:16px;font-size:.7rem;font-weight:800;color:#fff;
+    background:var(--red);border-radius:999px;padding:.24em 1em;letter-spacing:.08em}
+  .mem .role.gold,.mem.soon .role{background:var(--gold)}
+  .mem .role.green{background:var(--green)}
+  .mem b{display:block;margin-top:.55em;font-size:1.08rem;color:var(--ink-strong)}
+  .mem p{font-size:.84rem;color:var(--muted);font-weight:700;margin:.45em 0 0;line-height:1.75}
+
+  /* ---------- mentor recruit ---------- */
+  .recruit{max-width:760px;margin:44px auto 0;background:#fff;border:2px dashed var(--red);
+    border-radius:18px;padding:30px 26px;text-align:center}
+  .recruit .r-tag{display:inline-block;background:var(--red);color:#fff;font-weight:800;
+    border-radius:999px;padding:.32em 1.3em;font-size:.85rem;letter-spacing:.12em}
+  .recruit h3{font-size:1.3rem;font-weight:800;margin-top:.7em}
+  .recruit p{font-weight:700;color:var(--ink);margin:.7em 0 0;font-size:.95rem}
+  .recruit .cond{display:inline-block;margin-top:.9em;background:var(--cream-alt);border-radius:12px;
+    padding:.7em 1.4em;font-weight:800;color:var(--ink-strong);font-size:.95rem}
+  .recruit .cond .c-label{color:var(--red);margin-right:.6em}
+  .recruit small{display:block;margin-top:1.1em;color:var(--muted);font-weight:700;font-size:.8rem}
+
+  /* ---------- faq ---------- */
+  .faq{max-width:760px;margin:52px auto 0;display:grid;gap:14px}
+  .qa{background:#fff;border-radius:16px;border:1px solid var(--card-line);
+    box-shadow:0 4px 16px rgba(70,56,50,.07);overflow:hidden}
+  .qa summary{list-style:none;cursor:pointer;padding:20px 54px 20px 24px;font-weight:800;
+    color:var(--ink-strong);position:relative;font-size:1rem}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::before{content:"Q.";color:var(--red);margin-right:.6em;font-family:var(--mono);font-weight:700}
+  .qa summary::after{content:"＋";position:absolute;right:22px;top:50%;transform:translateY(-50%);
+    color:var(--red);font-weight:800;font-size:1.2rem}
+  .qa[open] summary::after{content:"－"}
+  .qa .a{padding:0 24px 22px 24px;font-size:.94rem;font-weight:700;color:var(--muted)}
+  .qa .a::before{content:"A.";color:var(--green);margin-right:.6em;font-family:var(--mono);font-weight:700}
+
+  /* ---------- overview ---------- */
+  .ov{max-width:760px;margin:52px auto 0;background:#fff;border-radius:20px;overflow:hidden;
+    border:1px solid var(--card-line);box-shadow:0 6px 22px rgba(70,56,50,.08)}
+  .ov-row{display:grid;grid-template-columns:104px 1fr;border-bottom:1px solid var(--card-line)}
+  @media(min-width:640px){.ov-row{grid-template-columns:160px 1fr}}
+  .ov-row:last-child{border-bottom:none}
+  .ov-row .l{padding:16px 18px;font-weight:800;font-size:.88rem;background:#FDECEA;color:var(--ink-strong)}
+  .ov-row .v{padding:16px 18px;font-size:.95rem;font-weight:700}
+  .ov-row .v small{color:var(--muted);font-size:.84rem;display:block}
+
+  /* ---------- final ---------- */
+  .final{position:relative;overflow:hidden;text-align:center;
+    background:linear-gradient(180deg,var(--white) 0%,var(--cream) 45%,var(--cream-alt) 100%);
+    padding:100px 0 110px}
+  .final .wrap{position:relative;z-index:2}
+  .final h2{font-size:clamp(1.8rem,5.4vw,3rem);font-weight:800}
+  .final h2 .em{color:var(--red)}
+  .final p{font-weight:800;color:var(--ink);margin:1.2em auto 0;max-width:28em}
+  .final .btn{margin-top:2.2em}
+  .final .note{font-size:.82rem;color:var(--muted);font-weight:700;margin-top:1.6em}
+
+  footer{background:var(--ink-strong);color:#DCCFC7;padding:30px 0;font-size:.84rem;font-weight:700}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+  footer b{color:#fff}
+
+  /* ---------- 「デフォルト版」ウォーターマーク（タイル状） ---------- */
+  .watermark{position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden}
+  .watermark .grid{position:absolute;top:-30%;left:-30%;width:160%;height:160%;
+    display:flex;flex-wrap:wrap;gap:0;transform:rotate(-30deg);
+    align-content:center;justify-content:center;user-select:none}
+  .watermark span{font-family:var(--maru);font-weight:800;
+    font-size:clamp(2rem,7vw,5rem);line-height:1.8;white-space:nowrap;
+    color:rgba(214,40,57,.12);letter-spacing:.05em;
+    padding:0 .6em;flex:0 0 auto}
+</style>
+
+<div class="lp">
+
+  <!-- 「デフォルト版」であることを示すウォーターマーク（タイル状に繰り返し） -->
+  <div class="watermark" aria-hidden="true"><div class="grid">
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
+  </div></div>
+
+  <!-- もみじの形（7枚の羽根＋茎）を一度定義して使い回す -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="momiji-leaf">
+        <g>
+          <polygon points="0,-46 9,-14 0,-2 -9,-14" transform="rotate(0)"/>
+          <polygon points="0,-40 8,-12 0,-2 -8,-12" transform="rotate(32)"/>
+          <polygon points="0,-40 8,-12 0,-2 -8,-12" transform="rotate(-32)"/>
+          <polygon points="0,-32 7,-10 0,-2 -7,-10" transform="rotate(64)"/>
+          <polygon points="0,-32 7,-10 0,-2 -7,-10" transform="rotate(-64)"/>
+          <polygon points="0,-24 6,-8 0,-2 -6,-8" transform="rotate(96)"/>
+          <polygon points="0,-24 6,-8 0,-2 -6,-8" transform="rotate(-96)"/>
+          <rect x="-1.6" y="-4" width="3.2" height="18" rx="1.6"/>
+        </g>
+      </g>
+    </defs>
+  </svg>
+
+  <header class="bar">
+    <div class="wrap">
+      <div class="brand">広島学生<span class="o">AI</span>ハッカソン 2026</div>
+      <div class="date">2026.9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
+      <a class="btn" href="#apply">参加申込（無料）</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <svg class="momiji" style="left:4%;top:70px;--rot:-18deg" width="74" height="74" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".8"/></svg>
+    <svg class="momiji" style="right:7%;top:110px;--rot:22deg;animation-delay:-3s" width="56" height="56" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#F2762E" opacity=".75"/></svg>
+    <svg class="momiji" style="left:10%;bottom:60px;--rot:40deg;animation-delay:-6s" width="48" height="48" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#E8A13B" opacity=".7"/></svg>
+    <svg class="momiji" style="right:13%;bottom:100px;--rot:-30deg;animation-delay:-1.5s" width="64" height="64" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".55"/></svg>
+    <div class="wrap">
+      <div class="when"><span class="mono">2026.9.19 SAT</span>　イノベーション・ハブ・ひろしまCamps で開催！</div>
+      <h1>
+        <span class="row top">はじめてでも、半日で。</span>
+        <span class="row mid"><span class="stroke">あなたのアイデアが<span class="em">動くアプリ</span>になる</span></span>
+        <span class="row">広島学生<span class="em">AI</span>ハッカソン</span>
+      </h1>
+      <p class="lead">AIと会話しながら、自分のアイデアを本物の動くアプリにする半日。審査されるのは「動くもの」だけ。対象は中学生・高校生・大学生。</p>
+      <div class="cta">
+        <a class="btn big" href="#apply">参加を申し込む</a>
+        <a class="btn big sub" href="#flow">当日の流れを見る</a>
+        <span class="cap">参加費無料・定員24名（大学生・高専生・専門学校生8名／高校生8名／中学生8名・応募多数の場合は抽選）</span>
+      </div>
+      <div class="pills">
+        <span class="pill">参加費<b>無料</b></span>
+        <span class="pill">賞金<b>3万円</b></span>
+        <span class="pill">半日で<b>完成</b></span>
+        <span class="pill">動くもので<b>勝負</b></span>
+        <span class="pill">チーム参加<b>（2〜3人）</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Features</span>
+        <h2>このハッカソンの<span class="em">4つの特徴</span></h2>
+        <span class="under"></span>
+      </div>
+      <div class="feats">
+        <div class="feat">
+          <div class="ic">🎓</div>
+          <h3>中学生から大学生対象</h3>
+          <p>中学生・高校生・大学生（高専生・専門学校生を含む）が対象。同じ土俵で競います。</p>
+        </div>
+        <div class="feat">
+          <div class="ic">⏱️</div>
+          <h3>4時間でアプリ開発</h3>
+          <p>その場でゼロから、約4時間の開発タイムで動くアプリを完成させます。</p>
+        </div>
+        <div class="feat">
+          <div class="ic">🚀</div>
+          <h3>審査は「動くもの」だけ</h3>
+          <p>スライドや発表のうまさは審査に入りません。動く作品の内容で勝負します。</p>
+        </div>
+        <div class="feat">
+          <div class="ic">🏆</div>
+          <h3>賞金3万円</h3>
+          <p>最優秀賞にはAmazonギフト券3万円。オーディエンス賞もあります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TIMETABLE ============ -->
+  <section id="flow">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Schedule</span>
+        <h2>当日の流れ</h2>
+        <span class="under"></span>
+        <p>11:00スタート、17:00に表彰までフィニッシュ。受付は10:30から。昼食は各自でご用意ください。</p>
+      </div>
+      <div class="tt">
+        <div class="tt-row"><span class="t">11:00</span><span class="d">開会・オリエンテーション<small>趣旨説明</small></span></div>
+        <div class="tt-row key"><span class="t">11:10</span><span class="d">テーマ発表<span class="tag">当日発表</span><small>お題はその場で発表。全員同じスタートライン！</small></span></div>
+        <div class="tt-row"><span class="t">11:15</span><span class="d">開発タイム<small>AIと話しながら、いきなり開発スタート。デプロイ（ネット公開）まで一気に。昼食は各自、好きなタイミングで</small></span></div>
+        <div class="tt-row key"><span class="t">15:15</span><span class="d">開発終了<span class="tag">ドキドキ</span><small>完成した作品をネットに公開して、URLを提出。このURLが成果物です</small></span></div>
+        <div class="tt-row"><span class="t">15:25</span><span class="d">発表<small>作品をスクリーンで実際に動かしながら発表します。スライドでの説明は不要です。</small></span></div>
+        <div class="tt-row"><span class="t">16:15</span><span class="d">審査<small>審査員が提出URLの作品を実際にさわって審査します</small></span></div>
+        <div class="tt-row"><span class="t">16:45</span><span class="d">結果発表・表彰・記念撮影</span></div>
+        <div class="tt-row"><span class="t">17:00</span><span class="d">終了</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRIZE ============ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Prize</span>
+        <h2>楽しく作れて、<span class="em">賞金もGET</span></h2>
+        <span class="under"></span>
+      </div>
+      <div class="prize-hero">
+        <div class="top">
+          <div class="lab">最優秀賞</div>
+          <div class="amt">¥30,000</div>
+          <p>Amazonギフト券／オーディエンス賞もあります</p>
+        </div>
+        <div class="bottom">
+          <div class="cell">
+            <b>「自分の作品」が残る</b>
+            <p>完成した動くアプリは、進学や就活でそのまま見せられる実績になります。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="judge">
+        <h3>審査基準</h3>
+        <div class="jd-grid">
+          <div class="jd" style="--jc:#D62839">
+            <div class="hd">テーマ適合性</div>
+            <ul>
+              <li>開発テーマに沿った作品であること<small>事前の作り込みは評価せず、その場で作り上げるものを評価します</small></li>
+            </ul>
+          </div>
+          <div class="jd" style="--jc:#F2762E">
+            <div class="hd">実装度</div>
+            <ul>
+              <li>作品が動くことを重視<small>アイデアのみは評価しません</small></li>
+            </ul>
+          </div>
+          <div class="jd" style="--jc:#E8A13B">
+            <div class="hd">チャレンジ精神</div>
+            <ul>
+              <li>知的好奇心と探求心</li>
+              <li>独創的な方法で問題を解決しようとする姿勢</li>
+            </ul>
+          </div>
+          <div class="jd" style="--jc:#4C956C">
+            <div class="hd">AI活用度</div>
+            <ul>
+              <li>AIをどれだけ活用しているか<small>AIと会話しながら、うまく使いこなして作れているかを評価します</small></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ugoite">動いてなんぼ！</div>
+        <div class="j-note">実際に動く作品だけが審査対象。スライドや発表のうまさは審査しません。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEMBERS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Members</span>
+        <h2>ファシリテーター・メンター・<span class="em">審査員</span></h2>
+        <span class="under"></span>
+        <p>当日、みなさんと一緒に走るメンバーです。メンター・審査員は順次公開します。</p>
+      </div>
+      <div class="members">
+        <div class="mem">
+          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <span class="role">ファシリテーター</span>
+          <b>藤本 勝己</b>
+          <p>HiBiS DX・ITトレンド研究部会 副部会長。</p>
+        </div>
+        <div class="mem">
+          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <span class="role gold">メンター</span>
+          <b>武村 達也</b>
+          <p>HiBiS DX・ITトレンド研究部会 部会長。AIを使ったアプリ開発者。</p>
+        </div>
+        <div class="mem">
+          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <span class="role gold">メンター</span>
+          <b>尾上 正幸</b>
+          <p>プロフィールは近日公開。</p>
+        </div>
+        <div class="mem soon">
+          <div class="ph"><span class="q">?</span></div>
+          <span class="role">メンター</span>
+          <b>COMING SOON</b>
+          <p>AIを仕事で使うプロが登場予定。おたのしみに！</p>
+        </div>
+        <div class="mem soon">
+          <div class="ph"><span class="q">?</span></div>
+          <span class="role green">審査員</span>
+          <b>COMING SOON</b>
+          <p>みなさんの作品を審査するゲストが登場予定。</p>
+        </div>
+        <div class="mem soon">
+          <div class="ph"><span class="q">?</span></div>
+          <span class="role green">審査員</span>
+          <b>COMING SOON</b>
+          <p>みなさんの作品を審査するゲストが登場予定。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">FAQ</span>
+        <h2>Q&A</h2>
+        <span class="under"></span>
+      </div>
+      <div class="faq">
+        <details class="qa">
+          <summary>AIでアプリを作ったことがないんですけど、大丈夫ですか？</summary>
+          <div class="a">大丈夫です。むしろ「はじめて」の人こそ歓迎します。ただ、一度も作ったことがないと当日は少し苦しいかもしれません。そこでひとつだけお願いがあります。当日までに一度、おうちでAIに「ネットに公開できるアプリを作りたいんだけど、どうすればいい？」と聞きながら、何か小さなものを作ってみてください。わからないことをAIに質問しながら覚えていく——このハッカソンで大切にしているのは、まさにその力です。</div>
+        </details>
+        <details class="qa">
+          <summary>ひとりでの参加はできる？</summary>
+          <div class="a">今回はチーム参加制です。2人または3人のチームを組んで、チーム単位でお申し込みください。学校の友達と組むのがおすすめです。</div>
+        </details>
+        <details class="qa">
+          <summary>学年や学校がちがう友達とチームを組める？</summary>
+          <div class="a">同じ区分（中学生／高校生／大学生・高専生・専門学校生）の中ならOKです。学年や学校がちがっても大丈夫（例：高1と高3、別の学校どうし）。ただし、中学生と高校生のように区分をまたぐ混成チームは組めません。</div>
+        </details>
+        <details class="qa">
+          <summary>参加に学校の許可はいる？</summary>
+          <div class="a">学校の許可は必要ありません。個人（チーム）で自由に参加できます。安心してお申し込みください。</div>
+        </details>
+        <details class="qa">
+          <summary>作った作品やアイデアは、どうあつかわれるの？</summary>
+          <div class="a">作品の権利（著作権など）は、作ったみなさんのチームのものです。主催者は、イベントの記録や告知（Webサイト・SNS・報道など）のために、作品の画面や当日の写真・映像を使わせてもらうことがあります。なお、発表はオープンな場で行うため秘密保持はできません。ヒミツにしたいアイデアの持ち込みは避けてください。また、他の人が権利を持つ素材（画像・音楽・コードなど）は、ライセンスを守って使いましょう。</div>
+        </details>
+        <details class="qa">
+          <summary>申し込んだら必ず参加できる？</summary>
+          <div class="a">申込締切は2026年8月31日（月）です。応募が定員（各区分8チーム分）を超えた場合は、各区分ごとに抽選します。抽選は9月1日（火）に行い、申し込んだすべてのチームに当落の結果をご連絡します。</div>
+        </details>
+        <details class="qa">
+          <summary>何を持っていけばいい？</summary>
+          <div class="a">チームで最低ひとりは、ノートPCを持ってきてください。PCがないと開発ができません（全員が持ってくる必要はありませんが、チームに1台もないと参加がむずかしくなります）。ただし、スマートフォンだけで開発してネットに公開できるなら、PCはなくても大丈夫です。あとは、アイデアと好奇心があれば十分です。</div>
+        </details>
+        <details class="qa">
+          <summary>お金はかかる？</summary>
+          <div class="a">参加費は無料です。気軽に参加してください。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Overview</span>
+        <h2>開催概要</h2>
+        <span class="under"></span>
+      </div>
+      <div class="ov">
+        <div class="ov-row"><div class="l">日時</div><div class="v">2026年9月19日（土）11:00–17:00 <small>受付 10:30〜</small></div></div>
+        <div class="ov-row"><div class="l">会場</div><div class="v">イノベーション・ハブ・ひろしま Camps（広島市）</div></div>
+        <div class="ov-row"><div class="l">対象</div><div class="v">中学生・高校生・大学生 <small>高専生・専門学校生を含む</small></div></div>
+        <div class="ov-row"><div class="l">参加形式</div><div class="v">2〜3人のチームで参加 <small>申込はチーム単位。中学生は中学生どうし、高校生は高校生どうし、大学生・高専生・専門学校生は同区分どうしでチームを組んでください（区分をまたぐ混成チームは不可）</small></div></div>
+        <div class="ov-row"><div class="l">定員</div><div class="v">24名 <small>大学生・高専生・専門学校生8名／高校生8名／中学生8名（応募多数の場合は各区分で抽選）</small></div></div>
+        <div class="ov-row"><div class="l">申込締切</div><div class="v">2026年8月31日（月） <small>応募が定員を超えた場合は、各区分（中学生／高校生／大学生・高専生・専門学校生）ごとに抽選します</small></div></div>
+        <div class="ov-row"><div class="l">抽選・結果連絡</div><div class="v">2026年9月1日（火） <small>抽選を行い、申し込んだすべてのチームに当落の結果をご連絡します</small></div></div>
+        <div class="ov-row"><div class="l">参加費</div><div class="v">無料</div></div>
+        <div class="ov-row"><div class="l">持ち物</div><div class="v">ノートPC（チームに最低1台） <small>PCがないと開発できません。全員分は不要ですが、チームに1台は必須。スマートフォンだけで開発・公開まで完結できる場合はPCがなくてもOK</small></div></div>
+        <div class="ov-row"><div class="l">昼食</div><div class="v">各自でご用意ください <small>開発タイム中に自由なタイミングでどうぞ</small></div></div>
+        <div class="ov-row"><div class="l">主催</div><div class="v">HiBiS DX・ITトレンド研究部会</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final" id="apply">
+    <svg class="momiji" style="left:8%;bottom:90px;--rot:24deg" width="60" height="60" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".7"/></svg>
+    <svg class="momiji" style="right:9%;bottom:150px;--rot:-20deg;animation-delay:-4s" width="46" height="46" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#F2762E" opacity=".65"/></svg>
+    <svg class="momiji" style="right:20%;top:70px;--rot:12deg;animation-delay:-7s" width="40" height="40" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#E8A13B" opacity=".6"/></svg>
+    <div class="wrap">
+      <h2>この夏いちばんの<br>「<span class="em">作った！</span>」を、あなたに。</h2>
+      <p>むずかしいことはAIとメンターにおまかせ。あとは一歩ふみだすだけ。</p>
+      <a class="btn big" href="#" onclick="return false">参加を申し込む（無料）</a>
+      <div class="note">申込フォームは準備中です。公開され次第、ここに掲載します。</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>広島学生<b>AI</b>ハッカソン 2026｜9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
+      <div>主催：HiBiS DX・ITトレンド研究部会</div>
+    </div>
+  </footer>
+
+</div>
