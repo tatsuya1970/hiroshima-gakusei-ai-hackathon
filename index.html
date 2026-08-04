@@ -444,7 +444,7 @@
         <span class="tool">GitHub Pages</span>
         <span class="tool">ChatGPT Sites</span>
       </div>
-      <div class="t-note">※Claude codeなど他のAIの使用は禁止です。<br>※Vercel、Renderなど上記以外のホスティングサービスの使用は禁止です。</div>
+      <div class="t-note">※Claude Codeなど他のAIの使用は禁止です。<br>※Vercel、Renderなど上記以外のホスティングサービスの使用は禁止です。</div>
     </div>
   </section>
 
@@ -632,15 +632,27 @@
         </details>
         <details class="qa">
           <summary>使う生成AIやアカウントは用意してもらえる？</summary>
-          <div class="a">パソコン・アカウントは各自でご用意ください（主催者から共通のアカウントをお貸しすることはありません）。使うAIは、中学生から大学生まで全員が同じ<b>ChatGPT と Gemini</b> です。作品は Netlify・GitHub Pages・ChatGPT Sitesのいずれかで公開してください。</div>
+          <div class="a">パソコン・アカウントは各自でご用意ください（主催者から共通のアカウントをお貸しすることはありません）。使うAIは、中学生から大学生まで全員が同じ<b>GPT と Gemini</b> です。作品は Netlify・GitHub Pages・ChatGPT Sitesのいずれかで公開してください。</div>
         </details>
         <details class="qa">
           <summary>Claude Codeを使いたいんですが…</summary>
-          <div class="a">使えません。開発に使えるAIは<b>ChatGPT と Gemini</b> のみで、Claude Code をはじめ、それ以外のAIの使用は禁止です。使用した場合は審査の対象外となります。全員が同じ道具で競うことで、道具の差ではなく発想と実装で勝負するためのルールです。</div>
+          <div class="a">使えません。開発に使えるAIは<b>GPT と Gemini</b> のみで、Claude Code をはじめ、それ以外のAIの使用は禁止です。使用した場合は審査の対象外となります。全員が同じ道具で競うことで、道具の差ではなく発想と実装で勝負するためのルールです。</div>
         </details>
         <details class="qa">
           <summary>なんでGPTとGeminiだけなんですか？</summary>
           <div class="a">道具の差ではなく、発想と実装の工夫で競ってほしいからです。参加者は中学生から大学生までいるので、中学生でも親権者の承諾があれば使えるツールに統一しています。全員の条件をそろえるためのルールです。</div>
+        </details>
+        <details class="qa">
+          <summary>Leaflet や React などのライブラリ、GitHub の公開コードは使えますか？</summary>
+          <div class="a"><b>使えます。</b>限定しているのは「AIモデル」と「ホスティングサービス」だけです。見分ける基準は「<b>アカウント登録が要るかどうか</b>」で、CDNで読み込む・ダウンロードする・<code>git clone</code> するなど、<b>登録画面が出ないものは自由に使えます</b>（Leaflet、国土地理院タイル、PLATEAU、Google Fonts など）。ライブラリのライセンス（MITなど）に年齢の条件はないので、ひとつずつ規約を調べる必要もありません。使ったライブラリは、作品ページの最後に名前とライセンス名（例: Leaflet (BSD-2-Clause)）を書いてください。<br><b>ただし、AIモデルを含むライブラリは例外です。</b>MediaPipe や Transformers.js のように、機械学習モデルをブラウザで動かすものは、登録が不要でも使えません。作品の中で使えるAIも <b>GPT と Gemini</b> だけです。</div>
+        </details>
+        <details class="qa">
+          <summary>作るものを事前に準備していってもいい？</summary>
+          <div class="a">テーマに関わるコード（画面・機能・ロジック）を事前に書いてくることは禁止です。テーマは当日発表なので、全員が同じスタートラインです。ただし<b>開発環境の準備は「持ち込み」に当たりません</b>。アカウントの作成、エディタ（VS Code等）の導入、拡張機能の有効化、パッケージのインストールは、当日までに済ませておいてOK（むしろおすすめです）。一般に公開されているライブラリ・ツール・テンプレートを当日使うのも自由です。</div>
+        </details>
+        <details class="qa">
+          <summary>開発中にAIから「APIキー」や「クレジットカード」を求められたら？</summary>
+          <div class="a">その場で作業を止めて、運営やメンターに相談してください。代わりの方法をご案内します。開発テーマは、外部サービスのAPIキーがなくても完成できる内容にします。保護者の同意なく支払い情報を登録しないでください。</div>
         </details>
         <details class="qa">
           <summary>保護者の同意はいる？</summary>
@@ -677,9 +689,9 @@
         <div class="ov-row"><div class="l">参加費</div><div class="v">無料 <small>会場までの交通費・昼食代・通信費は各自のご負担です</small></div></div>
         <div class="ov-row"><div class="l">成果物</div><div class="v">Webブラウザから使える状態にして、URLを提出 <small>公開先は Netlify・GitHub Pages・ChatGPT Sites のいずれかを使ってください。提出されたURLを開いて実際に動くことが必須条件です。発表でのスライドの使用は禁止で、運営のパソコンで作品を開き、スクリーンに映して動かしながら説明していただきます</small></div></div>
         <div class="ov-row"><div class="l">持ち物</div><div class="v">ノートPC（チームに最低1台を推奨） <small>全員分は不要ですが、チームに1台もないと開発がむずかしくなります</small></div></div>
-        <div class="ov-row"><div class="l">使用可能AIモデル</div><div class="v">ChatGPT・Gemini</div></div>
-        <div class="ov-row"><div class="l">使用可能ホスティングサービス</div><div class="v">Netlify・GitHub Pages・ChatGPT Sites。</div></div>
-        <div class="ov-row"><div class="l">保護者の同意</div><div class="v">18歳未満の方は保護者の同意が必要です <small>参加が決定したときに同意書を送付いたします。</div></div>
+        <div class="ov-row"><div class="l">使用可能AIモデル</div><div class="v">GPT・Gemini</div></div>
+        <div class="ov-row"><div class="l">使用可能ホスティングサービス</div><div class="v">Netlify・GitHub Pages・ChatGPT Sites</div></div>
+        <div class="ov-row"><div class="l">保護者の同意</div><div class="v">18歳未満の方は保護者の同意が必要です <small>参加が決定したときに同意書を送付いたします</small></div></div>
         <div class="ov-row"><div class="l">成果物の権利</div><div class="v">参加者・参加チームに帰属します</div></div>
         <div class="ov-row"><div class="l">昼食</div><div class="v">各自でご用意ください <small>開発タイム中に自由なタイミングでどうぞ</small></div></div>
         <div class="ov-row"><div class="l">主催</div><div class="v">HiBiS DX・ITトレンド研究部会</div></div>
