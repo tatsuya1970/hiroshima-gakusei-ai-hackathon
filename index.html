@@ -30,7 +30,7 @@
     --mono:ui-monospace,"SFMono-Regular","Menlo","Consolas",monospace;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth;font-size:106.25%}
+  html{scroll-behavior:smooth;font-size:118.75%}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
   .lp{background:var(--white);color:var(--ink);font-family:var(--maru);line-height:1.9;
@@ -102,11 +102,13 @@
   .pill.hot b{color:#FFE3B8;font-size:1.15em}
 
   /* ---------- tools ---------- */
-  .tools{padding:34px 0 10px;text-align:center}
-  .tools .t-label{font-size:.88rem;font-weight:800;color:var(--muted);letter-spacing:.14em}
-  .tools .row{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;margin-top:14px}
-  .tool{font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--ink);
-    background:var(--cream-alt);border-radius:10px;padding:.5em 1em}
+  .tools{padding:64px 0 40px;text-align:center}
+  .tools .t-sub{font-size:1.05rem;font-weight:800;color:var(--ink);letter-spacing:.1em;margin-top:38px}
+  .tools .t-note{margin-top:30px;font-size:.95rem;font-weight:800;color:var(--red);line-height:2}
+  .tools .row{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;margin-top:18px}
+  .tool{font-family:var(--mono);font-size:1.25rem;font-weight:800;color:var(--ink-strong);
+    background:#fff;border:3px solid var(--red);border-radius:16px;padding:.55em 1.3em;
+    box-shadow:0 6px 18px rgba(214,40,57,.18)}
 
   /* ---------- section base ---------- */
   section{padding:84px 0}
@@ -121,7 +123,7 @@
 
   /* ---------- features ---------- */
   .feats{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
-  @media(min-width:640px){.feats{grid-template-columns:1fr 1fr}}
+  @media(min-width:640px){.feats{grid-template-columns:1fr 1fr}.feats .feat:last-child{grid-column:1/-1}}
   @media(min-width:960px){.feats{grid-template-columns:repeat(4,1fr)}}
   .feat{background:#fff;border-radius:20px;padding:30px 22px;text-align:center;
     box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line);
@@ -378,42 +380,25 @@
       <div class="pills">
         <span class="pill hot">最優秀賞 賞金<b>3万円</b></span>
         <span class="pill">参加費<b>無料</b></span>
-        <span class="pill">半日で<b>完成</b></span>
         <span class="pill">動くもので<b>勝負</b></span>
         <span class="pill">チーム参加<b>（2〜3人）</b></span>
       </div>
     </div>
   </section>
 
-  <!-- ============ TOOLS ============ -->
-  <div class="tools">
-    <div class="wrap">
-      <div class="t-label">大会公式ツール（全区分共通・すべて無料）</div>
-      <div class="row">
-        <span class="tool">ChatGPT</span>
-        <span class="tool">Gemini</span>
-        <span class="tool">MediaPipe</span>
-        <span class="tool">Teachable Machine</span>
-        <span class="tool">Netlify</span>
-        <span class="tool">GitHub Pages</span>
-        <span class="tool">ChatGPT Sites</span>
-      </div>
-    </div>
-  </div>
-
   <!-- ============ FEATURES ============ -->
   <section>
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Features</span>
-        <h2>このハッカソンの<span class="em">4つの特徴</span></h2>
+        <h2>このハッカソンの<span class="em">5つの特徴</span></h2>
         <span class="under"></span>
       </div>
       <div class="feats">
         <div class="feat">
           <div class="ic">🎓</div>
           <h3>中学生から大学生まで</h3>
-          <p>13歳以上の中学生・高校生・高専生・専門学校生・大学生が対象。全員が同じ道具（大会公式ツール）で競います。</p>
+          <p>13歳以上の中学生・高校生・高専生・専門学校生・大学生が対象。</p>
         </div>
         <div class="feat">
           <div class="ic">⏱️</div>
@@ -430,7 +415,36 @@
           <h3>賞金3万円</h3>
           <p>最優秀賞にはAmazonギフト券3万円。オーディエンス賞やその他の賞もあります。</p>
         </div>
+        <div class="feat">
+          <div class="ic">🛠️</div>
+          <h3>使えるAIは限定</h3>
+          <p>使用できるAIモデル・Webホスティングサービスは限定。全員が同じ道具で競うので、道具の差ではなく発想と実装で勝負が決まります。</p>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ TOOLS ============ -->
+  <section class="tools alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Tools</span>
+        <h2>使用可能<span class="em">AI・ホスティングサービス</span>について</h2>
+        <span class="under"></span>
+        <p>AIモデル・Webホスティングサービスは、以下に挙げたもののみ使用できます。<br>これら以外のAIモデル・ホスティングサービスを使用した作品は、審査の対象外となります。</p>
+      </div>
+      <div class="t-sub">AIモデル</div>
+      <div class="row">
+        <span class="tool">GPT</span>
+        <span class="tool">Gemini</span>
+      </div>
+      <div class="t-sub">Webホスティングサービス</div>
+      <div class="row">
+        <span class="tool">Netlify</span>
+        <span class="tool">GitHub Pages</span>
+        <span class="tool">ChatGPT Sites</span>
+      </div>
+      <div class="t-note">※Claude codeなど他のAIの使用は禁止です。<br>※Vercel、Renderなど上記以外のホスティングサービスの使用は禁止です。</div>
     </div>
   </section>
 
@@ -446,7 +460,7 @@
       <div class="tt">
         <div class="tt-row"><span class="t">11:00</span><span class="d">開会・オリエンテーション<small>趣旨説明</small></span></div>
         <div class="tt-row key"><span class="t">11:10</span><span class="d">テーマ発表<span class="tag">当日発表</span><small>お題はその場で発表。全員同じスタートライン！</small></span></div>
-        <div class="tt-row"><span class="t">11:15</span><span class="d">開発タイム<small>AIと話しながら、いきなり開発スタート。デプロイ（ネット公開）まで一気に。昼食は各自、好きなタイミングで</small></span></div>
+        <div class="tt-row"><span class="t">11:15</span><span class="d">開発タイム<small>いきなり開発スタート。デプロイ（ネット公開）まで一気に。昼食は各自、好きなタイミングで</small></span></div>
         <div class="tt-row key"><span class="t">15:15</span><span class="d">開発終了<span class="tag">ドキドキ</span><small>完成した作品をネットに公開して、URLを提出。このURLが成果物です</small></span></div>
         <div class="tt-row"><span class="t">15:25</span><span class="d">発表<small>作品をスクリーンで実際に動かしながら発表します。スライドの使用は禁止です。</small></span></div>
         <div class="tt-row"><span class="t">16:15</span><span class="d">審査＆企業PRコーナー・作品体験<small>審査員が提出URLの作品を実際にさわって審査。その時間に、企業によるPRコーナーと、参加者どうしがおたがいの作品を体験する時間を設けます</small></span></div>
@@ -501,7 +515,6 @@
             </ul>
           </div>
         </div>
-        <div class="j-note">使ったAIツールの種類・高機能さ・有料か無料かは、審査に一切考慮しません。</div>
         <div class="ugoite">動いてなんぼ！</div>
       </div>
     </div>
@@ -611,27 +624,27 @@
         </details>
         <details class="qa">
           <summary>申し込んだら必ず参加できる？</summary>
-          <div class="a">申込締切は2026年9月7日（月）です。定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢（中学生／高校生／大学生・高専生・専門学校生の区分）や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。</div>
+          <div class="a">申込締切は2026年9月7日（月）です。定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。</div>
         </details>
         <details class="qa">
           <summary>何を持っていけばいい？</summary>
           <div class="a">ノートPCの持参をおすすめします。全員が持ってくる必要はありませんが、チームに1台もないと開発がむずかしくなります。あとは、アイデアと好奇心があれば十分です。</div>
         </details>
         <details class="qa">
-          <summary>作るものを事前に準備していってもいい？</summary>
-          <div class="a">テーマに関わるコード（画面・機能・ロジック）を事前に書いてくることは禁止です。テーマは当日発表なので、全員が同じスタートラインです。ただし開発環境の準備は「持ち込み」に当たりません。アカウントの作成、エディタ（VS Code等）の導入、拡張機能の有効化、フレームワークの雛形づくり、パッケージのインストールは、当日までに済ませておいてOK（むしろおすすめです）。一般に公開されているライブラリ・ツール・テンプレートを当日使うのも自由です。</div>
-        </details>
-        <details class="qa">
           <summary>使う生成AIやアカウントは用意してもらえる？</summary>
-          <div class="a">パソコン・アカウントは各自でご用意ください（主催者から共通のアカウントをお貸しすることはありません）。使うAIは、中学生から大学生まで全員が同じ「大会公式ツール」＝<b>ChatGPT と Gemini</b> です。作品の公開は Netlify・GitHub Pages・ChatGPT Sites、作品の中で動かすAIは MediaPipe・Teachable Machine を使います。すべて無料で、クレジットカードは必要ありません。<b>ChatGPTとGeminiの両方のアカウントを、チーム全員が当日までに各自でご用意ください。</b>無料版には使用量の上限があるため、片方が上限に達したらもう一方に切り替えて開発を続けます（チームで1つでは足りません）。</div>
+          <div class="a">パソコン・アカウントは各自でご用意ください（主催者から共通のアカウントをお貸しすることはありません）。使うAIは、中学生から大学生まで全員が同じ<b>ChatGPT と Gemini</b> です。作品は Netlify・GitHub Pages・ChatGPT Sitesのいずれかで公開してください。</div>
         </details>
         <details class="qa">
-          <summary>年齢の条件はある？ 保護者の同意はいる？</summary>
-          <div class="a">参加できるのは<b>13歳以上</b>の方です。ChatGPT・Gemini・GitHub・Netlify などが13歳以上を利用条件としているためで、中学1年生でも当日13歳になっていない場合は参加できません。また、<b>18歳未満の方は保護者の同意が必要</b>です（申込フォームで確認します）。18歳未満の方は、アカウントも保護者と一緒に作ってください。</div>
+          <summary>Claude Codeを使いたいんですが…</summary>
+          <div class="a">使えません。開発に使えるAIは<b>ChatGPT と Gemini</b> のみで、Claude Code をはじめ、それ以外のAIの使用は禁止です。使用した場合は審査の対象外となります。全員が同じ道具で競うことで、道具の差ではなく発想と実装で勝負するためのルールです。</div>
         </details>
         <details class="qa">
-          <summary>開発中にAIから「APIキー」や「クレジットカード」を求められたら？</summary>
-          <div class="a">その場で作業を止めて、運営やメンターに相談してください。代わりの方法をご案内します。開発テーマは、外部サービスのAPIキーがなくても完成できる内容にします。保護者の同意なく支払い情報を登録しないでください。</div>
+          <summary>なんでGPTとGeminiだけなんですか？</summary>
+          <div class="a">道具の差ではなく、発想と実装の工夫で競ってほしいからです。参加者は中学生から大学生までいるので、中学生でも親権者の承諾があれば使えるツールに統一しています。全員の条件をそろえるためのルールです。</div>
+        </details>
+        <details class="qa">
+          <summary>保護者の同意はいる？</summary>
+          <div class="a"><b>18歳未満の方は保護者の同意が必要</b>です。</div>
         </details>
         <details class="qa">
           <summary>昼ごはんはどこで食べるのですか？</summary>
@@ -656,7 +669,7 @@
       <div class="ov">
         <div class="ov-row"><div class="l">日時</div><div class="v">2026年9月19日（土）11:00–17:00 <small>受付 10:30〜</small></div></div>
         <div class="ov-row"><div class="l">会場</div><div class="v">イノベーション・ハブ・ひろしま Camps <small>広島市中区紙屋町1-4-3 エフケイビル1F</small><small><a href="https://www.camps-hiroshima.jp/" target="_blank" rel="noopener">https://www.camps-hiroshima.jp/</a></small></div></div>
-        <div class="ov-row"><div class="l">対象</div><div class="v">中学生・高校生・高専生・専門学校生・大学生（13歳以上） <small>使用する生成AIサービスの利用条件により、13歳未満の方は参加できません（中学1年生でも開催日に13歳になっていない場合は対象外）。小学生・大学院生・社会人の方も今回は対象外です。AIの利用経験は問いません</small></div></div>
+        <div class="ov-row"><div class="l">対象</div><div class="v">中学生（13歳以上）・高校生・高専生・専門学校生・大学生 <small>使用する生成AIサービスの利用条件により、13歳未満の方は参加できません（中学1年生でも開催日に13歳になっていない場合は対象外）</small></div></div>
         <div class="ov-row"><div class="l">参加形式</div><div class="v">2〜3人のチームで参加 <small>申込はチーム単位。おひとりでのお申し込みは受け付けていません。中学生は中学生どうし、高校生は高校生どうしで組んでください（区分をまたぐ混成チームは組めません）</small></div></div>
         <div class="ov-row"><div class="l">定員</div><div class="v">25人前後 <small>2〜3人のチームで8チーム程度。応募者多数の場合は、年齢（中学生／高校生／大学生・高専生・専門学校生）や学校のバランスを調整して参加チームを決定します。選考はチーム単位で行うため、人数が定員を若干前後することがあります</small></div></div>
         <div class="ov-row"><div class="l">申込締切</div><div class="v">2026年9月7日（月）</div></div>
@@ -664,9 +677,9 @@
         <div class="ov-row"><div class="l">参加費</div><div class="v">無料 <small>会場までの交通費・昼食代・通信費は各自のご負担です</small></div></div>
         <div class="ov-row"><div class="l">成果物</div><div class="v">Webブラウザから使える状態にして、URLを提出 <small>公開先は Netlify・GitHub Pages・ChatGPT Sites のいずれかを使ってください。提出されたURLを開いて実際に動くことが必須条件です。発表でのスライドの使用は禁止で、運営のパソコンで作品を開き、スクリーンに映して動かしながら説明していただきます</small></div></div>
         <div class="ov-row"><div class="l">持ち物</div><div class="v">ノートPC（チームに最低1台を推奨） <small>全員分は不要ですが、チームに1台もないと開発がむずかしくなります</small></div></div>
-        <div class="ov-row"><div class="l">大会公式ツール</div><div class="v">全区分共通（すべて無料・カード不要） <small>AI＝ChatGPT・Gemini／作品内で動かすAI＝MediaPipe・Teachable Machine／公開＝Netlify・GitHub Pages・ChatGPT Sites。道具の差ではなく発想と実装で競うため、中学生から大学生まで同じツールを使います</small></div></div>
-        <div class="ov-row"><div class="l">アカウントの準備</div><div class="v">各自でご用意ください <small>ChatGPTとGeminiの両方を、チーム全員が当日までに各自でご用意ください（無料版には使用量の上限があるため、チームで1つでは足りません）。主催者はアカウントを用意・貸与しません</small></div></div>
-        <div class="ov-row"><div class="l">保護者の同意</div><div class="v">18歳未満の方は保護者の同意が必要です <small>申込フォームで確認します。18歳未満の方は、AIサービスのアカウントも保護者と一緒に作成してください</small></div></div>
+        <div class="ov-row"><div class="l">使用可能AIモデル</div><div class="v">ChatGPT・Gemini</div></div>
+        <div class="ov-row"><div class="l">使用可能ホスティングサービス</div><div class="v">Netlify・GitHub Pages・ChatGPT Sites。</div></div>
+        <div class="ov-row"><div class="l">保護者の同意</div><div class="v">18歳未満の方は保護者の同意が必要です <small>参加が決定したときに同意書を送付いたします。</div></div>
         <div class="ov-row"><div class="l">成果物の権利</div><div class="v">参加者・参加チームに帰属します</div></div>
         <div class="ov-row"><div class="l">昼食</div><div class="v">各自でご用意ください <small>開発タイム中に自由なタイミングでどうぞ</small></div></div>
         <div class="ov-row"><div class="l">主催</div><div class="v">HiBiS DX・ITトレンド研究部会</div></div>
@@ -681,7 +694,6 @@
     <svg class="momiji" style="right:20%;top:70px;--rot:12deg;animation-delay:-7s" width="40" height="40" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#E8A13B" opacity=".6"/></svg>
     <div class="wrap">
       <h2>この夏いちばんの<br>「<span class="em">作った！</span>」を、あなたに。</h2>
-      <p>むずかしいことはAIとメンターにおまかせ。あとは一歩ふみだすだけ。</p>
       <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
       <a class="btn big" href="#" onclick="return false">参加を申し込む（無料）</a>
       <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）</div>
