@@ -6,3 +6,8 @@
 !作業/参加規約_広島学生AIハッカソン.md
 !作業/生成AI利用ガイドライン_広島学生AIハッカソン.md
 !作業/応募フォーム案_広島学生AIハッカソン.md
+
+# PDF生成の中間ファイルと依存（tools/README.md 参照）
+tools/node_modules/
+tools/*.html
+tools/package-lock.json

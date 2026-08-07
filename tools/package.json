@@ -1,0 +1,10 @@
+{
+  "name": "hackathon-doc-pdf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "募集要項Markdown→PDFの変換用。詳しくは README.md",
+  "type": "module",
+  "dependencies": {
+    "marked": "^16.0.0"
+  }
+}

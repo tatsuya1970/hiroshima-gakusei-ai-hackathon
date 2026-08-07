@@ -286,6 +286,7 @@
   .ov-row .v a{color:var(--red);font-family:var(--mono);text-decoration:none;
     border-bottom:1px solid var(--red);word-break:break-all}
   .ov-row .v a:hover{color:var(--red-deep);border-color:var(--red-deep)}
+  .ov-row .v a.doc{font-family:var(--maru);word-break:normal}
 
   /* ---------- final ---------- */
   .final{position:relative;overflow:hidden;text-align:center;
@@ -301,10 +302,14 @@
   .final .when2 .mono{color:#FFE3B8;font-size:1.5em;font-variant-numeric:tabular-nums}
   .final .btn{margin-top:1.6em}
   .final .note{font-size:.92rem;color:var(--muted);font-weight:700;margin-top:1.6em;line-height:1.9}
+  .final .note a{color:var(--red);text-decoration:none;border-bottom:1px solid var(--red)}
+  .final .note a:hover{color:var(--red-deep);border-color:var(--red-deep)}
 
   footer{background:var(--ink-strong);color:#DCCFC7;padding:30px 0;font-size:.92rem;font-weight:700}
   footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
   footer b{color:#fff}
+  footer a{color:#F5D9D4;text-decoration:none;border-bottom:1px solid rgba(245,217,212,.45)}
+  footer a:hover{color:#fff;border-color:#fff}
 
   /* ---------- 「デフォルト版」ウォーターマーク（タイル状） ---------- */
   .watermark{position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden}
@@ -750,6 +755,7 @@
         <div class="ov-row"><div class="l">成果物の権利</div><div class="v">参加者・参加チームに帰属します</div></div>
         <div class="ov-row"><div class="l">昼食</div><div class="v">各自でご用意ください <small>開発タイム中に自由なタイミングでどうぞ</small></div></div>
         <div class="ov-row"><div class="l">主催</div><div class="v">HiBiS DX・ITトレンド研究部会</div></div>
+        <div class="ov-row"><div class="l">募集要項</div><div class="v"><a class="doc" href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>　／　<a class="doc" href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">生成AI・開発サービス 利用ガイドライン（PDF）</a> <small>お申し込みの前に、必ず両方をお読みください。保護者の方もご確認をお願いします</small></div></div>
       </div>
     </div>
   </section>
@@ -763,12 +769,13 @@
       <h2>この夏いちばんの<br>「<span class="em">作った！</span>」を、あなたに。</h2>
       <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
       <a class="btn big" href="#" onclick="return false">参加を申し込む（無料）</a>
-      <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>諸事情により延長する場合があります</div>
+      <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>諸事情により延長する場合があります<br>お申し込みの前に <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をお読みください</div>
     </div>
   </section>
 
   <footer>
     <div class="wrap">
+      <div><a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>　｜　<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">生成AI・開発サービス 利用ガイドライン（PDF）</a></div>
       <div>広島学生<b>AI</b>ハッカソン 2026｜9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
       <div>主催：HiBiS DX・ITトレンド研究部会</div>
     </div>
