@@ -19,13 +19,21 @@ node md2html.mjs "../作業/生成AI利用ガイドライン_広島学生AIハ�
 ```
 
 ```powershell
-# HTML → PDF（PowerShell。1本ずつ実行する。まとめて実行すると片方しか出力されない）
+# HTML → PDF（PowerShell）
+# ※ 1本ずつ実行する。まとめて実行すると片方しか出力されない
+# ※ --print-to-pdf と file:/// は必ず絶対パスで書く。相対パスだと何も出力されず、
+#    しかもエラーも出ないので「成功した」と勘違いする
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-& $chrome --headless --disable-gpu --no-pdf-header-footer "--print-to-pdf=..\pdf\terms.pdf" "file:///$((Resolve-Path terms.html).Path -replace '\\','/')"
-& $chrome --headless --disable-gpu --no-pdf-header-footer "--print-to-pdf=..\pdf\ai-guideline.pdf" "file:///$((Resolve-Path guideline.html).Path -replace '\\','/')"
+$repo   = "C:\projects\hiroshima-gakusei-ai-hackathon"
+
+& $chrome --headless --disable-gpu --no-pdf-header-footer `
+  "--print-to-pdf=$repo\pdf\terms.pdf" "file:///$($repo -replace '\\','/')/tools/terms.html"
+
+& $chrome --headless --disable-gpu --no-pdf-header-footer `
+  "--print-to-pdf=$repo\pdf\ai-guideline.pdf" "file:///$($repo -replace '\\','/')/tools/guideline.html"
 ```
 
-`gcm` や `externally_managed_app_manager` のERRORログが出るが、`... bytes written to file ...` が表示されていれば成功。
+`gcm` や `externally_managed_app_manager` のERRORログが出るが、**`... bytes written to file ...` が表示されていれば成功。**この行が出ない場合は書き出されていないので、`pdf/` のタイムスタンプを必ず確認すること。
 
 ## 確認すること
 
