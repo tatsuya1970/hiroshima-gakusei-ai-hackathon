@@ -109,6 +109,8 @@
     border:2px solid rgba(214,40,57,.28);border-radius:16px;padding:22px 26px}
   .tools .t-box p{font-size:.95rem;line-height:1.95;color:var(--ink)}
   .tools .t-box p + p{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(214,40,57,.28)}
+  .tools .t-box a{color:var(--red);text-decoration:none;border-bottom:1px solid var(--red)}
+  .tools .t-box a:hover{color:var(--red-deep);border-color:var(--red-deep)}
   .tools .row{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;margin-top:18px}
   .tool{font-family:var(--mono);font-size:1.25rem;font-weight:800;color:var(--ink-strong);
     background:#fff;border:3px solid var(--red);border-radius:16px;padding:.55em 1.3em;
@@ -461,10 +463,7 @@
       
       <div class="t-note">※Claude Codeなど他のAIの使用は禁止です。<br>※<b>使えるAIコーディングツールは Codex のみ</b>です。GitHub Copilot、Cursor、Google Antigravity、Windsurf など Codex 以外のAIコーディングツールの使用は禁止です。<br>※Vercel、Renderなど上記以外のホスティングサービスの使用は禁止です。 </div>
       <div class="t-box">
-        <p><b>使えるAIは、OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するものに限ります。</b>モデル名ではなく提供元で決めているのは、モデル名が頻繁に変わるためです。<b>APIキーの取得が必要な使い方（OpenAI API・Gemini API など）は含みません。</b><br><b>コードを書かせるだけでなく、画像づくりにも使えます。</b>ChatGPT や Gemini の画像生成機能で、作品に使うイラスト・アイコン・背景をつくってOKです。</p>
-        <p><b>AIコーディングツールで使えるのは Codex だけです。</b>GitHub Copilot・Cursor・Google Antigravity・Windsurf などは使えません。Codex は「モデルの名前」ではなく<b>OpenAIのコーディングエージェントという製品の名前</b>で、ChatGPTのアカウントの範囲で使えるため、追加の登録もクレジットカードも要りません。<br>なお、<b>エディタそのもの（VS Code など）は自由に使えます。</b>制限がかかるのは、そこに入れるAI機能のほうです。</p>
-        <p><b>使えないのは「AIモデルのAPI」であって、APIが全部ダメなわけではありません。</b>地図・天気・時刻表・オープンデータなど<b>AI以外の公開APIは、各APIの規約を遵守のうえ使用できます。</b></p>
-        <p>学校のアカウントでAIを使う場合、校外イベントで使ってよいかは学校の規則によりますので、<b>事前に確認してください。</b></p>
+        <p>画像生成の可否、AI以外のAPIの扱い、学校アカウントを使うときの注意など、くわしいルールは <a class="doc" href="pdf/ai-guideline.pdf" target="_blank" rel="noopener"><b>生成AI・開発サービス 利用ガイドライン（PDF）</b></a> をご確認ください。</p>
       </div>
     </div>
   </section>
