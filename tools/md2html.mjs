@@ -65,7 +65,7 @@ const metaHtml = metaLines.length ? `<p class="meta">${marked.parseInline(metaLi
 const html = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><title>${docTitle}</title><style>${css}</style></head>
 <body><h1>${h1}</h1>${metaHtml}${bodyHtml}
-<div class="foot">広島学生AIハッカソン 2026 ／ https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/</div>
+<div class="foot">広島学生AIハッカソン 2026 ／ https://hiroshima-ai-hackathon.jp/</div>
 </body></html>`
 
 writeFileSync(out, html, 'utf8')

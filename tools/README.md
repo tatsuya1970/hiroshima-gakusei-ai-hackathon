@@ -78,7 +78,7 @@ $repo   = "C:\projects\hiroshima-gakusei-ai-hackathon"
 
 | PDF | 公開URL |
 |---|---|
-| `pdf/terms.pdf` | https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/terms.pdf |
-| `pdf/ai-guideline.pdf` | https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/ai-guideline.pdf |
+| `pdf/terms.pdf` | https://hiroshima-ai-hackathon.jp/pdf/terms.pdf |
+| `pdf/ai-guideline.pdf` | https://hiroshima-ai-hackathon.jp/pdf/ai-guideline.pdf |
 
 このURLは**応募フォームとLPの3箇所から参照している**ので、ファイル名を変えないこと。

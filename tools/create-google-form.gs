@@ -16,8 +16,8 @@
  *   - 公開して回答URLをLPの「参加を申し込む」ボタンに差し込む
  */
 
-const TERMS_PDF = 'https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/terms.pdf';
-const GUIDE_PDF = 'https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/ai-guideline.pdf';
+const TERMS_PDF = 'https://hiroshima-ai-hackathon.jp/pdf/terms.pdf';
+const GUIDE_PDF = 'https://hiroshima-ai-hackathon.jp/pdf/ai-guideline.pdf';
 
 function createHackathonForm() {
   const form = FormApp.create('広島学生AIハッカソン 参加申込フォーム');
