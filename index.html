@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>広島学生AIハッカソン 2026 | 9.19 SAT</title>
-<meta name="description" content="2026年9月19日（土）イノベーション・ハブ・ひろしまCamps。13歳以上の中学生・高校生・大学生が2〜3人チームで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。">
+<meta name="description" content="2026年9月19日（土）イノベーション・ハブ・ひろしまCamps。広島県内の学校に通う13歳以上の中学生・高校生・大学生が2〜3人チームで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="広島学生AIハッカソン 2026 | 9.19 SAT">
-<meta property="og:description" content="中学生から大学生まで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。2026年9月19日（土）広島Campsで開催。">
+<meta property="og:description" content="広島県内の学校に通う13歳以上の中学生から大学生まで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。2026年9月19日（土）広島Campsで開催。">
 <meta property="og:url" content="https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
@@ -105,6 +105,10 @@
   .tools{padding:64px 0 40px;text-align:center}
   .tools .t-sub{font-size:1.05rem;font-weight:800;color:var(--ink);letter-spacing:.1em;margin-top:38px}
   .tools .t-note{margin-top:30px;font-size:.95rem;font-weight:800;color:var(--red);line-height:2}
+  .tools .t-box{max-width:860px;margin:32px auto 0;text-align:left;background:#fff;
+    border:2px solid rgba(214,40,57,.28);border-radius:16px;padding:22px 26px}
+  .tools .t-box p{font-size:.95rem;line-height:1.95;color:var(--ink)}
+  .tools .t-box p + p{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(214,40,57,.28)}
   .tools .row{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;margin-top:18px}
   .tool{font-family:var(--mono);font-size:1.25rem;font-weight:800;color:var(--ink-strong);
     background:#fff;border:3px solid var(--red);border-radius:16px;padding:.55em 1.3em;
@@ -132,6 +136,7 @@
   .feat .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;
     font-size:1.7rem;background:var(--cream-alt)}
   .feat h3{font-size:1.16rem;font-weight:800;margin-top:.9em}
+  .feat h3 .nb{display:inline-block}
   .feat p{font-size:.96rem;color:var(--muted);font-weight:700;margin:.5em 0 0;line-height:1.8}
 
   /* ---------- steps ---------- */
@@ -371,7 +376,7 @@
         <span class="row mid"><span class="stroke">あなたのアイデアが<span class="em">動くアプリ</span>になる</span></span>
         <span class="row">広島学生<span class="em">AI</span>ハッカソン</span>
       </h1>
-      <p class="lead">AIと会話しながら、自分のアイデアを本物の動くアプリにする半日。審査されるのは「動くもの」だけ。対象は中学生から大学生まで。</p>
+      <p class="lead">AIと会話しながら、自分のアイデアを本物の動くアプリにする半日。審査されるのは「動くもの」だけ。対象は広島県内の学校に通う13歳以上の中学生から大学生まで。</p>
       <div class="cta">
         <a class="btn big" href="#apply">参加を申し込む</a>
         <a class="btn big sub" href="#flow">当日の流れを見る</a>
@@ -397,8 +402,8 @@
       <div class="feats">
         <div class="feat">
           <div class="ic">🎓</div>
-          <h3>中学生から大学生まで</h3>
-          <p>13歳以上の中学生・高校生・高専生・専門学校生・大学生が対象。</p>
+          <h3><span class="nb">13歳以上の中学生</span><span class="nb">から大学生まで</span></h3>
+          <p>広島県内の学校に通う、13歳以上の中学生・高校生・高専生・専門学校生・大学生が対象。</p>
         </div>
         <div class="feat">
           <div class="ic">⏱️</div>
@@ -431,7 +436,7 @@
         <span class="en">Tools</span>
         <h2>使用可能<span class="em">AI・ホスティングサービス</span>について</h2>
         <span class="under"></span>
-        <p>AIモデル・Webホスティングサービスは、以下に挙げたもののみ使用できます。<br>これら以外のAIモデル・ホスティングサービスを使用した作品は、審査の対象外となります。</p>
+        <p>AIモデル・Webホスティングサービスは、以下に挙げたもののみ使用できます。<br>中学生から大学生まで、全員が同じ道具で競います。</p>
       </div>
       <div class="t-sub">AIモデル</div>
       <div class="row">
@@ -445,6 +450,11 @@
         <span class="tool">ChatGPT Sites</span>
       </div>
       <div class="t-note">※Claude Codeなど他のAIの使用は禁止です。<br>※Vercel、Renderなど上記以外のホスティングサービスの使用は禁止です。</div>
+      <div class="t-box">
+        <p><b>使えるAIは、OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するものに限ります。</b>モデル名ではなく提供元で決めているのは、モデル名が頻繁に変わるためです。<b>APIキーの取得が必要な使い方（OpenAI API・Gemini API など）は含みません。</b>また、GitHub Copilot・Cursor・Google Antigravity などのAIコーディングツールも使えません（<b>エディタそのもの（VS Code など）は自由に使えます</b>）。<br><b>コードを書かせるだけでなく、画像づくりにも使えます。</b>ChatGPT や Gemini の画像生成機能で、作品に使うイラスト・アイコン・背景をつくってOKです。</p>
+        <p><b>どのAIを使ったかの確認を行いません。</b>申込フォームの「使用するAIモデルなど、本ハッカソンの募集要項を守ります」のチェックをもって、ルールを守っていただいたものとして進めます。<b>そのうえで、募集要項に違反したことが判明した場合は、審査の対象外となります。</b>信頼を前提にした運用ですので、ご協力をお願いします。</p>
+        <p>学校のアカウントでAIを使う場合、校外イベントで使ってよいかは学校の規則によりますので、<b>事前に確認してください。</b></p>
+      </div>
     </div>
   </section>
 
@@ -619,6 +629,10 @@
           <div class="a">学校の許可は必要ありません。個人（チーム）で自由に参加できます。安心してお申し込みください。</div>
         </details>
         <details class="qa">
+          <summary>広島県外の学校に通っているけど参加できる？</summary>
+          <div class="a"><b>参加できません。</b>この大会は<b>広島県内に所在する学校に在籍している学生</b>が対象です。<b>通っている学校の所在地で判断します</b>ので、広島県内にお住まいでも、県外の学校に通っている場合は対象外となります。逆に、県外にお住まいでも広島県内の学校に通っていれば参加できます。</div>
+        </details>
+        <details class="qa">
           <summary>作った作品やアイデアは、どうあつかわれるの？</summary>
           <div class="a">作品の権利（著作権など）は、作ったみなさんのチームのものです。主催者は、イベントの記録や告知（Webサイト・SNS・報道など）のために、作品の画面や当日の写真・映像を使わせてもらうことがあります。なお、発表はオープンな場で行うため秘密保持はできません。ヒミツにしたいアイデアの持ち込みは避けてください。また、他の人が権利を持つ素材（画像・音楽・コードなど）は、ライセンスを守って使いましょう。</div>
         </details>
@@ -639,24 +653,40 @@
           <div class="a">使えません。開発に使えるAIは<b>GPT と Gemini</b> のみで、Claude Code をはじめ、それ以外のAIの使用は禁止です。使用した場合は審査の対象外となります。全員が同じ道具で競うことで、道具の差ではなく発想と実装で勝負するためのルールです。</div>
         </details>
         <details class="qa">
+          <summary>Copilot や Cursor などのAIコーディングツールは使える？</summary>
+          <div class="a"><b>使えません。</b>使えるAIは <b>OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するもの</b>に限ります。GitHub Copilot、Cursor、Google Antigravity、Windsurf などは提供元がちがうため使えません。<br>VS Code でエージェント的に開発したい場合は、<b>Codex</b> を使ってください。Codex は<b>モデルの名前ではなく、OpenAIのコーディングエージェントという製品の名前</b>です。ChatGPTのアカウントの範囲で使えるので、追加の登録もクレジットカードも要りません（アプリ・CLI・VS Code拡張から使えます）。<br>なお、<b>エディタそのもの（VS Code など）は自由に使えます。</b>制限がかかるのは、そこに入れるAI機能のほうです。</div>
+        </details>
+        <details class="qa">
+          <summary>作品に使うイラストや画像を、AIでつくってもいい？</summary>
+          <div class="a"><b>つくれます。</b>使えるAIは「OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するもの」ですが、<b>これは用途を問いません。</b>コードを書かせるだけでなく、<b>ChatGPT や Gemini の画像生成機能で、作品に使うイラスト・アイコン・背景をつくってOK</b>です。<br>ただし<b>実在の人物、アニメやゲームのキャラクター、企業のロゴは生成しないでください。</b>他の人の権利を侵害してしまうことがあります。<br>なお、Midjourney や Stable Diffusion など<b>OpenAI・Google 以外のサービスは使えません。</b></div>
+        </details>
+        <details class="qa">
+          <summary>BGMや効果音、ナレーションはAIでつくれる？</summary>
+          <div class="a"><b>音楽・音声の生成AIは使えません。</b>Suno は年齢の条件（13歳以上）は満たしますが提供元がちがい、ElevenLabs は<b>18歳以上限定</b>です。<b>Gemini の音楽生成機能も18歳以上限定</b>なので、中高生が使えず不公平になることから、<b>大学生チームも含めて全員使いません。</b><br>BGMや効果音がほしいときは、<b>アカウント登録の要らない公開のフリー素材</b>を使ってください（利用条件を確認して、作品ページの最後に出典を書いてください）。<br><b>音がなくても審査には影響しません。</b>4時間で音まで作り込む余裕はまずないので、まずは動くものを完成させることを優先してください。</div>
+        </details>
+        <details class="qa">
+          <summary>OpenAI や Gemini の「API」を使ってもいい？</summary>
+          <div class="a"><b>使えません。</b>使えるのは <b>ChatGPT・Gemini・Codex にログインして使う形</b>だけで、<b>APIキーを取得して作品から呼び出す使い方</b>（OpenAI API、Gemini API など）は対象外です。<br>APIには各社の<b>開発者向けの別の規約</b>が適用されます。<b>Gemini API は18歳以上に限られ、さらに「18歳未満が利用するサービスに組み込むこと」も禁止</b>されています。OpenAI API もクレジットカードの登録が必要です。中学生から参加できる大会なので、全員が同じ条件で使える形に統一しています。<br><b>見分け方はかんたんです。</b>開発中に「<b>APIキーを取得してください</b>」「<b>クレジットカードを登録してください</b>」という画面が出たら、それがAPIの入口です。<b>そこで手を止めてください。</b>迷ったらメンターに聞いてください。AIは年齢条件を気にせずAPIを使うコードを提案してくることがあるので、注意してください。</div>
+        </details>
+        <details class="qa">
+          <summary>使ったAIを運営がチェックするんですか？</summary>
+          <div class="a"><b>チェックはしません。</b>申込フォームの「<b>使用するAIモデルなど、本ハッカソンの募集要項を守ります</b>」のチェックをもって、ルールを守っていただいたものとして進めます。<br>ただし、<b>募集要項に違反したことが判明した場合は、審査の対象外</b>となります（受賞後にわかった場合は受賞の取り消しもあります）。皆さんを信頼しての運用ですので、ご協力をお願いします。</div>
+        </details>
+        <details class="qa">
+          <summary>学校のアカウントで AI を使ってもいい？</summary>
+          <div class="a">校外のイベントで学校アカウントを使ってよいかは、学校の規則によります。事前に先生に確認してください。運営から学校へ問い合わせや調整を行うことはしません。学校が認めない場合は、個人の無料アカウントをご用意ください。</div>
+        </details>
+        <details class="qa">
+          <summary>無料版でも最後まで作れますか？</summary>
+          <div class="a"><b>作れます。</b>開発テーマも進め方も、無料の範囲で作品を完成・公開できるように設計しています。<b>上限に達しても、有料プランに課金する必要はありません。</b><br>ただし無料版には使用量の上限があるので、途中でAIが止まらないように工夫をしてください。例えば、<b>①チーム全員が ChatGPT と Gemini の両方のアカウントを持つ</b>（片方が上限に達しても、もう一方や別のメンバーの端末に切り替えられます）<b>②作品全体のコードを毎回貼り直さず、直したい部分だけをAIに渡す ③同じ指示を何度も送り直さない</b>。</div>
+        </details>
+        <details class="qa">
           <summary>なんでGPTとGeminiだけなんですか？</summary>
           <div class="a">道具の差ではなく、発想と実装の工夫で競ってほしいからです。参加者は中学生から大学生までいるので、中学生でも親権者の承諾があれば使えるツールに統一しています。全員の条件をそろえるためのルールです。</div>
         </details>
         <details class="qa">
-          <summary>Leaflet や React などのライブラリ、GitHub の公開コードは使えますか？</summary>
-          <div class="a"><b>使えます。</b>限定しているのは「AIモデル」と「ホスティングサービス」だけです。見分ける基準は「<b>アカウント登録が要るかどうか</b>」で、CDNで読み込む・ダウンロードする・<code>git clone</code> するなど、<b>登録画面が出ないものは自由に使えます</b>（Leaflet、国土地理院タイル、PLATEAU、Google Fonts など）。ライブラリのライセンス（MITなど）に年齢の条件はないので、ひとつずつ規約を調べる必要もありません。使ったライブラリは、作品ページの最後に名前とライセンス名（例: Leaflet (BSD-2-Clause)）を書いてください。<br><b>ただし、AIモデルを含むライブラリは例外です。</b>MediaPipe や Transformers.js のように、機械学習モデルをブラウザで動かすものは、登録が不要でも使えません。作品の中で使えるAIも <b>GPT と Gemini</b> だけです。</div>
-        </details>
-        <details class="qa">
-          <summary>作るものを事前に準備していってもいい？</summary>
-          <div class="a">テーマに関わるコード（画面・機能・ロジック）を事前に書いてくることは禁止です。テーマは当日発表なので、全員が同じスタートラインです。ただし<b>開発環境の準備は「持ち込み」に当たりません</b>。アカウントの作成、エディタ（VS Code等）の導入、拡張機能の有効化、パッケージのインストールは、当日までに済ませておいてOK（むしろおすすめです）。一般に公開されているライブラリ・ツール・テンプレートを当日使うのも自由です。</div>
-        </details>
-        <details class="qa">
-          <summary>開発中にAIから「APIキー」や「クレジットカード」を求められたら？</summary>
-          <div class="a">その場で作業を止めて、運営やメンターに相談してください。代わりの方法をご案内します。開発テーマは、外部サービスのAPIキーがなくても完成できる内容にします。保護者の同意なく支払い情報を登録しないでください。</div>
-        </details>
-        <details class="qa">
           <summary>保護者の同意はいる？</summary>
-          <div class="a"><b>18歳未満の方は保護者の同意が必要</b>です。</div>
+          <div class="a"><b>18歳未満の方は保護者の同意が必要</b>です。正式に参加が決定しましたら同意書をメールで送ります。</div>
         </details>
         <details class="qa">
           <summary>昼ごはんはどこで食べるのですか？</summary>
@@ -664,7 +694,7 @@
         </details>
         <details class="qa">
           <summary>お金はかかる？</summary>
-          <div class="a">参加費は無料です。気軽に参加してください。ただし、会場までの交通費・昼食代・通信費は各自のご負担になります。開発に使う大会公式ツールはすべて無料で、クレジットカードの登録も必要ありません。</div>
+          <div class="a">参加費は無料です。気軽に参加してください。ただし、会場までの交通費・昼食代は各自のご負担になります。</div>
         </details>
       </div>
     </div>
@@ -681,7 +711,7 @@
       <div class="ov">
         <div class="ov-row"><div class="l">日時</div><div class="v">2026年9月19日（土）11:00–17:00 <small>受付 10:30〜</small></div></div>
         <div class="ov-row"><div class="l">会場</div><div class="v">イノベーション・ハブ・ひろしま Camps <small>広島市中区紙屋町1-4-3 エフケイビル1F</small><small><a href="https://www.camps-hiroshima.jp/" target="_blank" rel="noopener">https://www.camps-hiroshima.jp/</a></small></div></div>
-        <div class="ov-row"><div class="l">対象</div><div class="v">中学生（13歳以上）・高校生・高専生・専門学校生・大学生 <small>使用する生成AIサービスの利用条件により、13歳未満の方は参加できません（中学1年生でも開催日に13歳になっていない場合は対象外）</small></div></div>
+        <div class="ov-row"><div class="l">対象</div><div class="v">広島県内に所在する学校に在籍する、13歳以上の中学生・高校生・高専生・専門学校生・大学生 <small>在籍する学校の所在地で判断します。広島県外の学校に通っている方は、広島県内にお住まいでも対象外です</small><small>使用する生成AIサービスの利用条件により、13歳未満の方は参加できません（中学1年生でも開催日に13歳になっていない場合は対象外）</small></div></div>
         <div class="ov-row"><div class="l">参加形式</div><div class="v">2〜3人のチームで参加 <small>申込はチーム単位。おひとりでのお申し込みは受け付けていません。中学生は中学生どうし、高校生は高校生どうしで組んでください（区分をまたぐ混成チームは組めません）</small></div></div>
         <div class="ov-row"><div class="l">定員</div><div class="v">25人前後 <small>2〜3人のチームで8チーム程度。応募者多数の場合は、年齢（中学生／高校生／大学生・高専生・専門学校生）や学校のバランスを調整して参加チームを決定します。選考はチーム単位で行うため、人数が定員を若干前後することがあります</small></div></div>
         <div class="ov-row"><div class="l">申込締切</div><div class="v">2026年9月7日（月）</div></div>
@@ -689,8 +719,9 @@
         <div class="ov-row"><div class="l">参加費</div><div class="v">無料 <small>会場までの交通費・昼食代・通信費は各自のご負担です</small></div></div>
         <div class="ov-row"><div class="l">成果物</div><div class="v">Webブラウザから使える状態にして、URLを提出 <small>公開先は Netlify・GitHub Pages・ChatGPT Sites のいずれかを使ってください。提出されたURLを開いて実際に動くことが必須条件です。発表でのスライドの使用は禁止で、運営のパソコンで作品を開き、スクリーンに映して動かしながら説明していただきます</small></div></div>
         <div class="ov-row"><div class="l">持ち物</div><div class="v">ノートPC（チームに最低1台を推奨） <small>全員分は不要ですが、チームに1台もないと開発がむずかしくなります</small></div></div>
-        <div class="ov-row"><div class="l">使用可能AIモデル</div><div class="v">GPT・Gemini</div></div>
+        <div class="ov-row"><div class="l">使用可能AI</div><div class="v">GPT・Gemini <small>使えるAIは OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するものに限ります。APIキーの取得が必要な使い方（OpenAI API・Gemini API など）は含みません。運営が使用状況を確認することはありませんが、募集要項に違反したことが判明した場合は審査の対象外となります</small></div></div>
         <div class="ov-row"><div class="l">使用可能ホスティングサービス</div><div class="v">Netlify・GitHub Pages・ChatGPT Sites</div></div>
+        <div class="ov-row"><div class="l">アカウント</div><div class="v">各自で事前にご用意ください <small>ChatGPTとGeminiの両方を、チーム全員が各自で準備してください（18歳未満の方は保護者と一緒に）。無料版でも作品の完成・公開まで到達できる設計です。上限に達しても課金は不要です。学校が契約する教育機関向けプラン（Google Workspace for Education 等）を使う場合は、校外での利用可否を事前に学校へご確認ください</small></div></div>
         <div class="ov-row"><div class="l">保護者の同意</div><div class="v">18歳未満の方は保護者の同意が必要です <small>参加が決定したときに同意書を送付いたします</small></div></div>
         <div class="ov-row"><div class="l">成果物の権利</div><div class="v">参加者・参加チームに帰属します</div></div>
         <div class="ov-row"><div class="l">昼食</div><div class="v">各自でご用意ください <small>開発タイム中に自由なタイミングでどうぞ</small></div></div>
