@@ -21,7 +21,7 @@
 > ・[**参加規約（PDF）**](https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/terms.pdf)
 > ・[**生成AI・開発サービス 利用ガイドライン（PDF）**](https://tatsuya1970.github.io/hiroshima-gakusei-ai-hackathon/pdf/ai-guideline.pdf)
 >
-> **※ 本大会は、中学生から大学生まで全員が同じ道具で競います。**AIモデルは **GPT・Gemini**、AIコーディングツールは **Codex**、作品の公開は **Netlify・GitHub Pages・ChatGPT Sites** を使います。保護者の方も一緒にガイドラインをご確認ください。
+> **※ 本大会は、中学生から大学生まで全員が同じ道具で競います。**使えるAIサービスは **ChatGPT・Gemini**（AIコーディングツールは **Codex**）、作品の公開は **Netlify・GitHub Pages・ChatGPT Sites** を使います。保護者の方も一緒にガイドラインをご確認ください。
 
 ---
 

@@ -38,7 +38,7 @@ function createHackathonForm() {
       '参加規約（PDF）: ' + TERMS_PDF,
       '生成AI・開発サービス 利用ガイドライン（PDF）: ' + GUIDE_PDF,
       '',
-      '※ 本大会は、中学生から大学生まで全員が同じ道具で競います。AIモデルは GPT・Gemini、AIコーディングツールは Codex、作品の公開は Netlify・GitHub Pages・ChatGPT Sites を使います。保護者の方も一緒にガイドラインをご確認ください。'
+      '※ 本大会は、中学生から大学生まで全員が同じ道具で競います。使えるAIサービスは ChatGPT・Gemini（AIコーディングツールは Codex）、作品の公開は Netlify・GitHub Pages・ChatGPT Sites を使います。保護者の方も一緒にガイドラインをご確認ください。'
     ].join('\n')
   );
 
