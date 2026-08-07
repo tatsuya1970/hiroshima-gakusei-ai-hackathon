@@ -314,36 +314,11 @@
   footer a{color:#F5D9D4;text-decoration:none;border-bottom:1px solid rgba(245,217,212,.45)}
   footer a:hover{color:#fff;border-color:#fff}
 
-  /* ---------- 「デフォルト版」ウォーターマーク（タイル状） ---------- */
-  .watermark{position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden}
-  .watermark .grid{position:absolute;top:-30%;left:-30%;width:160%;height:160%;
-    display:flex;flex-wrap:wrap;gap:0;transform:rotate(-30deg);
-    align-content:center;justify-content:center;user-select:none}
-  .watermark span{font-family:var(--maru);font-weight:800;
-    font-size:clamp(2rem,7vw,5rem);line-height:1.8;white-space:nowrap;
-    color:rgba(214,40,57,.12);letter-spacing:.05em;
-    padding:0 .6em;flex:0 0 auto}
 </style>
 </head>
 <body>
 
 <div class="lp">
-
-  <!-- 「デフォルト版」であることを示すウォーターマーク（タイル状に繰り返し） -->
-  <div class="watermark" aria-hidden="true"><div class="grid">
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-    <span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span><span>デフォルト</span>
-  </div></div>
 
   <!-- もみじの形（7枚の羽根＋茎）を一度定義して使い回す -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
