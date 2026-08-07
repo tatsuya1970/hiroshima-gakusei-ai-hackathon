@@ -110,6 +110,10 @@
 
 ---
 
-## LP掲載用: 申込ボタンの差し込み
+## 公開中のフォームURL
 
-フォーム公開後、LPの2箇所の「参加を申し込む」ボタンの `href` をフォームURLに差し替え、「申込フォームは準備中です」の注記を削除する。
+**回答URL**: https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform
+
+2026-08-07 に公開。**LPの2箇所（ヒーローと最終CTA）の「参加を申し込む」ボタンに差し込み済み。**
+
+本案（Markdown）を改定したときは、**フォーム本体も手作業で直すこと。**`tools/create-google-form.gs` を再実行するとフォームが新規に作られ、上記の回答URLが変わってしまう。
