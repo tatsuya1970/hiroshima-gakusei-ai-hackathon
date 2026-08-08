@@ -4,340 +4,331 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>広島学生AIハッカソン 2026 | 9.19 SAT</title>
-<meta name="description" content="2026年9月19日（土）イノベーション・ハブ・ひろしまCamps。広島県内の学校に通う13歳以上の中学生・高校生・大学生が2〜3人チームで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。">
+<meta name="description" content="はじめてでも、半日で。あなたのアイデアが動くアプリになる。2026年9月19日（土）イノベーション・ハブ・ひろしまCamps。広島県内の学校に通う13歳以上の中学生・高校生・大学生が2〜3人チームで、AIと会話しながら4時間で動くWebアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="広島学生AIハッカソン 2026 | 9.19 SAT">
-<meta property="og:description" content="広島県内の学校に通う13歳以上の中学生から大学生まで、AIと会話しながら半日で動くアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。2026年9月19日（土）広島Campsで開催。">
+<meta property="og:description" content="アイデア、動かせ。はじめてでも、半日で。広島県内の学校に通う13歳以上の中学生から大学生まで、AIと会話しながら4時間で動くWebアプリをつくる。参加費無料・定員25人前後・最優秀賞3万円。2026年9月19日（土）広島Campsで開催。">
 <meta property="og:url" content="https://hiroshima-ai-hackathon.jp/">
 <link rel="canonical" href="https://hiroshima-ai-hackathon.jp/">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <style>
-  /* ============ 広島レッド × もみじ × 丸ゴシック ============ */
+  /* ============================================================
+     広島学生AIハッカソン 2026
+     チラシ準拠：ブルー #0347F0 × ライム #E6F617 × 白
+     面と影ではなく、罫線・余白・級数差で構造をつくる。
+     ============================================================ */
   :root{
-    --cream:#FFF9F3;
-    --cream-alt:#FBEFE6;
+    --blue:#0347F0;        /* チラシの見出し「動」・下部帯 */
+    --blue-deep:#0030B4;
+    --blue-mid:#2E6BFF;
+    --lime:#E6F617;        /* チラシの下部ライム帯。ハイライト専用 */
+    --lime-deep:#C6D400;
+    --tint:#F3F7FF;
+    --tint-alt:#E6EEFF;
     --white:#FFFFFF;
-    --ink:#463832;
-    --ink-strong:#332622;
-    --muted:#8C7A70;
-    --red:#D62839;
-    --red-deep:#B01E2E;
-    --momiji:#F2762E;
-    --gold:#E8A13B;
-    --green:#4C956C;
-    --card-line:#F3E4D8;
-    --maru:"Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","HG Maru Gothic M-PRO","Yu Gothic UI","Yu Gothic",sans-serif;
+    --ink:#1B2230;
+    --ink-strong:#0B1220;
+    --muted:#5D6883;
+    --rule:#D8E2F5;        /* 細罫 */
+    --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;
     --mono:ui-monospace,"SFMono-Regular","Menlo","Consolas",monospace;
+    --gap:clamp(38px,5.6vw,60px);   /* 見出しと本体のあき */
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth;font-size:118.75%}
+  html{scroll-behavior:smooth;font-size:112.5%}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-  .lp{background:var(--white);color:var(--ink);font-family:var(--maru);line-height:1.9;
-      -webkit-font-smoothing:antialiased;overflow-x:hidden}
-  .wrap{width:100%;max-width:1000px;margin:0 auto;padding:0 22px}
-  h1,h2,h3{margin:0;line-height:1.35;text-wrap:balance;color:var(--ink-strong)}
+  .lp{background:var(--white);color:var(--ink);font-family:var(--gothic);line-height:1.85;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{margin:0;line-height:1.26;color:var(--ink-strong);letter-spacing:-.005em;
+    font-feature-settings:"palt" 1}
   a{color:inherit}
-  .mono{font-family:var(--mono)}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  /* ライムはベタ面ではなく蛍光ペンとして使う */
+  .mark{background:linear-gradient(transparent 60%,var(--lime) 60%);padding:0 .12em}
 
   /* ---------- header ---------- */
-  .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(8px);
-       box-shadow:0 1px 0 rgba(70,56,50,.1)}
-  .bar .wrap{display:flex;align-items:center;gap:16px;height:66px}
-  .brand{font-weight:800;font-size:1.08rem;color:var(--ink-strong)}
-  .brand .o{color:var(--red)}
-  .bar .date{margin-left:auto;font-size:.88rem;color:var(--red);display:none;font-weight:800}
-  @media(min-width:680px){.bar .date{display:block}}
-
-  .btn{display:inline-block;text-decoration:none;font-weight:800;text-align:center;font-family:var(--maru);
-    background:var(--red);color:#fff;border:none;border-radius:999px;cursor:pointer;
-    padding:.6em 1.5em;font-size:.9rem;box-shadow:0 4px 14px rgba(214,40,57,.3);
-    transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
-  .btn:hover{background:var(--red-deep);transform:translateY(-2px);box-shadow:0 8px 20px rgba(176,30,46,.38)}
-  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-  .btn.big{font-size:1.12rem;padding:.95em 2.8em}
-  .btn.sub{background:#fff;color:var(--red);border:2px solid var(--red);box-shadow:none}
-  .btn.sub:hover{background:#FDECEA;transform:translateY(-2px)}
-
-  /* ---------- momiji ---------- */
-  .momiji{position:absolute;pointer-events:none}
-  @media(prefers-reduced-motion:no-preference){
-    .momiji{animation:sway 9s ease-in-out infinite alternate;transform-origin:center}
-    @keyframes sway{
-      from{transform:rotate(var(--rot,0deg)) translateY(0)}
-      to{transform:rotate(calc(var(--rot,0deg) + 14deg)) translateY(14px)}
-    }
+  .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule)}
+  .bar .wrap{display:flex;align-items:center;gap:20px;height:62px}
+  .brand{font-weight:900;font-size:1rem;letter-spacing:-.01em;color:var(--ink-strong);
+    font-feature-settings:"palt" 1}
+  .brand .o{color:var(--blue)}
+  .bar .date{margin-left:auto;font-size:.76rem;letter-spacing:.04em;color:var(--muted);
+    display:none;font-weight:700}
+  @media(min-width:760px){.bar .date{display:block}}
+  @media(max-width:560px){
+    .bar .wrap{gap:12px}
+    .brand{font-size:.88rem}
+    .bar .btn{padding:.6em 1.1em;font-size:.76rem;white-space:nowrap}
   }
-  @media(prefers-reduced-motion:reduce){.momiji{animation:none}}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-block;text-decoration:none;font-weight:800;text-align:center;
+    font-family:var(--gothic);background:var(--blue);color:#fff;border:1px solid var(--blue);
+    border-radius:2px;cursor:pointer;padding:.8em 1.7em;font-size:.86rem;letter-spacing:.04em;
+    transition:background .18s ease,border-color .18s ease,color .18s ease}
+  .btn:hover{background:var(--blue-deep);border-color:var(--blue-deep)}
+  .btn:focus-visible{outline:2px solid var(--ink-strong);outline-offset:3px}
+  .btn.big{font-size:1rem;padding:1.05em 2.5em}
+  .btn.sub{background:transparent;color:var(--ink-strong);border-color:var(--ink-strong)}
+  .btn.sub:hover{background:var(--ink-strong);color:#fff}
 
   /* ---------- hero ---------- */
-  .hero{position:relative;overflow:hidden;text-align:center;
-    background:linear-gradient(180deg,var(--cream-alt) 0%,var(--cream) 55%,var(--white) 100%);
-    padding:76px 0 92px}
-  .hero .wrap{position:relative;z-index:2}
-  /* 開催日バッジ（大きく目立たせる） */
-  .hero .when{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.2em .8em;
-    background:var(--red);color:#fff;font-weight:800;
-    border-radius:999px;padding:.5em 1.7em;font-size:1.02rem;letter-spacing:.04em;
-    box-shadow:0 6px 18px rgba(214,40,57,.32)}
-  .hero .when .mono{color:#FFE3B8;font-size:1.5em;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-  .hero .when .place{font-size:.98em}
-  .hero h1{margin-top:.8em;font-weight:800;font-size:clamp(2.5rem,7.8vw,4.7rem);line-height:1.3;letter-spacing:.02em}
-  .hero h1 .row{display:block}
-  .hero h1 .row.top{font-size:.44em;letter-spacing:.12em;color:var(--muted)}
-  .hero h1 .row.mid{font-size:.64em;margin:.5em 0 .45em;line-height:1.5}
-  .hero h1 .em{color:var(--red)}
-  .hero h1 .stroke{display:inline-block;background:#fff;border-radius:.35em;padding:.02em .35em;
-    box-shadow:0 3px 12px rgba(70,56,50,.1)}
-  .hero .lead{max-width:34em;margin:1.8em auto 0;font-size:clamp(1.04rem,2.1vw,1.2rem);font-weight:700;color:var(--ink)}
-  .hero .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:2.2em}
-  .hero .cap{width:100%;font-size:.92rem;color:var(--muted);font-weight:700}
+  .hero{position:relative;overflow:hidden;background:var(--tint);padding:clamp(40px,6vw,72px) 0 clamp(56px,7vw,84px)}
+  .hero-grid{display:grid;gap:32px;grid-template-columns:1fr}
+  @media(min-width:940px){
+    .hero-grid{grid-template-columns:1.06fr .94fr;gap:48px;align-items:end}
+  }
 
-  .pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:2.4em}
-  .pill{background:#fff;border-radius:999px;padding:.5em 1.3em;font-size:.92rem;font-weight:800;
-    color:var(--ink);box-shadow:0 2px 8px rgba(70,56,50,.1)}
-  .pill b{color:var(--red)}
-  /* 賞金・開催日ピルは反転させて強調 */
-  .pill.hot{background:var(--red);color:#fff;box-shadow:0 5px 16px rgba(214,40,57,.34);font-size:1.02rem}
-  .pill.hot b{color:#FFE3B8;font-size:1.15em}
+  .kicker{margin:0;font-weight:800;line-height:1.75;letter-spacing:.01em;
+    font-size:clamp(.92rem,3.4vw,1.16rem);color:var(--blue)}
+  .kicker .b2{color:var(--ink-strong)}
+  .hero h1{margin-top:.5em}
+  .catch{display:block;font-weight:900;line-height:1;letter-spacing:-.02em;
+    font-size:clamp(2.9rem,11.5vw,5.4rem);color:var(--ink-strong)}
+  .catch .l{display:block}
+  .catch .ugo{display:inline-block;color:var(--blue);font-size:1.28em;line-height:.8;
+    transform:skewX(-9deg);transform-origin:bottom left;margin-right:.04em}
+  .run{display:inline-block;margin-top:1.3em;font-family:var(--mono);font-weight:700;
+    font-size:clamp(.8rem,2.2vw,.92rem);letter-spacing:.22em;color:var(--ink-strong);
+    background:linear-gradient(transparent 58%,var(--lime) 58%);padding:0 .3em}
+  .ev{display:block;margin-top:1.4em;font-weight:900;color:var(--ink-strong);
+    font-size:clamp(1.1rem,4.6vw,1.85rem);line-height:1.35}
+  .ev .en{display:block;margin-top:.55em;font-family:var(--mono);font-weight:700;
+    font-size:.44em;letter-spacing:.12em;color:var(--blue);word-break:break-word}
 
-  /* ---------- tools ---------- */
-  .tools{padding:64px 0 40px;text-align:center}
-  .tools .t-sub{font-size:1.05rem;font-weight:800;color:var(--ink);letter-spacing:.1em;margin-top:38px}
-  .tools .t-hint{margin-top:12px;font-size:.9rem;font-weight:700;color:var(--ink);opacity:.78;line-height:1.8}
-  .tools .t-note{margin-top:30px;font-size:.95rem;font-weight:800;color:var(--red);line-height:2}
-  .tools .t-box{max-width:860px;margin:32px auto 0;text-align:left;background:#fff;
-    border:2px solid rgba(214,40,57,.28);border-radius:16px;padding:22px 26px}
-  .tools .t-box p{font-size:.95rem;line-height:1.95;color:var(--ink)}
-  .tools .t-box p + p{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(214,40,57,.28)}
-  .tools .t-box a{color:var(--red);text-decoration:none;border-bottom:1px solid var(--red)}
-  .tools .t-box a:hover{color:var(--red-deep);border-color:var(--red-deep)}
-  .tools .row{display:flex;flex-wrap:wrap;gap:14px 18px;justify-content:center;margin-top:18px}
-  .tool{font-family:var(--mono);font-size:1.25rem;font-weight:800;color:var(--ink-strong);
-    background:#fff;border:3px solid var(--red);border-radius:16px;padding:.55em 1.3em;
-    box-shadow:0 6px 18px rgba(214,40,57,.18)}
+  /* 開催日：面ではなく罫線と級数で見せる */
+  .hero .when{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3em 1.1em;
+    margin-top:1.7em;padding-top:1.1em;border-top:1px solid var(--ink-strong)}
+  .hero .when .mono{font-size:clamp(1.16rem,3.6vw,1.5rem);font-weight:700;letter-spacing:.01em;
+    color:var(--ink-strong)}
+  .hero .when .place{font-size:.84rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
+
+  /* 写真：枠を持たず、四辺を背景へ溶かす */
+  .hero-photo .ph-in{position:relative;max-width:470px;margin:0 auto}
+  .hero-photo img{display:block;width:100%;height:auto;
+    -webkit-mask-image:
+      linear-gradient(to right,transparent 0,#000 18%,#000 84%,transparent 100%),
+      linear-gradient(to bottom,transparent 0,#000 15%,#000 82%,transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      linear-gradient(to right,transparent 0,#000 18%,#000 84%,transparent 100%),
+      linear-gradient(to bottom,transparent 0,#000 15%,#000 82%,transparent 100%);
+    mask-composite:intersect}
+  .hero-photo .tagline{position:absolute;left:0;bottom:4%;background:var(--blue);color:#fff;
+    font-weight:800;font-size:.8rem;letter-spacing:.04em;padding:.6em 1em;border-radius:2px}
+
+  .hero .lead{max-width:34em;margin:2.4em 0 0;font-size:clamp(.98rem,2vw,1.08rem);
+    font-weight:700;color:var(--ink);line-height:1.95}
+  .hero .lead b{color:var(--blue)}
+  .hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:1.8em}
+  .hero .cap{width:100%;font-size:.78rem;color:var(--muted);font-weight:700;line-height:1.8}
+
+  /* チラシ下部のライム帯。1pxのすき間を地色で見せて罫線にする */
+  .specband{margin-top:clamp(40px,6vw,64px);background:rgba(11,18,32,.26);
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
+  @media(min-width:760px){.specband{grid-template-columns:repeat(3,1fr)}}
+  @media(min-width:1000px){.specband{grid-template-columns:repeat(6,1fr)}}
+  .specband .cell{background:var(--lime);padding:18px 16px}
+  .specband .k{display:block;font-size:.7rem;font-weight:800;letter-spacing:.08em;
+    color:rgba(11,18,32,.66)}
+  .specband .v{display:block;margin-top:.25em;font-weight:900;color:var(--ink-strong);
+    font-size:1.08rem;line-height:1.35;font-feature-settings:"palt" 1}
+  .specband .v small{display:block;margin-top:.3em;font-size:.68em;font-weight:700;
+    color:rgba(11,18,32,.62);line-height:1.5}
+  .specband .v small.in{display:inline;margin:0 0 0 .35em;font-size:.62em;letter-spacing:.08em}
 
   /* ---------- section base ---------- */
-  section{padding:84px 0}
-  section.alt{background:var(--cream)}
-  .sec-head{text-align:center;max-width:44em;margin:0 auto}
-  .sec-head .en{font-family:var(--mono);font-size:.8rem;letter-spacing:.26em;color:var(--red);
-    text-transform:uppercase;font-weight:700}
-  .sec-head h2{font-size:clamp(1.7rem,4.6vw,2.5rem);font-weight:800;margin-top:.5em}
-  .sec-head h2 .em{color:var(--red)}
-  .sec-head .under{display:block;width:64px;height:5px;border-radius:99px;background:var(--red);margin:.9em auto 0}
-  .sec-head p{color:var(--muted);font-weight:700;margin:1.2em 0 0;font-size:1.05rem}
+  section{padding:clamp(64px,8vw,110px) 0}
+  section.alt{background:var(--tint)}
+  .sec-head{max-width:none}
+  .sec-head .en{display:flex;align-items:center;gap:.9em;font-family:var(--mono);font-size:.68rem;
+    letter-spacing:.24em;color:var(--blue);text-transform:uppercase;font-weight:700}
+  .sec-head .en::before{content:"";width:26px;height:3px;background:var(--lime);flex:none}
+  .sec-head h2{font-size:clamp(1.55rem,3.9vw,2.3rem);font-weight:900;margin-top:.7em}
+  .sec-head h2 .em{color:var(--blue)}
+  .sec-head p{max-width:38em;color:var(--muted);font-weight:600;margin:1.1em 0 0;
+    font-size:.95rem;line-height:1.95}
 
   /* ---------- features ---------- */
-  .feats{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
-  @media(min-width:640px){.feats{grid-template-columns:1fr 1fr}.feats .feat:last-child{grid-column:1/-1}}
-  @media(min-width:960px){.feats{grid-template-columns:repeat(4,1fr)}}
-  .feat{background:#fff;border-radius:20px;padding:30px 22px;text-align:center;
-    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line);
-    transition:transform .2s ease}
-  .feat:hover{transform:translateY(-5px)}
-  .feat .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;
-    font-size:1.7rem;background:var(--cream-alt)}
-  .feat h3{font-size:1.16rem;font-weight:800;margin-top:.9em}
-  .feat h3 .nb{display:inline-block}
-  .feat p{font-size:.96rem;color:var(--muted);font-weight:700;margin:.5em 0 0;line-height:1.8}
+  .feats{margin-top:var(--gap);border-top:1px solid var(--ink-strong)}
+  .feat{display:grid;grid-template-columns:auto 1fr;gap:.2em 20px;padding:26px 0;
+    border-bottom:1px solid var(--rule)}
+  @media(min-width:860px){
+    .feat{grid-template-columns:74px 15em 1fr;gap:0 28px;align-items:baseline;padding:30px 0}
+  }
+  .feat .n{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--blue);
+    letter-spacing:.12em;line-height:2.4}
+  @media(max-width:859px){.feat .n{grid-row:1;line-height:1.9}}
+  .feat h3{font-size:clamp(1.08rem,2.3vw,1.24rem);font-weight:900}
+  .feat p{color:var(--muted);font-weight:600;font-size:.92rem;line-height:1.95;margin:.5em 0 0;
+    grid-column:2/-1}
+  @media(min-width:860px){.feat p{margin:0;grid-column:3}}
 
-  /* ---------- steps ---------- */
-  .steps{display:grid;gap:22px;grid-template-columns:1fr;margin-top:52px}
-  @media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr)}}
-  .step{background:#fff;border-radius:20px;padding:34px 26px 30px;position:relative;
-    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line)}
-  .step .n{position:absolute;top:-18px;left:22px;width:44px;height:44px;border-radius:50%;
-    background:var(--red);color:#fff;font-weight:800;display:grid;place-items:center;
-    font-size:1.15rem;box-shadow:0 4px 12px rgba(214,40,57,.33)}
-  .step h3{font-size:1.28rem;font-weight:800;margin-top:.3em}
-  .step p{font-size:1rem;color:var(--muted);font-weight:700;margin:.6em 0 0}
+  /* ---------- tools ---------- */
+  .tools .t-sub{margin-top:44px;padding-bottom:10px;border-bottom:1px solid var(--rule);
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);font-weight:700}
+  .tools .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .tool{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--blue);
+    background:transparent;border:1px solid var(--blue);border-radius:2px;padding:.5em 1.1em}
+  .tools .t-hint{margin-top:14px;font-size:.84rem;font-weight:600;color:var(--muted);line-height:1.9}
+  .tools .t-note{margin-top:40px;padding:.1em 0 .1em 18px;border-left:3px solid var(--blue);
+    font-size:.86rem;font-weight:700;color:var(--ink);line-height:2.05}
+  .tools .t-box{margin-top:26px;border:1px solid var(--rule);border-radius:2px;padding:20px 22px;
+    background:var(--white)}
+  .tools .t-box p{font-size:.88rem;line-height:2;color:var(--ink);font-weight:600}
+  .tools .t-box a{color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue)}
+  .tools .t-box a:hover{color:var(--blue-deep);border-color:var(--blue-deep)}
 
   /* ---------- timetable ---------- */
-  .tt{max-width:680px;margin:52px auto 0;position:relative;padding-left:30px}
-  .tt::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:4px;border-radius:99px;
-    background:var(--cream-alt)}
-  .tt-row{position:relative;display:grid;grid-template-columns:86px 1fr;gap:14px;padding:12px 0;align-items:baseline}
-  @media(min-width:560px){.tt-row{grid-template-columns:104px 1fr}}
-  .tt-row::before{content:"";position:absolute;left:-27px;top:1.15em;width:14px;height:14px;border-radius:50%;
-    background:#fff;border:4px solid var(--gold)}
-  .tt-row.key::before{border-color:var(--red)}
-  .tt-row .t{font-family:var(--mono);font-weight:700;font-size:1.06rem;color:var(--ink-strong);font-variant-numeric:tabular-nums}
-  .tt-row .d{font-weight:800;font-size:1.08rem;color:var(--ink-strong)}
-  .tt-row .d small{display:block;font-weight:700;color:var(--muted);font-size:.92rem;margin-top:.15em}
-  .tt-row .tag{display:inline-block;background:var(--red);color:#fff;font-size:.72rem;font-weight:800;
-    border-radius:999px;padding:.18em .8em;margin-left:.6em;vertical-align:.15em}
-
-  /* ---------- themes ---------- */
-  .themes{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
-  @media(min-width:680px){.themes{grid-template-columns:1fr 1fr}}
-  .th{background:#fff;border-radius:20px;padding:30px 28px;border:1px solid var(--card-line);
-    box-shadow:0 6px 22px rgba(70,56,50,.08);transition:transform .2s ease}
-  .th:hover{transform:translateY(-5px)}
-  .th .k{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.12em;color:#fff;
-    background:var(--tcolor,var(--red));border-radius:999px;padding:.25em 1em;text-transform:uppercase;
-    font-family:var(--mono)}
-  .th h3{font-size:1.28rem;font-weight:800;margin:.7em 0 .3em}
-  .th p{font-size:1rem;color:var(--muted);font-weight:700;margin:0}
+  .tt{margin-top:var(--gap);border-top:1px solid var(--ink-strong)}
+  .tt-row{display:grid;grid-template-columns:74px 1fr;gap:0 18px;padding:18px 0;
+    border-bottom:1px solid var(--rule);align-items:baseline}
+  @media(min-width:720px){.tt-row{grid-template-columns:120px 1fr;gap:0 28px;padding:20px 0}}
+  /* グリッド項目は自動的にブロック化されるので、幅を内容に合わせる */
+  .tt-row .t{justify-self:start;font-family:var(--mono);font-weight:700;font-size:.95rem;
+    color:var(--muted);font-variant-numeric:tabular-nums}
+  /* 節目の時刻だけ蛍光ペンで示す（説明文まで引かないよう .t に限定する） */
+  .tt-row.key .t{color:var(--ink-strong);padding:0 .25em;
+    background:linear-gradient(transparent 58%,var(--lime) 58%)}
+  .tt-row .d{font-weight:900;font-size:1.02rem;color:var(--ink-strong)}
+  .tt-row .d small{display:block;font-weight:600;color:var(--muted);font-size:.85rem;
+    margin-top:.4em;line-height:1.9;background:none;padding:0}
+  .tt-row .tag{display:inline-block;margin-left:.7em;vertical-align:.12em;font-family:var(--mono);
+    font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--blue);
+    border:1px solid var(--blue);border-radius:2px;padding:.25em .6em;background:var(--white)}
 
   /* ---------- prize ---------- */
-  .prize-hero{max-width:760px;margin:52px auto 0;background:#fff;border-radius:26px;overflow:hidden;
-    box-shadow:0 10px 34px rgba(70,56,50,.12);border:1px solid var(--card-line);text-align:center}
-  .prize-hero .top{background:linear-gradient(135deg,var(--red),var(--momiji));color:#fff;padding:40px 20px 36px}
-  .prize-hero .top .lab{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;
-    padding:.28em 1.4em;font-weight:800;letter-spacing:.2em;font-size:1rem}
-  .prize-hero .top .amt{font-family:var(--mono);font-weight:700;font-size:clamp(3.6rem,11vw,6rem);
-    line-height:1.05;margin-top:.12em;font-variant-numeric:tabular-nums;letter-spacing:-.01em;
-    text-shadow:0 3px 12px rgba(0,0,0,.2)}
-  .prize-hero .top p{margin:.5em 0 0;font-weight:800;font-size:1.08rem}
-  .prize-hero .bottom{display:grid;grid-template-columns:1fr;gap:0}
-  .prize-hero .cell{padding:26px 24px;border-top:1px solid var(--card-line)}
-  .prize-hero .cell b{font-size:1.14rem;color:var(--ink-strong)}
-  .prize-hero .cell p{font-size:.96rem;color:var(--muted);font-weight:700;margin:.4em 0 0}
+  .prize-hero{margin-top:var(--gap);display:grid;grid-template-columns:1fr;gap:0}
+  @media(min-width:860px){.prize-hero{grid-template-columns:1.05fr .95fr;align-items:stretch}}
+  .prize-hero .top{background:var(--blue);color:#fff;padding:clamp(30px,4vw,42px) clamp(24px,3vw,36px)}
+  .prize-hero .top .lab{display:inline-block;font-family:var(--mono);font-size:.68rem;
+    letter-spacing:.24em;font-weight:700;padding-bottom:.5em;
+    border-bottom:1px solid rgba(255,255,255,.45)}
+  .prize-hero .top .amt{font-family:var(--mono);font-weight:700;line-height:1;
+    font-size:clamp(2.9rem,8.5vw,4.6rem);margin-top:.34em;font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em}
+  .prize-hero .top p{margin:.7em 0 0;font-weight:700;font-size:.9rem;letter-spacing:.04em;
+    color:var(--lime)}
+  .prize-hero .cell{padding:clamp(26px,3.4vw,42px) 0 0}
+  @media(min-width:860px){.prize-hero .cell{padding:clamp(30px,4vw,42px) 0 0 clamp(24px,3vw,36px)}}
+  .prize-hero .cell b{display:block;font-size:1.06rem;font-weight:900;color:var(--ink-strong)}
+  .prize-hero .cell p{font-size:.9rem;color:var(--muted);font-weight:600;margin:.55em 0 0;line-height:1.95}
 
   /* ---------- judge ---------- */
-  .judge{max-width:860px;margin:40px auto 0}
-  .judge h3{text-align:center;font-size:1.35rem;font-weight:800;color:var(--ink-strong)}
-  .jd-grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:24px}
-  @media(min-width:560px){.jd-grid{grid-template-columns:1fr 1fr}}
-  @media(min-width:880px){.jd-grid{grid-template-columns:repeat(3,1fr)}}
-  .jd{background:#fff;border:2px solid var(--jc,var(--red));border-radius:16px;overflow:hidden;
-    box-shadow:0 5px 18px rgba(70,56,50,.08)}
-  .jd .hd{background:var(--jc,var(--red));color:#fff;font-weight:800;text-align:center;
-    padding:.5em .4em;font-size:1.1rem;letter-spacing:.06em}
-  .jd ul{list-style:none;margin:0;padding:14px 14px 16px;text-align:center}
-  .jd li{font-weight:800;color:var(--ink);font-size:1rem;line-height:1.9}
-  .jd li small{font-weight:700;color:var(--muted);font-size:.86rem;display:block;line-height:1.6}
-  .jd-gate{margin-top:24px;background:var(--red);color:#fff;border-radius:14px;text-align:center;
-    padding:20px 18px}
-  .jd-gate .g-label{display:inline-block;background:#fff;color:var(--red);font-weight:800;
-    border-radius:999px;padding:.25em 1.2em;font-size:.8rem;letter-spacing:.14em}
-  .jd-gate .g-main{display:block;font-weight:800;font-size:clamp(1.2rem,3.2vw,1.6rem);margin-top:.4em}
-  .jd-gate small{display:block;margin-top:.4em;font-weight:700;font-size:.86rem;color:#FFD9DD}
-  .ugoite{margin-top:16px;background:#FFF23D;color:#2A2416;font-weight:800;text-align:center;
-    font-size:clamp(1.3rem,3.6vw,1.8rem);padding:.55em .5em;border-radius:12px;letter-spacing:.1em}
-  .j-note{margin-top:16px;text-align:center;font-size:.95rem;font-weight:800;color:var(--red)}
+  .judge{margin-top:clamp(48px,6vw,76px)}
+  .judge h3{font-size:1.02rem;font-weight:900;color:var(--ink-strong);
+    padding-bottom:.7em;border-bottom:1px solid var(--ink-strong)}
+  .jd-grid{display:grid;gap:28px;grid-template-columns:1fr;margin-top:28px}
+  @media(min-width:720px){.jd-grid{grid-template-columns:repeat(3,1fr);gap:32px}}
+  .jd{border-top:3px solid var(--jc,var(--blue));padding-top:16px}
+  .jd .hd{font-size:1rem;font-weight:900;color:var(--ink-strong);letter-spacing:.02em}
+  .jd ul{list-style:none;margin:.7em 0 0;padding:0}
+  .jd li{font-weight:700;color:var(--ink);font-size:.92rem;line-height:1.85}
+  .jd li + li{margin-top:.5em}
+  .jd li small{display:block;margin-top:.35em;font-weight:600;color:var(--muted);
+    font-size:.82rem;line-height:1.8}
+  .ugoite{margin-top:clamp(40px,5vw,60px);font-weight:900;letter-spacing:.02em;
+    font-size:clamp(1.5rem,4.4vw,2.2rem);color:var(--ink-strong);font-feature-settings:"palt" 1}
+  .ugoite span{background:linear-gradient(transparent 62%,var(--lime) 62%);padding:0 .14em}
 
   /* ---------- members ---------- */
-  .members{display:grid;gap:20px;grid-template-columns:1fr;margin-top:52px}
-  @media(min-width:560px){.members{grid-template-columns:1fr 1fr}}
+  .members{display:grid;gap:34px 28px;grid-template-columns:1fr;margin-top:var(--gap)}
+  @media(min-width:600px){.members{grid-template-columns:1fr 1fr}}
   @media(min-width:960px){.members{grid-template-columns:repeat(3,1fr)}}
-  .mem{background:#fff;border-radius:20px;padding:30px 20px 26px;text-align:center;
-    box-shadow:0 6px 22px rgba(70,56,50,.08);border:1px solid var(--card-line);
-    transition:transform .2s ease}
-  .mem:hover{transform:translateY(-5px)}
-  .mem .ph{width:112px;height:112px;margin:0 auto;border-radius:50%;background:var(--cream-alt);
-    display:grid;place-items:center;overflow:hidden;border:3px solid var(--card-line)}
+  .mem{border-top:1px solid var(--rule);padding-top:22px}
+  .mem .ph{width:80px;height:80px;border-radius:50%;background:var(--tint-alt);
+    display:grid;place-items:center;overflow:hidden}
   .mem .ph img{width:100%;height:100%;object-fit:cover}
-  .mem .ph .q{font-size:2.8rem;font-weight:800;color:#D9C8B8;font-family:var(--maru)}
-  .mem .role{display:inline-block;margin-top:16px;font-size:.78rem;font-weight:800;color:#fff;
-    background:var(--red);border-radius:999px;padding:.24em 1em;letter-spacing:.08em}
-  .mem .role.gold,.mem.soon .role{background:var(--gold)}
-  .mem .role.green{background:var(--green)}
-  .mem b{display:block;margin-top:.55em;font-size:1.16rem;color:var(--ink-strong)}
-  .mem p{font-size:.92rem;color:var(--muted);font-weight:700;margin:.45em 0 0;line-height:1.75}
+  .mem .ph .q{font-size:1.9rem;font-weight:800;color:#AFC0E4;font-family:var(--mono)}
+  .mem .role{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:.62rem;
+    font-weight:700;letter-spacing:.16em;color:#fff;background:var(--blue);
+    border-radius:2px;padding:.4em .8em}
+  .mem .role.gold,.mem.soon .role{background:var(--lime);color:var(--ink-strong)}
+  .mem .role.green{background:var(--blue-deep);color:#fff}
+  .mem b{display:block;margin-top:.7em;font-size:1.08rem;font-weight:900;color:var(--ink-strong)}
+  .mem p{font-size:.84rem;color:var(--muted);font-weight:600;margin:.6em 0 0;line-height:1.9}
 
   /* ---------- organizer ---------- */
-  .org{max-width:760px;margin:52px auto 0;background:#fff;border-radius:22px;
-    border:1px solid var(--card-line);box-shadow:0 6px 22px rgba(70,56,50,.08);
-    padding:38px 30px;text-align:center}
-  .org .o-tag{display:inline-block;background:var(--red);color:#fff;font-weight:800;
-    border-radius:999px;padding:.3em 1.4em;font-size:.88rem;letter-spacing:.14em}
-  .org h3{font-size:clamp(1.25rem,3.4vw,1.6rem);font-weight:800;margin-top:.75em}
-  .org .o-full{display:block;margin-top:.4em;font-size:1.02rem;font-weight:700;color:var(--muted)}
-  .org p{font-size:1rem;font-weight:700;color:var(--ink);margin:1.1em auto 0;max-width:34em;line-height:1.9}
-  .org .o-link{display:inline-block;margin-top:1.4em;font-family:var(--mono);font-size:1rem;font-weight:700;
-    color:var(--red);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:.1em}
-  .org .o-link:hover{color:var(--red-deep);border-color:var(--red-deep)}
-  .org .o-sub{display:block;margin-top:1.5em;font-size:.95rem;font-weight:800;color:var(--ink-strong)}
-
-  /* ---------- mentor recruit ---------- */
-  .recruit{max-width:760px;margin:44px auto 0;background:#fff;border:2px dashed var(--red);
-    border-radius:18px;padding:30px 26px;text-align:center}
-  .recruit .r-tag{display:inline-block;background:var(--red);color:#fff;font-weight:800;
-    border-radius:999px;padding:.32em 1.3em;font-size:.85rem;letter-spacing:.12em}
-  .recruit h3{font-size:1.3rem;font-weight:800;margin-top:.7em}
-  .recruit p{font-weight:700;color:var(--ink);margin:.7em 0 0;font-size:.95rem}
-  .recruit .cond{display:inline-block;margin-top:.9em;background:var(--cream-alt);border-radius:12px;
-    padding:.7em 1.4em;font-weight:800;color:var(--ink-strong);font-size:.95rem}
-  .recruit .cond .c-label{color:var(--red);margin-right:.6em}
-  .recruit small{display:block;margin-top:1.1em;color:var(--muted);font-weight:700;font-size:.8rem}
+  .org{margin-top:var(--gap);border-top:1px solid var(--ink-strong);padding-top:30px;
+    display:grid;gap:26px;grid-template-columns:1fr}
+  @media(min-width:820px){.org{grid-template-columns:18em 1fr;gap:0 56px}}
+  .org .o-tag{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;
+    font-weight:700;color:#fff;background:var(--blue);border-radius:2px;padding:.4em .8em}
+  .org h3{font-size:clamp(1.3rem,3.2vw,1.7rem);font-weight:900;margin-top:.6em}
+  .org .o-full{display:block;margin-top:.5em;font-size:.86rem;font-weight:700;color:var(--muted)}
+  .org p{font-size:.94rem;font-weight:600;color:var(--ink);margin:0;line-height:2;max-width:36em}
+  .org .o-link{display:inline-block;margin-top:1.4em;font-family:var(--mono);font-size:.86rem;
+    font-weight:700;color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue);
+    padding-bottom:.15em}
+  .org .o-link:hover{color:var(--blue-deep);border-color:var(--blue-deep)}
+  .org .o-sub{display:block;margin-top:1.6em;font-size:.84rem;font-weight:800;color:var(--ink-strong)}
 
   /* ---------- faq ---------- */
-  .faq{max-width:760px;margin:52px auto 0;display:grid;gap:14px}
-  .qa{background:#fff;border-radius:16px;border:1px solid var(--card-line);
-    box-shadow:0 4px 16px rgba(70,56,50,.07);overflow:hidden}
-  .qa summary{list-style:none;cursor:pointer;padding:20px 54px 20px 24px;font-weight:800;
-    color:var(--ink-strong);position:relative;font-size:1.08rem}
+  .faq{margin-top:var(--gap);border-top:1px solid var(--ink-strong)}
+  .qa{border-bottom:1px solid var(--rule)}
+  .qa summary{list-style:none;cursor:pointer;position:relative;padding:20px 40px 20px 0;
+    font-weight:800;font-size:.98rem;color:var(--ink-strong);line-height:1.7}
   .qa summary::-webkit-details-marker{display:none}
-  .qa summary::before{content:"Q.";color:var(--red);margin-right:.6em;font-family:var(--mono);font-weight:700}
-  .qa summary::after{content:"＋";position:absolute;right:22px;top:50%;transform:translateY(-50%);
-    color:var(--red);font-weight:800;font-size:1.2rem}
-  .qa[open] summary::after{content:"－"}
-  .qa .a{padding:0 24px 22px 24px;font-size:1.02rem;font-weight:700;color:var(--muted)}
-  .qa .a::before{content:"A.";color:var(--green);margin-right:.6em;font-family:var(--mono);font-weight:700}
+  .qa summary::before{content:"Q";font-family:var(--mono);font-weight:700;font-size:.82em;
+    color:var(--blue);margin-right:1.1em}
+  /* ＋／－の記号ではなく、細い線で組む */
+  .qa summary::after{content:"";position:absolute;right:4px;top:50%;width:13px;height:13px;
+    transform:translateY(-50%);
+    background:
+      linear-gradient(var(--blue),var(--blue)) center/13px 1.5px no-repeat,
+      linear-gradient(var(--blue),var(--blue)) center/1.5px 13px no-repeat}
+  .qa[open] summary::after{background:linear-gradient(var(--blue),var(--blue)) center/13px 1.5px no-repeat}
+  .qa .a{padding:0 0 24px;font-size:.92rem;font-weight:600;color:var(--muted);line-height:2}
+  .qa .a::before{content:"A";font-family:var(--mono);font-weight:700;font-size:.86em;
+    color:var(--blue-deep);margin-right:1.1em}
+  .qa .a b{color:var(--ink-strong)}
 
   /* ---------- overview ---------- */
-  .ov{max-width:760px;margin:52px auto 0;background:#fff;border-radius:20px;overflow:hidden;
-    border:1px solid var(--card-line);box-shadow:0 6px 22px rgba(70,56,50,.08)}
-  .ov-row{display:grid;grid-template-columns:104px 1fr;border-bottom:1px solid var(--card-line)}
-  @media(min-width:640px){.ov-row{grid-template-columns:160px 1fr}}
-  .ov-row:last-child{border-bottom:none}
-  .ov-row .l{padding:16px 18px;font-weight:800;font-size:.96rem;background:#FDECEA;color:var(--ink-strong)}
-  .ov-row .v{padding:16px 18px;font-size:1.04rem;font-weight:700}
-  .ov-row .v small{color:var(--muted);font-size:.92rem;display:block;line-height:1.8}
-  .ov-row .v a{color:var(--red);font-family:var(--mono);text-decoration:none;
-    border-bottom:1px solid var(--red);word-break:break-all}
-  .ov-row .v a:hover{color:var(--red-deep);border-color:var(--red-deep)}
-  .ov-row .v a.doc{font-family:var(--maru);word-break:normal}
+  .ov{margin-top:var(--gap);border-top:1px solid var(--ink-strong)}
+  .ov-row{display:grid;grid-template-columns:1fr;gap:.3em 0;padding:18px 0;
+    border-bottom:1px solid var(--rule)}
+  @media(min-width:720px){.ov-row{grid-template-columns:13em 1fr;gap:0 32px;padding:20px 0}}
+  .ov-row .l{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.06em;line-height:1.9}
+  .ov-row .v{font-size:.96rem;font-weight:700;color:var(--ink-strong);line-height:1.9}
+  .ov-row .v small{display:block;margin-top:.4em;color:var(--muted);font-size:.82rem;
+    font-weight:600;line-height:1.9}
+  .ov-row .v a{color:var(--blue);font-family:var(--mono);font-size:.9em;text-decoration:none;
+    border-bottom:1px solid var(--blue);word-break:break-all}
+  .ov-row .v a:hover{color:var(--blue-deep);border-color:var(--blue-deep)}
+  .ov-row .v a.doc{font-family:var(--gothic);font-size:1em;word-break:normal}
 
   /* ---------- final ---------- */
-  .final{position:relative;overflow:hidden;text-align:center;
-    background:linear-gradient(180deg,var(--white) 0%,var(--cream) 45%,var(--cream-alt) 100%);
-    padding:100px 0 110px}
-  .final .wrap{position:relative;z-index:2}
-  .final h2{font-size:clamp(1.8rem,5.4vw,3rem);font-weight:800}
-  .final h2 .em{color:var(--red)}
-  .final p{font-weight:800;color:var(--ink);margin:1.2em auto 0;max-width:28em;font-size:1.08rem}
-  .final .when2{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.2em .8em;
-    margin-top:1.6em;background:var(--red);color:#fff;border-radius:999px;padding:.5em 1.7em;
-    font-weight:800;font-size:1.02rem;box-shadow:0 6px 18px rgba(214,40,57,.32)}
-  .final .when2 .mono{color:#FFE3B8;font-size:1.5em;font-variant-numeric:tabular-nums}
-  .final .btn{margin-top:1.6em}
-  .final .note{font-size:.92rem;color:var(--muted);font-weight:700;margin-top:1.6em;line-height:1.9}
-  .final .note a{color:var(--red);text-decoration:none;border-bottom:1px solid var(--red)}
-  .final .note a:hover{color:var(--red-deep);border-color:var(--red-deep)}
+  /* チラシ下部のブルー帯を、そのままページの締めに使う */
+  .final{background:var(--blue);color:#fff;padding:clamp(72px,9vw,120px) 0}
+  .final h2{color:#fff;font-size:clamp(1.9rem,5.2vw,3.1rem);font-weight:900;line-height:1.24}
+  .final h2 .em{color:var(--lime)}
+  .final .when2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3em 1.1em;
+    margin-top:1.8em;padding-top:1.1em;border-top:1px solid rgba(255,255,255,.45);max-width:32em}
+  .final .when2 .mono{font-size:clamp(1.16rem,3.6vw,1.5rem);font-weight:700;color:#fff}
+  .final .when2 span:not(.mono){font-size:.84rem;font-weight:700;color:rgba(255,255,255,.85)}
+  .final .btn{margin-top:2em;background:var(--lime);border-color:var(--lime);color:var(--ink-strong)}
+  .final .btn:hover{background:#fff;border-color:#fff;color:var(--ink-strong)}
+  .final .note{font-size:.8rem;color:rgba(255,255,255,.82);font-weight:600;margin-top:2em;
+    line-height:2;max-width:44em}
+  .final .note a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55)}
+  .final .note a:hover{border-color:#fff}
 
-  footer{background:var(--ink-strong);color:#DCCFC7;padding:30px 0;font-size:.92rem;font-weight:700}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+  /* ---------- footer ---------- */
+  footer{background:var(--ink-strong);color:#9FADC7;padding:34px 0;font-size:.78rem;font-weight:600}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
   footer b{color:#fff}
-  footer a{color:#F5D9D4;text-decoration:none;border-bottom:1px solid rgba(245,217,212,.45)}
+  footer a{color:#C9D6F2;text-decoration:none;border-bottom:1px solid rgba(201,214,242,.4)}
   footer a:hover{color:#fff;border-color:#fff}
-
 </style>
 </head>
 <body>
 
 <div class="lp">
-
-  <!-- もみじの形（7枚の羽根＋茎）を一度定義して使い回す -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <g id="momiji-leaf">
-        <g>
-          <polygon points="0,-46 9,-14 0,-2 -9,-14" transform="rotate(0)"/>
-          <polygon points="0,-40 8,-12 0,-2 -8,-12" transform="rotate(32)"/>
-          <polygon points="0,-40 8,-12 0,-2 -8,-12" transform="rotate(-32)"/>
-          <polygon points="0,-32 7,-10 0,-2 -7,-10" transform="rotate(64)"/>
-          <polygon points="0,-32 7,-10 0,-2 -7,-10" transform="rotate(-64)"/>
-          <polygon points="0,-24 6,-8 0,-2 -6,-8" transform="rotate(96)"/>
-          <polygon points="0,-24 6,-8 0,-2 -6,-8" transform="rotate(-96)"/>
-          <rect x="-1.6" y="-4" width="3.2" height="18" rx="1.6"/>
-        </g>
-      </g>
-    </defs>
-  </svg>
 
   <header class="bar">
     <div class="wrap">
@@ -349,28 +340,40 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <svg class="momiji" style="left:4%;top:70px;--rot:-18deg" width="74" height="74" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".8"/></svg>
-    <svg class="momiji" style="right:7%;top:110px;--rot:22deg;animation-delay:-3s" width="56" height="56" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#F2762E" opacity=".75"/></svg>
-    <svg class="momiji" style="left:10%;bottom:60px;--rot:40deg;animation-delay:-6s" width="48" height="48" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#E8A13B" opacity=".7"/></svg>
-    <svg class="momiji" style="right:13%;bottom:100px;--rot:-30deg;animation-delay:-1.5s" width="64" height="64" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".55"/></svg>
     <div class="wrap">
-      <div class="when"><span class="mono">2026.9.19 SAT</span><span class="place">イノベーション・ハブ・ひろしまCamps で開催！</span></div>
-      <h1>
-        <span class="row top">はじめてでも、半日で。</span>
-        <span class="row mid"><span class="stroke">あなたのアイデアが<span class="em">動くアプリ</span>になる</span></span>
-        <span class="row">広島学生<span class="em">AI</span>ハッカソン</span>
-      </h1>
-      <p class="lead">AIと会話しながら、自分のアイデアを実際に動くアプリにする半日。つくるのは<b>Webブラウザで動くアプリ</b>（URLを開けばすぐ使えるもの）です。審査されるのは「動くもの」だけ。対象は広島県内の学校に通う13歳以上の中学生から大学生まで。</p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">はじめてでも、半日で。<br><span class="b2">あなたのアイデアが動くアプリになる。</span></p>
+          <h1>
+            <span class="catch">
+              <span class="l">アイデア、</span>
+              <span class="l"><span class="ugo">動</span>かせ。</span>
+            </span>
+            <span class="run">IDEA → BUILD → RUN!</span>
+            <span class="ev">広島学生AIハッカソン 2026<span class="en">HIROSHIMA STUDENT AI HACKATHON 2026</span></span>
+          </h1>
+          <div class="when"><span class="mono">2026.9.19 SAT</span><span class="place">11:00–17:00｜ひろしま Camps</span></div>
+        </div>
+        <div class="hero-photo">
+          <div class="ph-in">
+            <img src="images/hero-students.jpg" width="455" height="592" alt="ノートPCを囲んでアプリをつくる学生たち" fetchpriority="high" decoding="async">
+            <span class="tagline">AIと一緒に、想像をカタチに。</span>
+          </div>
+        </div>
+      </div>
+      <p class="lead"><b>AIに詳しくなくても大丈夫！</b>2〜3人のチームで、AIと会話しながらアイデアを実際に「動くWebアプリ」に。4時間で、つくって、試して、発表しよう！対象は広島県内の学校に通う13歳以上の中学生から大学生まで。</p>
       <div class="cta">
         <a class="btn big" href="https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform" target="_blank" rel="noopener">参加を申し込む</a>
         <a class="btn big sub" href="#flow">当日の流れを見る</a>
-        <span class="cap">参加費無料・定員25人前後（2〜3人のチームで8チーム程度）・応募者多数の場合は年齢や学校のバランスを調整して決定します</span>
+        <span class="cap">応募者多数の場合は、年齢や学校のバランスを調整して参加チームを決定します</span>
       </div>
-      <div class="pills">
-        <span class="pill hot">最優秀賞 賞金<b>3万円</b></span>
-        <span class="pill">参加費<b>無料</b></span>
-        <span class="pill">動くもので<b>勝負</b></span>
-        <span class="pill">チーム参加<b>（2〜3人）</b></span>
+      <div class="specband">
+        <div class="cell"><span class="k">参加条件</span><span class="v">13歳以上<small>中学生〜大学生</small></span></div>
+        <div class="cell"><span class="k">参加費</span><span class="v">無料</span></div>
+        <div class="cell"><span class="k">定員</span><span class="v">約25人<small>※選考あり</small></span></div>
+        <div class="cell"><span class="k">持ち物</span><span class="v">ノートPC<small>充電器も忘れずに！</small></span></div>
+        <div class="cell"><span class="k">応募締切</span><span class="v">9.7<small class="in">MON</small></span></div>
+        <div class="cell"><span class="k">最優秀賞</span><span class="v">3万円<small>Amazonギフト券</small></span></div>
       </div>
     </div>
   </section>
@@ -381,31 +384,30 @@
       <div class="sec-head">
         <span class="en">Features</span>
         <h2>このハッカソンの<span class="em">5つの特徴</span></h2>
-        <span class="under"></span>
       </div>
       <div class="feats">
         <div class="feat">
-          <div class="ic">🎓</div>
-          <h3><span class="nb">13歳以上の中学生</span><span class="nb">から大学生まで</span></h3>
+          <span class="n">01</span>
+          <h3>13歳以上の中学生から大学生まで</h3>
           <p>広島県内の学校に通う、13歳以上の中学生・高校生・高専生・専門学校生・大学生が対象。</p>
         </div>
         <div class="feat">
-          <div class="ic">⏱️</div>
+          <span class="n">02</span>
           <h3>4時間でアプリ開発</h3>
           <p>その場でゼロから、約4時間の開発タイムでWebブラウザで動くアプリを完成させます。</p>
         </div>
         <div class="feat">
-          <div class="ic">🚀</div>
+          <span class="n">03</span>
           <h3>審査は「動くもの」だけ</h3>
           <p>発表のうまさは審査に入りません。動く作品の内容で勝負します。</p>
         </div>
         <div class="feat">
-          <div class="ic">🏆</div>
+          <span class="n">04</span>
           <h3>賞金3万円</h3>
           <p>最優秀賞にはAmazonギフト券3万円。オーディエンス賞やその他の賞もあります。</p>
         </div>
         <div class="feat">
-          <div class="ic">🛠️</div>
+          <span class="n">05</span>
           <h3>使うAIは全員同じ</h3>
           <p>使用できるAIサービス・Webホスティングサービスは全員共通で、それ以外は使えません。道具の差ではなく、発想と実装で勝負が決まります。</p>
         </div>
@@ -419,7 +421,6 @@
       <div class="sec-head">
         <span class="en">Tools</span>
         <h2>使用できる<span class="em">AI・ホスティングサービス</span>について</h2>
-        <span class="under"></span>
         <p>AIサービス・Webホスティングサービスは、以下に挙げたもののみ使用できます。<br>中学生から大学生まで、全員が同じ道具で競います。</p>
       </div>
       <div class="t-sub">AIサービス｜会話でつくる</div>
@@ -452,7 +453,6 @@
       <div class="sec-head">
         <span class="en">Schedule</span>
         <h2>当日の流れ</h2>
-        <span class="under"></span>
         <p>11:00スタート、17:00に表彰までフィニッシュ。受付は10:30から。昼食は各自でご用意ください。</p>
       </div>
       <div class="tt">
@@ -474,7 +474,6 @@
       <div class="sec-head">
         <span class="en">Prizes</span>
         <h2>楽しく作れて、<span class="em">賞金もGET</span></h2>
-        <span class="under"></span>
       </div>
       <div class="prize-hero">
         <div class="top">
@@ -493,19 +492,19 @@
       <div class="judge">
         <h3>審査基準</h3>
         <div class="jd-grid">
-          <div class="jd" style="--jc:#D62839">
+          <div class="jd" style="--jc:#0347F0">
             <div class="hd">テーマ適合性</div>
             <ul>
               <li>開発テーマに沿った作品であること<small>事前の作り込みは評価せず、その場で作り上げるものを評価します</small></li>
             </ul>
           </div>
-          <div class="jd" style="--jc:#F2762E">
+          <div class="jd" style="--jc:#2E6BFF">
             <div class="hd">実装度</div>
             <ul>
               <li>作品が動くことを重視<small>アイデアのみは評価しません</small></li>
             </ul>
           </div>
-          <div class="jd" style="--jc:#4C956C">
+          <div class="jd" style="--jc:#0030B4">
             <div class="hd">チャレンジ精神</div>
             <ul>
               <li>知的好奇心と探求心</li>
@@ -513,7 +512,7 @@
             </ul>
           </div>
         </div>
-        <div class="ugoite">動いてなんぼ！</div>
+        <div class="ugoite"><span>動いてなんぼ！</span></div>
       </div>
     </div>
   </section>
@@ -524,12 +523,11 @@
       <div class="sec-head">
         <span class="en">Members</span>
         <h2>ファシリテーター・メンター・<span class="em">審査員</span></h2>
-        <span class="under"></span>
         <p>当日、みなさんと一緒に走るメンバーです。メンター・審査員は順次公開します。</p>
       </div>
       <div class="members">
         <div class="mem">
-          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#AFC0E4"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#AFC0E4"/></svg></div>
           <span class="role">ファシリテーター</span>
           <b>藤本 勝己</b>
           <p>HiBiS DX・ITトレンド研究部会 副部会長。</p>
@@ -541,13 +539,13 @@
           <p>HiBiS DX・ITトレンド研究部会 部会長。タケムラテックラボ代表。AIを使ったアプリ開発者。ハッカソンには最近10年で約20回参加。</p>
         </div>
         <div class="mem">
-          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <div class="ph"><img src="images/mentor-onoue.jpg" width="112" height="112" alt="尾上 正幸" loading="lazy" decoding="async"></div>
           <span class="role gold">メンター</span>
           <b>尾上 正幸</b>
-          <p>プロフィールは近日公開。</p>
+          <p>エルティーエス　マネージャー。広島を拠点にAIやIoTを活用した実証実験「ひろしまサンドボックス」に携わるなど、先端技術による地方創生を推進。デジタル技術で地域課題を解決に導きます。</p>
         </div>
         <div class="mem">
-          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#D9C8B8"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#D9C8B8"/></svg></div>
+          <div class="ph"><svg viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><circle cx="50" cy="34" r="18" fill="#AFC0E4"/><path d="M50 56c-20 0-32 12-34 30h68c-2-18-14-30-34-30z" fill="#AFC0E4"/></svg></div>
           <span class="role gold">メンター</span>
           <b>菅原 政行</b>
           <p>プロフィールは近日公開。</p>
@@ -574,15 +572,18 @@
       <div class="sec-head">
         <span class="en">Organizer</span>
         <h2>主催者</h2>
-        <span class="under"></span>
       </div>
       <div class="org">
-        <span class="o-tag">主催</span>
-        <h3>HiBiS</h3>
-        <span class="o-full">広島インターネットビジネスソサイエティ</span>
-        <p>広島を中心に、インターネットやITを活用したビジネスの振興・人材育成に取り組む団体です。このハッカソンは、HiBiSの「DX・ITトレンド研究部会」が主催します。</p>
-        <a class="o-link" href="https://www.hibis.jp/" target="_blank" rel="noopener">https://www.hibis.jp/</a>
-        <span class="o-sub">主催：HiBiS DX・ITトレンド研究部会</span>
+        <div class="org-l">
+          <span class="o-tag">主催</span>
+          <h3>HiBiS</h3>
+          <span class="o-full">広島インターネットビジネスソサイエティ</span>
+        </div>
+        <div class="org-r">
+          <p>広島を中心に、インターネットやITを活用したビジネスの振興・人材育成に取り組む団体です。このハッカソンは、HiBiSの「DX・ITトレンド研究部会」が主催します。</p>
+          <a class="o-link" href="https://www.hibis.jp/" target="_blank" rel="noopener">https://www.hibis.jp/</a>
+          <span class="o-sub">主催：HiBiS DX・ITトレンド研究部会</span>
+        </div>
       </div>
     </div>
   </section>
@@ -593,7 +594,6 @@
       <div class="sec-head">
         <span class="en">FAQ</span>
         <h2>Q&A</h2>
-        <span class="under"></span>
       </div>
       <div class="faq">
         <details class="qa">
@@ -710,7 +710,6 @@
       <div class="sec-head">
         <span class="en">Overview</span>
         <h2>開催概要</h2>
-        <span class="under"></span>
       </div>
       <div class="ov">
         <div class="ov-row"><div class="l">日時</div><div class="v">2026年9月19日（土）11:00–17:00 <small>受付 10:30〜</small></div></div>
@@ -739,11 +738,8 @@
 
   <!-- ============ FINAL CTA ============ -->
   <section class="final" id="apply">
-    <svg class="momiji" style="left:8%;bottom:90px;--rot:24deg" width="60" height="60" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#D62839" opacity=".7"/></svg>
-    <svg class="momiji" style="right:9%;bottom:150px;--rot:-20deg;animation-delay:-4s" width="46" height="46" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#F2762E" opacity=".65"/></svg>
-    <svg class="momiji" style="right:20%;top:70px;--rot:12deg;animation-delay:-7s" width="40" height="40" viewBox="-50 -50 100 100" aria-hidden="true"><use href="#momiji-leaf" fill="#E8A13B" opacity=".6"/></svg>
     <div class="wrap">
-      <h2>この夏いちばんの<br>「<span class="em">作った！</span>」を、あなたに。</h2>
+      <h2>友達を誘って、<br><span class="em">エントリーしよう！</span></h2>
       <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
       <a class="btn big" href="https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform" target="_blank" rel="noopener">参加を申し込む（無料）</a>
       <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>諸事情により延長する場合があります<br>お申し込みの前に <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をお読みください</div>
