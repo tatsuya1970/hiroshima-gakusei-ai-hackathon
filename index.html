@@ -324,6 +324,106 @@
   footer b{color:#fff}
   footer a{color:#C9D6F2;text-decoration:none;border-bottom:1px solid rgba(201,214,242,.4)}
   footer a:hover{color:#fff;border-color:#fff}
+
+  /* ============================================================
+     brush-up layer：質感・動き・マイクロインタラクション
+     配色はチラシ準拠のまま（ブルー #0347F0 × ライム #E6F617 × 白）
+     ============================================================ */
+  ::selection{background:var(--lime);color:var(--ink-strong)}
+  section[id]{scroll-margin-top:72px}
+
+  /* header：スクロール進捗と浮き影 */
+  .bar{transition:box-shadow .25s ease}
+  .bar.scrolled{box-shadow:0 10px 30px rgba(3,71,240,.08)}
+  .bar .progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+    background:var(--blue);pointer-events:none}
+
+  /* 大CTAの矢印 */
+  .btn.big::after{content:"→";display:inline-block;margin-left:.6em;
+    transition:transform .2s ease}
+  .btn.big:hover::after{transform:translateX(5px)}
+
+  /* hero：淡い設計グリッドを敷く（右上から溶かす） */
+  .hero .wrap{position:relative;z-index:1}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(var(--tint-alt) 1px,transparent 1px),
+      linear-gradient(90deg,var(--tint-alt) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(130% 100% at 80% 0%,#000 25%,transparent 72%);
+    mask-image:radial-gradient(130% 100% at 80% 0%,#000 25%,transparent 72%)}
+
+  /* hero：ロードイン */
+  @media(prefers-reduced-motion:no-preference){
+    .hero-copy>*,.hero-photo .ph-in,.hero .lead,.hero .cta,.hero .specband{
+      opacity:0;transform:translateY(18px);
+      animation:rise .75s cubic-bezier(.22,1,.36,1) forwards}
+    .hero-copy>*:nth-child(1){animation-delay:.05s}
+    .hero-copy>*:nth-child(2){animation-delay:.16s}
+    .hero-copy>*:nth-child(3){animation-delay:.3s}
+    .hero-photo .ph-in{animation-delay:.22s}
+    .hero .lead{animation-delay:.42s}
+    .hero .cta{animation-delay:.52s}
+    .hero .specband{animation-delay:.62s}
+  }
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* マーキー帯：チラシの帯をそのまま流す */
+  .ticker{overflow:hidden;background:var(--blue)}
+  .ticker-in{display:flex;width:max-content;animation:tick 30s linear infinite}
+  .ticker .tk{display:block;white-space:nowrap;padding:.95em 0;color:#fff;
+    font-family:var(--mono);font-weight:700;font-size:.76rem;letter-spacing:.18em}
+  .ticker .tk b{color:var(--lime);font-weight:700;padding:0 1.4em}
+  .ticker.lm{background:var(--lime)}
+  .ticker.lm .tk{color:var(--ink-strong)}
+  .ticker.lm .tk b{color:var(--blue)}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.ticker-in{animation:none}}
+
+  /* features：ホバーで番号に蛍光ペン */
+  .feat .n{transition:color .18s ease,background-color .18s ease}
+  .feat:hover .n{color:var(--ink-strong);padding:0 .25em;margin-left:-.25em;
+    background:linear-gradient(transparent 58%,var(--lime) 58%)}
+  .feat h3{transition:color .18s ease}
+  .feat:hover h3{color:var(--blue)}
+
+  /* tools：チップの反転 */
+  .tool{transition:background-color .18s ease,color .18s ease}
+  .tool:hover{background:var(--blue);color:#fff}
+
+  /* timetable：行のホバー */
+  .tt-row{transition:background-color .2s ease}
+  .tt-row:hover{background:var(--tint)}
+
+  /* prize：角にライムのストライプ */
+  .prize-hero .top{position:relative;overflow:hidden}
+  .prize-hero .top::before{content:"";position:absolute;top:-34px;right:-34px;
+    width:200px;height:200px;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(-45deg,var(--lime) 0 2px,transparent 2px 11px);
+    -webkit-mask-image:radial-gradient(closest-side,#000,transparent);
+    mask-image:radial-gradient(closest-side,#000,transparent)}
+  .prize-hero .top>*{position:relative}
+
+  /* members：写真のズーム */
+  .mem .ph img{transition:transform .4s cubic-bezier(.22,1,.36,1)}
+  .mem:hover .ph img{transform:scale(1.07)}
+
+  /* faq：ホバーで設問をブルーに */
+  .qa summary{transition:color .15s ease}
+  .qa summary:hover{color:var(--blue)}
+
+  /* final：背景に白フチの大型タイポ */
+  .final{position:relative;overflow:hidden}
+  .final .wrap{position:relative;z-index:1}
+  .final::before{content:"ENTRY";position:absolute;right:-.06em;bottom:-.16em;
+    line-height:1;font-family:var(--mono);font-weight:700;letter-spacing:-.04em;
+    font-size:clamp(5.5rem,20vw,14rem);color:transparent;
+    -webkit-text-stroke:1.5px rgba(255,255,255,.18);pointer-events:none}
+
+  /* スクロールリビール（JSが .rv を付与。JS無効時は常に表示） */
+  .rv{opacity:0;transform:translateY(24px);
+    transition:opacity .65s ease,transform .65s cubic-bezier(.22,1,.36,1)}
+  .rv.on{opacity:1;transform:none}
 </style>
 </head>
 <body>
@@ -336,6 +436,7 @@
       <div class="date">2026.9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
       <a class="btn" href="#apply">参加申込（無料）</a>
     </div>
+    <div class="progress" aria-hidden="true"></div>
   </header>
 
   <!-- ============ HERO ============ -->
@@ -377,6 +478,13 @@
       </div>
     </div>
   </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-in">
+      <span class="tk">HIROSHIMA STUDENT AI HACKATHON 2026<b>✦</b>2026.9.19 SAT<b>✦</b>IDEA → BUILD → RUN!<b>✦</b>参加費無料<b>✦</b>最優秀賞 ¥30,000<b>✦</b>定員25人前後<b>✦</b></span>
+      <span class="tk">HIROSHIMA STUDENT AI HACKATHON 2026<b>✦</b>2026.9.19 SAT<b>✦</b>IDEA → BUILD → RUN!<b>✦</b>参加費無料<b>✦</b>最優秀賞 ¥30,000<b>✦</b>定員25人前後<b>✦</b></span>
+    </div>
+  </div>
 
   <!-- ============ FEATURES ============ -->
   <section>
@@ -737,6 +845,12 @@
   </section>
 
   <!-- ============ FINAL CTA ============ -->
+  <div class="ticker lm" aria-hidden="true">
+    <div class="ticker-in">
+      <span class="tk">ENTRY NOW<b>✦</b>応募締切 2026.9.7 MON<b>✦</b>13歳以上の中学生〜大学生<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+      <span class="tk">ENTRY NOW<b>✦</b>応募締切 2026.9.7 MON<b>✦</b>13歳以上の中学生〜大学生<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+    </div>
+  </div>
   <section class="final" id="apply">
     <div class="wrap">
       <h2>友達を誘って、<br><span class="em">エントリーしよう！</span></h2>
@@ -755,6 +869,47 @@
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var bar=document.querySelector(".bar");
+  var pb=document.querySelector(".bar .progress");
+  function onScroll(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    pb.style.width=(max>0?(h.scrollTop/max)*100:0)+"%";
+    bar.classList.toggle("scrolled",h.scrollTop>8);
+  }
+  addEventListener("scroll",onScroll,{passive:true});
+  onScroll();
+
+  /* スクロールリビール：JS無効・reduced-motion環境では何もしない（常に表示） */
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  if(!("IntersectionObserver" in window))return;
+  var sel=".sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
+    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,"+
+    ".final h2,.final .when2,.final .btn,.final .note";
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;
+      el.classList.add("on");
+      io.unobserve(el);
+      /* リビール後は遅延と .rv を外し、ホバー等の transition を元に戻す */
+      setTimeout(function(){
+        el.classList.remove("rv","on");
+        el.style.transitionDelay="";
+      },900);
+    });
+  },{rootMargin:"0px 0px -8% 0px"});
+  [].slice.call(document.querySelectorAll(sel)).forEach(function(el){
+    var i=[].indexOf.call(el.parentNode.children,el);
+    el.style.transitionDelay=Math.min(i*45,270)+"ms";
+    el.classList.add("rv");
+    io.observe(el);
+  });
+})();
+</script>
 
 </body>
 </html>
