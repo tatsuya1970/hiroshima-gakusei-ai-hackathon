@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="広島学生AIハッカソン 2026">
+  <rect width="64" height="64" rx="14" fill="#0347F0"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="29" font-weight="700" letter-spacing="-1" fill="#FFFFFF">AI</text>
+  <rect x="16" y="45" width="32" height="5" rx="2.5" fill="#E6F617"/>
+</svg>

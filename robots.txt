@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hiroshima-ai-hackathon.jp/sitemap.xml
