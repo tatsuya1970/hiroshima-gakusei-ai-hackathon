@@ -28,6 +28,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Event",
+  "@id": "https://hiroshima-ai-hackathon.jp/#event",
   "name": "広島学生AIハッカソン 2026",
   "alternateName": "HIROSHIMA STUDENT AI HACKATHON 2026",
   "description": "広島県内の学校に通う13歳以上の中学生から大学生までが、2〜3人のチームでAIと会話しながら4時間で動くWebアプリをつくる半日ハッカソン。参加費無料・定員25人前後・最優秀賞3万円。",
@@ -46,6 +47,7 @@
     "url": "https://www.camps-hiroshima.jp/",
     "address": {
       "@type": "PostalAddress",
+      "postalCode": "730-0031",
       "streetAddress": "中区紙屋町1-4-3 エフケイビル1F",
       "addressLocality": "広島市",
       "addressRegion": "広島県",
@@ -54,9 +56,40 @@
   },
   "organizer": {
     "@type": "Organization",
+    "@id": "https://www.hibis.jp/#dx-it-trend",
     "name": "HiBiS DX・ITトレンド研究部会",
     "url": "https://www.hibis.jp/"
   },
+  "performer": [
+    {
+      "@type": "Person",
+      "name": "藤本 勝己",
+      "jobTitle": "ファシリテーター",
+      "image": "https://hiroshima-ai-hackathon.jp/images/facilitator-fujimoto.jpg",
+      "description": "HiBiS DX・ITトレンド研究部会 副部会長。アイエーアイ（株）代表。Web・AI・DX分野の企画・支援や講師活動に従事。"
+    },
+    {
+      "@type": "Person",
+      "name": "武村 達也",
+      "jobTitle": "メンター",
+      "image": "https://hiroshima-ai-hackathon.jp/images/mentor-takemura.jpg",
+      "description": "HiBiS DX・ITトレンド研究部会 部会長。タケムラテックラボ代表。AIを使ったアプリ開発者。"
+    },
+    {
+      "@type": "Person",
+      "name": "尾上 正幸",
+      "jobTitle": "メンター",
+      "image": "https://hiroshima-ai-hackathon.jp/images/mentor-onoue.jpg",
+      "description": "エルティーエス マネージャー。広島を拠点に、先端技術による地方創生を推進。"
+    },
+    {
+      "@type": "Person",
+      "name": "菅原 政行",
+      "jobTitle": "メンター",
+      "image": "https://hiroshima-ai-hackathon.jp/images/mentor-sugawara.jpg",
+      "description": "合同会社Team IshiHara代表、PinkieTech株式会社取締役。Web技術を中心としたものづくりを実践。"
+    }
+  ],
   "audience": {
     "@type": "EducationalAudience",
     "educationalRole": "student",
@@ -69,8 +102,268 @@
     "priceCurrency": "JPY",
     "availability": "https://schema.org/InStock",
     "url": "https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform",
+    "validFrom": "2026-08-07T00:00:00+09:00",
     "validThrough": "2026-09-07T23:59:59+09:00"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.hibis.jp/#organization",
+      "name": "HiBiS",
+      "alternateName": "広島インターネットビジネスソサイエティ",
+      "url": "https://www.hibis.jp/",
+      "description": "広島を中心に、インターネットやITを活用したビジネスの振興・人材育成に取り組む団体。",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "広島県"
+      },
+      "subOrganization": {
+        "@type": "Organization",
+        "@id": "https://www.hibis.jp/#dx-it-trend",
+        "name": "HiBiS DX・ITトレンド研究部会",
+        "parentOrganization": {
+          "@id": "https://www.hibis.jp/#organization"
+        }
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hiroshima-ai-hackathon.jp/#website",
+      "url": "https://hiroshima-ai-hackathon.jp/",
+      "name": "広島学生AIハッカソン 2026",
+      "alternateName": "HIROSHIMA STUDENT AI HACKATHON 2026",
+      "inLanguage": "ja",
+      "publisher": {
+        "@id": "https://www.hibis.jp/#dx-it-trend"
+      },
+      "about": {
+        "@id": "https://hiroshima-ai-hackathon.jp/#event"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://hiroshima-ai-hackathon.jp/#faq",
+  "inLanguage": "ja",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "AIでアプリを作ったことがないんですけど、大丈夫ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大丈夫です。むしろ「はじめて」の人こそ歓迎します。ただ、一度も作ったことがないと当日は少し苦しいかもしれません。そこでひとつだけお願いがあります。当日までに一度、おうちでAIに「ネットに公開できるアプリを作りたいんだけど、どうすればいい？」と聞きながら、何か小さなものを作ってみてください。わからないことをAIに質問しながら覚えていく——このハッカソンで大切にしているのは、まさにその力です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ひとりでの参加はできる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "今回はチーム参加制です。2人または3人のチームを組んで、チーム単位でお申し込みください。学校の友達と組むのがおすすめです。おひとりでのお申し込みは受け付けていません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "学年や学校がちがう友達とチームを組める？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "学年や学校がちがっても大丈夫です（例：高1と高3、別の学校どうし）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "中学生と高校生、高校生と大学生のような混成チームは組めるの？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "組めません。中学生は中学生どうし、高校生は高校生どうしで組んでください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "参加に学校の許可はいる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "学校の許可は必要ありません。個人（チーム）で自由に参加できます。安心してお申し込みください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "広島県外の学校に通っているけど参加できる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>参加できません。</b>この大会は<b>広島県内に所在する学校に在籍している学生</b>が対象です。<b>通っている学校の所在地で判断します</b>ので、広島県内にお住まいでも、県外の学校に通っている場合は対象外となります。逆に、県外にお住まいでも広島県内の学校に通っていれば参加できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "作った作品やアイデアは、どうあつかわれるの？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "作品の権利（著作権など）は、作ったみなさんのチームのものです。主催者は、イベントの記録や告知（Webサイト・SNS・報道など）のために、作品の画面や当日の写真・映像を使わせてもらうことがあります。なお、発表はオープンな場で行うため秘密保持はできません。ヒミツにしたいアイデアの持ち込みは避けてください。また、他の人が権利を持つ素材（画像・音楽・コードなど）は、ライセンスを守って使いましょう。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "申し込んだら必ず参加できる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "申込締切は2026年9月7日（月）です。定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。<br><b>諸事情により、申込締切と結果連絡日を延長する場合があります。</b>その場合はこのサイトなどでお知らせします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "何を持っていけばいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ノートPCの持参をおすすめします。全員が持ってくる必要はありませんが、チームに1台もないと開発がむずかしくなります。あとは、アイデアと好奇心があれば十分です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "使う生成AIやアカウントは用意してもらえる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "パソコン・アカウントは各自でご用意ください（主催者から共通のアカウントをお貸しすることはありません）。使うAIは、中学生から大学生まで全員が同じ<b>ChatGPT と Gemini</b> です。作品は Netlify・GitHub Pages・ChatGPT Sitesのいずれかで公開してください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "家族や友達、先生のアカウントを借りて開発してもいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>できません。</b>家族・友人・先生・メンターを含め、<b>他人のアカウントを使っての開発は禁止です。</b>ほとんどのサービスで、アカウントの共有は利用規約に違反します。<br>また、<b>年齢を偽ってアカウントをつくることも禁止です。</b>年齢の条件を満たさないサービスは使わないでください。<br>アカウントは、<b>チーム全員がそれぞれ自分のものを、当日までに</b>用意してください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AIに入力してはいけないものはある？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>個人情報は入力しないでください。</b>自分や他人の<b>本名・学校名・住所・電話番号・メールアドレス・顔写真</b>などです。<b>一度入力したものは取り消せません。</b>作品のテストに名前や住所が必要なときは、<b>架空のもの</b>（例: 山田太郎、広島市中区1-1-1）を使ってください。<br>また、<b>保護者の同意なく、保護者やほかの人のクレジットカードなどの支払情報を外部サービスに登録することも禁止です。</b>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "家で少し作ってから持っていってもいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>できません。</b>開発は<b>当日、会場でゼロから</b>行います。<b>事前に作成したコード・成果物の持ち込みは禁止です。</b>開発テーマも当日発表なので、全員が同じスタートラインです。<br>ただし、<b>一般に公開されているライブラリ・ツール・テンプレートを使うのはOK</b>です（スターターキットの複製も認めます）。完成済みのアプリを複製して中身を差し替えただけのものは、事前作成物とみなすことがあります。<br>なお、<b>当日までにおうちでAIとアプリづくりを試しておくこと</b>は練習なので問題ありません。当日はゼロから作り直してください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude Codeを使いたいんですが…",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "使えません。開発に使えるAIは<b>ChatGPT と Gemini</b>（コーディングエージェントは Codex）のみで、Claude Code をはじめ、それ以外のAIの使用は禁止です。全員が同じ道具で競うことで、道具の差ではなく発想と実装で勝負するためのルールです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Copilot や Cursor などのAIコーディングツールは使える？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>使えるAIコーディングツールは Codex だけです。</b>GitHub Copilot、Cursor、Google Antigravity、Windsurf などは使えません。<br>Codex は<b>モデルの名前ではなく、OpenAIのコーディングエージェントという製品の名前</b>です。ChatGPTのアカウントの範囲で使えます。<br>なお、<b>エディタそのもの（VS Code など）は自由に使えます。</b>制限がかかるのは、そこに入れるAI機能のほうです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "作品に使うイラストや画像を、AIでつくってもいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>つくれます。</b>使えるAIは「OpenAI（ChatGPT・Codex）と Google（Gemini）が提供するもの」ですが、<b>これは用途を問いません。</b>コードを書かせるだけでなく、<b>ChatGPT や Gemini の画像生成機能で、作品に使うイラスト・アイコン・背景をつくってOK</b>です。<br>ただし<b>実在の人物、アニメやゲームのキャラクター、企業のロゴは生成しないでください。</b>他の人の権利を侵害してしまうことがあります。<br>なお、Midjourney や Stable Diffusion など<b>OpenAI・Google 以外のサービスは使えません。</b>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "BGMや効果音、ナレーションはAIでつくれる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>Suno や ElevenLabs などの音楽・音声の生成AIは使えません。</b><br>BGMや効果音がほしいときは、<b>フリー素材</b>を使ってください（利用条件を確認して使ってください）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "OpenAI や Gemini の「API」を使ってもいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>使えません。</b>使えるのは <b>ChatGPT・Gemini・Codex にログインして使う形</b>だけで、<b>APIキーを取得して作品から呼び出す使い方</b>（OpenAI API、Gemini API など）は対象外です。<br>APIには各社の<b>開発者向けの別の規約</b>が適用されます。<b>Gemini API は18歳以上に限られ、さらに「18歳未満が利用するサービスに組み込むこと」も禁止</b>されています（Gemini API 追加利用規約「Age Requirements」）。OpenAI API は年齢の制限こそありませんが、<b>利用にクレジットカードの登録が必要</b>です。中学生から参加できる大会なので、全員が同じ条件で使える形に統一しています。<br><b>見分け方はかんたんです。</b>ChatGPT・Gemini・Codex のように<b>ログインするだけで使えるものはAPIではありません。</b>「APIキーを取得してください」と案内されるものが、AIのAPIです。AIは年齢条件を気にせずAPIを使うコードを提案してくることがあるので、注意してください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "天気や地図のAPIは使える？ APIは全部ダメ？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>全部ダメではありません。使えないのは「AIモデルのAPI」だけ</b>です。<br><b>地図・天気・時刻表・自治体のオープンデータ</b>などAI以外の公開APIは使えます。各APIの規約を遵守のうえご使用ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "作品の中にAIチャット機能を入れたいのですが",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>入れられません。</b>作品が動いている最中にAIを呼び出すには、AIモデルのAPIが必要になるためです。<br><b>この大会のAIは「作品をつくるための道具」であって、「作品に組み込む部品」ではありません。</b>「AIハッカソン」という名前ですが、評価されるのは<b>AIを使ってその場で何を作り上げたか</b>で、作品自体にAI機能があるかどうかは<b>審査に一切影響しません。</b><br>なお、<b>AIでつくったイラスト・アイコン・背景を素材として作品に入れるのはOK</b>です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "学校のアカウントで AI を使ってもいい？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "校外のイベントで学校アカウントを使ってよいかは、学校の規則によります。事前に確認してください。運営から学校へ問い合わせや調整を行うことはしません。学校が認めない場合は、個人の無料アカウントをご用意ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "無料版のAIなのでAIが最後まで使えるのか不安ですが",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "無料版には使用量の上限があるので、途中でAIが止まらないように工夫をしてください。例えば、<b>①チーム全員が ChatGPT と Gemini の両方のアカウントを持つ</b>（片方が上限に達しても、もう一方や別のメンバーの端末に切り替えられます）<b>②作品全体のコードを毎回貼り直さず、直したい部分だけをAIに渡す ③同じ指示を何度も送り直さない</b>。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "なんでChatGPTとGeminiだけなんですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "道具の差ではなく、発想と実装の工夫で競ってほしいからです。参加者は中学生から大学生までいるので、中学生でも親権者の承諾があれば使えるツールに統一しています。全員の条件をそろえるためのルールです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "保護者の同意はいる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<b>18歳未満の方は保護者の同意が必要</b>です。同意の確認は<b>参加が決定したあと</b>に行い、対象の方へ運営から個別にご案内します。お申し込みのときは、保護者の方のお名前や連絡先は入力しません。<br>保護者の方に同意・確認していただくのは、次の4つです。<b>①イベントに参加すること ②撮影した写真・動画を記録や広報に使うこと ③参加規約の内容（とくに免責事項）を了解すること ④当日使う生成AIサービスのアカウントが、保護者の同意のうえで作られたものであること</b>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "昼ごはんはどこで食べるのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "好きなタイミングでとってください。会場での飲食はOKですので、弁当持参、コンビニに買いに行く、近くのお店で食べるなどお任せします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "お金はかかる？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "参加費は無料です。気軽に参加してください。ただし、会場までの交通費・昼食代は各自のご負担になります。"
+      }
+    }
+  ]
 }
 </script>
 <style>
