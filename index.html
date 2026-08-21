@@ -612,14 +612,18 @@
   .ugoite span{background:linear-gradient(transparent 62%,var(--lime) 62%);padding:0 .14em}
 
   /* ---------- members ---------- */
-  .members{display:grid;gap:34px 28px;grid-template-columns:1fr;margin-top:var(--gap)}
+  .mem-group{margin-top:var(--gap)}
+  .mem-group + .mem-group{margin-top:clamp(48px,6vw,76px)}
+  .mem-group h3{font-size:1.02rem;font-weight:900;color:var(--ink-strong);
+    padding-bottom:.7em;border-bottom:1px solid var(--ink-strong)}
+  .members{display:grid;gap:34px 28px;grid-template-columns:1fr;margin-top:28px}
   @media(min-width:600px){.members{grid-template-columns:1fr 1fr}}
   @media(min-width:960px){.members{grid-template-columns:repeat(3,1fr)}}
   .mem{border-top:1px solid var(--rule);padding-top:22px}
-  .mem .ph{width:80px;height:80px;border-radius:50%;background:var(--tint-alt);
+  .mem .ph{width:120px;height:120px;border-radius:6px;background:var(--tint-alt);
     display:grid;place-items:center;overflow:hidden}
   .mem .ph img{width:100%;height:100%;object-fit:cover}
-  .mem .ph .q{font-size:1.9rem;font-weight:800;color:#AFC0E4;font-family:var(--mono)}
+  .mem .ph .q{font-size:2.85rem;font-weight:800;color:#AFC0E4;font-family:var(--mono)}
   .mem .role{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:.62rem;
     font-weight:700;letter-spacing:.16em;color:#fff;background:var(--blue);
     border-radius:2px;padding:.4em .8em}
@@ -1008,54 +1012,63 @@
         <h2>ファシリテーター・メンター・<span class="em">審査員</span></h2>
         <p>当日、みなさんと一緒に走るメンバーです。メンター・審査員は順次公開します。</p>
       </div>
-      <div class="members">
-        <div class="mem">
-          <div class="ph"><img src="images/facilitator-fujimoto.jpg" width="80" height="80" alt="藤本 勝己" loading="lazy" decoding="async"></div>
-          <span class="role">ファシリテーター</span>
-          <b>藤本 勝己</b>
-          <p>HiBiS DX・ITトレンド研究部会 副部会長。アイエーアイ（株）代表。Web・AI・DX分野の企画・支援や講師活動に従事。</p>
+      <div class="mem-group">
+        <h3>ファシリテーター・メンター</h3>
+        <div class="members">
+          <div class="mem">
+            <div class="ph"><img src="images/facilitator-fujimoto.jpg" width="120" height="120" alt="藤本 勝己" loading="lazy" decoding="async"></div>
+            <span class="role">ファシリテーター</span>
+            <b>藤本 勝己</b>
+            <p>HiBiS DX・ITトレンド研究部会 副部会長。アイエーアイ（株）代表。Web・AI・DX分野の企画・支援や講師活動に従事。</p>
+          </div>
+          <div class="mem">
+            <div class="ph"><img src="images/mentor-takemura.jpg" width="120" height="120" alt="武村 達也" loading="lazy" decoding="async"></div>
+            <span class="role gold">メンター</span>
+            <b>武村 達也</b>
+            <p>HiBiS DX・ITトレンド研究部会 部会長。タケムラテックラボ代表。AIを使ったアプリ開発者。ハッカソンには最近10年で約20回参加。</p>
+          </div>
+          <div class="mem">
+            <div class="ph"><img src="images/mentor-onoue.jpg" width="120" height="120" alt="尾上 正幸" loading="lazy" decoding="async"></div>
+            <span class="role gold">メンター</span>
+            <b>尾上 正幸</b>
+            <p>エルティーエス　マネージャー。広島を拠点にAIやIoTを活用した実証実験「ひろしまサンドボックス」に携わるなど、先端技術による地方創生を推進。デジタル技術で地域課題を解決に導きます。</p>
+          </div>
+          <div class="mem">
+            <div class="ph"><img src="images/mentor-sugawara.jpg" width="120" height="120" alt="菅原 政行" loading="lazy" decoding="async"></div>
+            <span class="role gold">メンター</span>
+            <b>菅原 政行</b>
+            <p>合同会社Team IshiHara代表、PinkieTech株式会社取締役。広島、北九州、首都圏の3拠点でWeb技術を中心としたものづくりを実践。</p>
+          </div>
         </div>
-        <div class="mem">
-          <div class="ph"><img src="images/mentor-takemura.jpg" width="80" height="80" alt="武村 達也" loading="lazy" decoding="async"></div>
-          <span class="role gold">メンター</span>
-          <b>武村 達也</b>
-          <p>HiBiS DX・ITトレンド研究部会 部会長。タケムラテックラボ代表。AIを使ったアプリ開発者。ハッカソンには最近10年で約20回参加。</p>
-        </div>
-        <div class="mem">
-          <div class="ph"><img src="images/mentor-onoue.jpg" width="80" height="80" alt="尾上 正幸" loading="lazy" decoding="async"></div>
-          <span class="role gold">メンター</span>
-          <b>尾上 正幸</b>
-          <p>エルティーエス　マネージャー。広島を拠点にAIやIoTを活用した実証実験「ひろしまサンドボックス」に携わるなど、先端技術による地方創生を推進。デジタル技術で地域課題を解決に導きます。</p>
-        </div>
-        <div class="mem">
-          <div class="ph"><img src="images/mentor-sugawara.jpg" width="80" height="80" alt="菅原 政行" loading="lazy" decoding="async"></div>
-          <span class="role gold">メンター</span>
-          <b>菅原 政行</b>
-          <p>合同会社Team IshiHara代表、PinkieTech株式会社取締役。広島、北九州、首都圏の3拠点でWeb技術を中心としたものづくりを実践。</p>
-        </div>
-        <div class="mem">
-          <div class="ph"><img src="images/judge-aibara.jpg" width="80" height="80" alt="相原 玲二" loading="lazy" decoding="async"></div>
-          <span class="role green">審査員</span>
-          <b>相原 玲二</b>
-          <p>HiBiS協議会会長。広島大学名誉教授。安田女子大学理工学部教授。HiBiSインターネットビジネスフォーラム審査委員長、DoBoXデータチャレンジ審査委員長などを歴任。</p>
-        </div>
-        <div class="mem">
-          <div class="ph"><img src="images/judge-arima.jpg" width="80" height="80" alt="有馬 猛夫" loading="lazy" decoding="async"></div>
-          <span class="role green">審査員</span>
-          <b>有馬 猛夫</b>
-          <p>ネクストビジョングループ（広島、東京、大阪）代表。IT人材育成とDX推進に携わり、広島県情報産業協会会長などを歴任。</p>
-        </div>
-        <div class="mem">
-          <div class="ph"><img src="images/judge-ishihara.jpg" width="80" height="80" alt="石原 裕輝" loading="lazy" decoding="async"></div>
-          <span class="role green">審査員</span>
-          <b>石原 裕輝</b>
-          <p>ダッタラ（株）代表取締役。オープンデータ基盤「Fractale」を開発、AIメディア「DATA WORLD」を運営。ビジネスコンテスト等で複数の最高位を受賞。</p>
-        </div>
-        <div class="mem soon">
-          <div class="ph"><span class="q">?</span></div>
-          <span class="role green">審査員</span>
-          <b>COMING SOON</b>
-          <p>審査員は3〜5名を予定しています。大学の先生、IT企業の経営者、スタートアップで活躍する方などに依頼中です。</p>
+      </div>
+
+      <div class="mem-group">
+        <h3>審査員</h3>
+        <div class="members">
+          <div class="mem">
+            <div class="ph"><img src="images/judge-aibara.jpg" width="120" height="120" alt="相原 玲二" loading="lazy" decoding="async"></div>
+            <span class="role green">審査員</span>
+            <b>相原 玲二</b>
+            <p>HiBiS協議会会長。広島大学名誉教授。安田女子大学理工学部教授。HiBiSインターネットビジネスフォーラム審査委員長、DoBoXデータチャレンジ審査委員長などを歴任。</p>
+          </div>
+          <div class="mem">
+            <div class="ph"><img src="images/judge-arima.jpg" width="120" height="120" alt="有馬 猛夫" loading="lazy" decoding="async"></div>
+            <span class="role green">審査員</span>
+            <b>有馬 猛夫</b>
+            <p>ネクストビジョングループ（広島、東京、大阪）代表。IT人材育成とDX推進に携わり、広島県情報産業協会会長などを歴任。</p>
+          </div>
+          <div class="mem">
+            <div class="ph"><img src="images/judge-ishihara.jpg" width="120" height="120" alt="石原 裕輝" loading="lazy" decoding="async"></div>
+            <span class="role green">審査員</span>
+            <b>石原 裕輝</b>
+            <p>ダッタラ（株）代表取締役。オープンデータ基盤「Fractale」を開発、AIメディア「DATA WORLD」を運営。ビジネスコンテスト等で複数の最高位を受賞。</p>
+          </div>
+          <div class="mem soon">
+            <div class="ph"><span class="q">?</span></div>
+            <span class="role green">審査員</span>
+            <b>COMING SOON</b>
+            <p>審査員は3〜5名を予定しています。大学の先生、IT企業の経営者、スタートアップで活躍する方などに依頼中です。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1274,7 +1287,7 @@
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   if(!("IntersectionObserver" in window))return;
   var sel=".sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
-    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,"+
+    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem-group h3,.mem,.org,.qa,.ov-row,"+
     ".final h2,.final .when2,.final .btn,.final .note";
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
