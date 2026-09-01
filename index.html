@@ -428,10 +428,10 @@
   .bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--rule)}
   .bar .wrap{display:flex;align-items:center;gap:20px;height:62px}
-  .brand{font-weight:900;font-size:1rem;letter-spacing:-.01em;color:var(--ink-strong);
-    font-feature-settings:"palt" 1}
+  .brand{margin-right:auto;font-weight:900;font-size:1rem;letter-spacing:-.01em;
+    color:var(--ink-strong);font-feature-settings:"palt" 1;white-space:nowrap}
   .brand .o{color:var(--blue)}
-  .bar .date{margin-left:auto;font-size:.76rem;letter-spacing:.04em;color:var(--muted);
+  .bar .date{font-size:.76rem;letter-spacing:.04em;color:var(--muted);
     display:none;font-weight:700}
   @media(min-width:760px){.bar .date{display:block}}
   @media(max-width:560px){
@@ -439,6 +439,53 @@
     .brand{font-size:.88rem}
     .bar .btn{padding:.6em 1.1em;font-size:.76rem;white-space:nowrap}
   }
+
+  /* ヘッダー内ナビ（広い画面） */
+  .nav{display:none}
+  .nav a{position:relative;padding:.45em 0;font-size:.75rem;font-weight:800;
+    letter-spacing:.02em;color:var(--ink-strong);text-decoration:none;white-space:nowrap;
+    transition:color .18s ease}
+  .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+    background:var(--blue);transform:scaleX(0);transform-origin:left;
+    transition:transform .2s ease}
+  .nav a:hover{color:var(--blue)}
+  .nav a:hover::after,.nav a.cur::after{transform:scaleX(1)}
+  .nav a.cur{color:var(--blue)}
+  .nav a:focus-visible{outline:2px solid var(--ink-strong);outline-offset:3px}
+
+  /* ヘッダー内メニュー（狭い画面／JSなしでも開閉可） */
+  .menu summary{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+    cursor:pointer;background:#fff;border:1px solid var(--rule);border-radius:2px;
+    list-style:none}
+  .menu summary::-webkit-details-marker{display:none}
+  .menu summary:focus-visible{outline:2px solid var(--ink-strong);outline-offset:2px}
+  .menu .ico{position:relative;display:block;width:17px;height:2px;background:var(--ink-strong)}
+  .menu .ico::before,.menu .ico::after{content:"";position:absolute;left:0;width:17px;height:2px;
+    background:var(--ink-strong);transition:transform .2s ease}
+  .menu .ico::before{top:-6px}
+  .menu .ico::after{top:6px}
+  .menu[open] .ico{background:transparent}
+  .menu[open] .ico::before{transform:translateY(6px) rotate(45deg)}
+  .menu[open] .ico::after{transform:translateY(-6px) rotate(-45deg)}
+  .menu:not([open]) .menu-panel{display:none}
+  .menu-panel{position:absolute;left:0;right:0;top:calc(100% + 1px);background:#fff;
+    border-bottom:1px solid var(--rule);box-shadow:0 18px 34px rgba(3,71,240,.10);
+    padding:10px 24px 22px;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;
+    max-height:calc(100vh - 62px);overflow:auto}
+  .menu-panel a{display:block;padding:.85em 0;font-size:.86rem;font-weight:800;
+    color:var(--ink-strong);text-decoration:none;border-bottom:1px solid var(--rule)}
+  .menu-panel a:hover{color:var(--blue)}
+  .menu-panel a.ap{grid-column:1/-1;margin-top:1.1em;padding:.95em 1em;text-align:center;
+    background:var(--blue);color:#fff;border:1px solid var(--blue)}
+  .menu-panel a.ap:hover{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
+  @media(min-width:1100px){
+    .nav{display:flex;align-items:center;gap:14px}
+    .bar .date{display:none}
+    .menu{display:none}
+  }
+
+  /* 固定ヘッダー分のアンカー位置調整 */
+  section[id]{scroll-margin-top:76px}
 
   /* ---------- buttons ---------- */
   .btn{display:inline-block;text-decoration:none;font-weight:800;text-align:center;
@@ -824,8 +871,32 @@
   <header class="bar">
     <div class="wrap">
       <div class="brand">広島学生<span class="o">AI</span>ハッカソン 2026</div>
+      <nav class="nav" aria-label="ページ内ナビゲーション">
+        <a href="#features">特徴</a>
+        <a href="#tools">AI・ツール</a>
+        <a href="#flow">当日の流れ</a>
+        <a href="#prizes">賞金</a>
+        <a href="#members">メンバー</a>
+        <a href="#faq">Q&amp;A</a>
+        <a href="#overview">開催概要</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
       <div class="date">2026.9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
       <a class="btn" href="#apply">参加申込（無料）</a>
+      <details class="menu">
+        <summary aria-label="メニュー"><span class="ico" aria-hidden="true"></span></summary>
+        <nav class="menu-panel" aria-label="ページ内ナビゲーション（メニュー）">
+          <a href="#features">特徴</a>
+          <a href="#tools">AI・ツール</a>
+          <a href="#flow">当日の流れ</a>
+          <a href="#prizes">賞金</a>
+          <a href="#members">メンバー</a>
+          <a href="#faq">Q&amp;A</a>
+          <a href="#overview">開催概要</a>
+          <a href="#contact">お問い合わせ</a>
+          <a class="ap" href="#apply">参加申込（無料）</a>
+        </nav>
+      </details>
     </div>
     <div class="progress" aria-hidden="true"></div>
   </header>
@@ -878,7 +949,7 @@
   </div>
 
   <!-- ============ FEATURES ============ -->
-  <section>
+  <section id="features">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Features</span>
@@ -915,7 +986,7 @@
   </section>
 
   <!-- ============ TOOLS ============ -->
-  <section class="tools alt">
+  <section class="tools alt" id="tools">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Tools</span>
@@ -968,7 +1039,7 @@
   </section>
 
   <!-- ============ PRIZE ============ -->
-  <section class="alt">
+  <section class="alt" id="prizes">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Prizes</span>
@@ -1017,7 +1088,7 @@
   </section>
 
   <!-- ============ STAFF ============ -->
-  <section>
+  <section id="members">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Staff</span>
@@ -1229,7 +1300,7 @@
   </section>
 
   <!-- ============ OVERVIEW ============ -->
-  <section>
+  <section id="overview">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">Overview</span>
@@ -1271,7 +1342,7 @@
       <div class="contact">
         <div class="ct-txt">
           <p>参加を検討中の方、保護者の方、学校の先生方からのご質問を受け付けています。<br>お問い合わせフォーム（Googleフォーム）よりお送りください。</p>
-          <small>ご回答までに数日いただく場合があります。内容によってはお答えできないことがあります。<br>選考の方法・結果に関するお問い合わせにはお答えできません。</small>
+          <small>24時間以内にご回答します。<br>選考の方法・結果に関するお問い合わせにはお答えできません。</small>
         </div>
         <div class="ct-act">
           <a class="btn big" href="https://forms.gle/JoTFcMF1Yf1QvJ3P9" target="_blank" rel="noopener">お問い合わせフォームを開く</a>
@@ -1319,6 +1390,42 @@
   }
   addEventListener("scroll",onScroll,{passive:true});
   onScroll();
+
+  /* ヘッダーナビ：現在表示中のセクションをハイライト */
+  var navLinks=[].slice.call(document.querySelectorAll(".nav a[href^='#']"));
+  var navTargets=navLinks.map(function(a){
+    return document.getElementById(a.getAttribute("href").slice(1));
+  });
+  function markCurrent(){
+    var best=-1;
+    for(var i=0;i<navTargets.length;i++){
+      var el=navTargets[i];
+      if(el&&el.getBoundingClientRect().top<=90)best=i;
+    }
+    for(var j=0;j<navLinks.length;j++){
+      navLinks[j].classList.toggle("cur",j===best);
+    }
+  }
+  if(navLinks.length){
+    addEventListener("scroll",markCurrent,{passive:true});
+    addEventListener("resize",markCurrent,{passive:true});
+    markCurrent();
+  }
+
+  /* メニュー：リンク選択・外側クリック・Escape で閉じる */
+  var menu=document.querySelector(".menu");
+  if(menu){
+    document.addEventListener("click",function(e){
+      if(!menu.hasAttribute("open"))return;
+      var t=e.target;
+      if(!menu.contains(t)||(t.closest&&t.closest(".menu-panel a"))){
+        menu.removeAttribute("open");
+      }
+    });
+    document.addEventListener("keydown",function(e){
+      if(e.key==="Escape")menu.removeAttribute("open");
+    });
+  }
 
   /* スクロールリビール：JS無効・reduced-motion環境では何もしない（常に表示） */
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
