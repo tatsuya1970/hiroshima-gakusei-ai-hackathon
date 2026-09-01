@@ -527,6 +527,9 @@
   .sec-head h2 .em{color:var(--blue)}
   .sec-head p{max-width:38em;color:var(--muted);font-weight:600;margin:1.1em 0 0;
     font-size:.95rem;line-height:1.95}
+  .sec-head p a{color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue);
+    font-weight:700}
+  .sec-head p a:hover{color:var(--blue-deep);border-color:var(--blue-deep)}
 
   /* ---------- features ---------- */
   .feats{margin-top:var(--gap);border-top:1px solid var(--ink-strong)}
@@ -676,6 +679,19 @@
     border-bottom:1px solid var(--blue);word-break:break-all}
   .ov-row .v a:hover{color:var(--blue-deep);border-color:var(--blue-deep)}
   .ov-row .v a.doc{font-family:var(--gothic);font-size:1em;word-break:normal}
+
+  /* ---------- contact ---------- */
+  .contact{margin-top:var(--gap);border-top:1px solid var(--ink-strong);
+    border-bottom:1px solid var(--ink-strong);padding:clamp(28px,4vw,40px) 0;
+    display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
+  @media(min-width:860px){.contact{grid-template-columns:1fr auto;gap:48px}}
+  .contact .ct-txt p{margin:0;font-size:.96rem;font-weight:700;color:var(--ink-strong);line-height:1.95}
+  .contact .ct-txt small{display:block;margin-top:.9em;font-size:.82rem;font-weight:600;
+    color:var(--muted);line-height:1.9}
+  .contact .ct-act{display:flex;flex-direction:column;align-items:flex-start;gap:1em}
+  @media(min-width:860px){.contact .ct-act{align-items:center}}
+  .contact .ct-act .cap{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;
+    color:var(--muted);font-weight:700}
 
   /* ---------- final ---------- */
   /* チラシ下部のブルー帯を、そのままページの締めに使う */
@@ -1097,7 +1113,7 @@
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="alt">
+  <section class="alt" id="faq">
     <div class="wrap">
       <div class="sec-head">
         <span class="en">FAQ</span>
@@ -1244,6 +1260,27 @@
     </div>
   </section>
 
+  <!-- ============ CONTACT ============ -->
+  <section class="alt" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Contact</span>
+        <h2>お問い合わせ</h2>
+        <p>ご不明な点は、まず <a href="#faq">Q&amp;A</a> と <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をご確認ください。解決しない場合は、下のフォームからお問い合わせください。</p>
+      </div>
+      <div class="contact">
+        <div class="ct-txt">
+          <p>参加を検討中の方、保護者の方、学校の先生方からのご質問を受け付けています。<br>お問い合わせフォーム（Googleフォーム）よりお送りください。</p>
+          <small>ご回答までに数日いただく場合があります。内容によってはお答えできないことがあります。<br>選考の方法・結果に関するお問い合わせにはお答えできません。</small>
+        </div>
+        <div class="ct-act">
+          <a class="btn big" href="https://forms.gle/JoTFcMF1Yf1QvJ3P9" target="_blank" rel="noopener">お問い合わせフォームを開く</a>
+          <span class="cap">GOOGLE FORM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ FINAL CTA ============ -->
   <div class="ticker lm" aria-hidden="true">
     <div class="ticker-in">
@@ -1262,7 +1299,7 @@
 
   <footer>
     <div class="wrap">
-      <div><a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>　｜　<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">生成AI・開発サービス 利用ガイドライン（PDF）</a></div>
+      <div><a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>　｜　<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">生成AI・開発サービス 利用ガイドライン（PDF）</a>　｜　<a href="#contact">お問い合わせ</a></div>
       <div>広島学生<b>AI</b>ハッカソン 2026｜9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
       <div>主催：HiBiS DX・ITトレンド研究部会</div>
     </div>
@@ -1287,7 +1324,7 @@
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   if(!("IntersectionObserver" in window))return;
   var sel=".sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
-    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,"+
+    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,.contact,"+
     ".final h2,.final .when2,.final .btn,.final .note";
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
