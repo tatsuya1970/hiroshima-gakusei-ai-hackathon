@@ -121,7 +121,7 @@
     "name": "参加申込（無料）",
     "price": "0",
     "priceCurrency": "JPY",
-    "availability": "https://schema.org/InStock",
+    "availability": "https://schema.org/SoldOut",
     "url": "https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform",
     "validFrom": "2026-08-07T00:00:00+09:00",
     "validThrough": "2026-09-07T23:59:59+09:00"
@@ -237,7 +237,7 @@
       "name": "申し込んだら必ず参加できる？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "申込締切は2026年9月7日（月）です。定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。<br><b>諸事情により、申込締切と結果連絡日を延長する場合があります。</b>その場合はこのサイトなどでお知らせします。"
+        "text": "<b>申込締切は2026年9月7日（月）で、参加者の募集は締め切りました。</b>定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。<br>諸事情により、結果連絡日を延長する場合があります。その場合はこのサイトなどでお知らせします。"
       }
     },
     {
@@ -498,6 +498,15 @@
   .btn.sub{background:transparent;color:var(--ink-strong);border-color:var(--ink-strong)}
   .btn.sub:hover{background:var(--ink-strong);color:#fff}
 
+  /* ---------- 募集終了のお知らせ ---------- */
+  .closed{display:flex;flex-wrap:wrap;align-items:center;gap:.6em 1em;
+    background:var(--tint);border:1px solid var(--rule);border-left:5px solid var(--blue);
+    border-radius:2px;padding:1.05em 1.3em}
+  .closed .tag{flex:none;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+    font-weight:700;background:var(--blue);color:#fff;padding:.4em .8em;border-radius:2px}
+  .closed p{margin:0;font-size:.94rem;font-weight:800;color:var(--ink-strong);line-height:1.85}
+  .closed p small{display:block;margin-top:.3em;font-size:.8rem;font-weight:700;color:var(--muted)}
+
   /* ---------- hero ---------- */
   .hero{position:relative;overflow:hidden;background:var(--tint);padding:clamp(40px,6vw,72px) 0 clamp(56px,7vw,84px)}
   .hero-grid{display:grid;gap:32px;grid-template-columns:1fr}
@@ -548,6 +557,7 @@
   .hero .lead b{color:var(--blue)}
   .hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:1.8em}
   .hero .cap{width:100%;font-size:.78rem;color:var(--muted);font-weight:700;line-height:1.8}
+  .hero .closed{margin-top:2em;max-width:34em}
 
   /* チラシ下部のライム帯。1pxのすき間を地色で見せて罫線にする */
   .specband{margin-top:clamp(40px,6vw,64px);background:rgba(11,18,32,.26);
@@ -751,6 +761,11 @@
   .final .when2 span:not(.mono){font-size:.84rem;font-weight:700;color:rgba(255,255,255,.85)}
   .final .btn{margin-top:2em;background:var(--lime);border-color:var(--lime);color:var(--ink-strong)}
   .final .btn:hover{background:#fff;border-color:#fff;color:var(--ink-strong)}
+  .final .closed{margin:2.2em auto 0;max-width:38em;justify-content:center;text-align:center;
+    background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.42);border-left-color:var(--lime)}
+  .final .closed .tag{background:var(--lime);color:var(--ink-strong)}
+  .final .closed p{color:#fff}
+  .final .closed p small{color:rgba(255,255,255,.85)}
   .final .note{font-size:.8rem;color:rgba(255,255,255,.82);font-weight:600;margin-top:2em;
     line-height:2;max-width:44em}
   .final .note a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55)}
@@ -793,7 +808,7 @@
 
   /* hero：ロードイン */
   @media(prefers-reduced-motion:no-preference){
-    .hero-copy>*,.hero-photo .ph-in,.hero .lead,.hero .cta,.hero .specband{
+    .hero-copy>*,.hero-photo .ph-in,.hero .lead,.hero .closed,.hero .cta,.hero .specband{
       opacity:0;transform:translateY(18px);
       animation:rise .75s cubic-bezier(.22,1,.36,1) forwards}
     .hero-copy>*:nth-child(1){animation-delay:.05s}
@@ -801,7 +816,8 @@
     .hero-copy>*:nth-child(3){animation-delay:.3s}
     .hero-photo .ph-in{animation-delay:.22s}
     .hero .lead{animation-delay:.42s}
-    .hero .cta{animation-delay:.52s}
+    .hero .closed{animation-delay:.5s}
+    .hero .cta{animation-delay:.6s}
     .hero .specband{animation-delay:.62s}
   }
   @keyframes rise{to{opacity:1;transform:none}}
@@ -882,7 +898,7 @@
         <a href="#contact">お問い合わせ</a>
       </nav>
       <div class="date">2026.9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
-      <a class="btn" href="#apply">参加申込（無料）</a>
+      <a class="btn" href="#apply">募集終了のお知らせ</a>
       <details class="menu">
         <summary aria-label="メニュー"><span class="ico" aria-hidden="true"></span></summary>
         <nav class="menu-panel" aria-label="ページ内ナビゲーション（メニュー）">
@@ -894,7 +910,7 @@
           <a href="#faq">Q&amp;A</a>
           <a href="#overview">開催概要</a>
           <a href="#contact">お問い合わせ</a>
-          <a class="ap" href="#apply">参加申込（無料）</a>
+          <a class="ap" href="#apply">募集終了のお知らせ</a>
         </nav>
       </details>
     </div>
@@ -925,17 +941,19 @@
         </div>
       </div>
       <p class="lead"><b>AIに詳しくなくても大丈夫！</b>2〜3人のチームで、AIと会話しながらアイデアを実際に「動くWebアプリ」に。4時間で、つくって、試して、発表しよう！対象は広島県内の学校に通う13歳以上の中学生から大学生まで。</p>
+      <div class="closed">
+        <span class="tag">CLOSED</span>
+        <p>参加者の募集は締め切りました。たくさんのお申し込みをありがとうございました。<small>選考結果は、申し込んだすべてのチームへご連絡します。</small></p>
+      </div>
       <div class="cta">
-        <a class="btn big" href="https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform" target="_blank" rel="noopener">参加を申し込む</a>
         <a class="btn big sub" href="#flow">当日の流れを見る</a>
-        <span class="cap">応募者多数の場合は、年齢や学校のバランスを調整して参加チームを決定します</span>
       </div>
       <div class="specband">
         <div class="cell"><span class="k">参加条件</span><span class="v">13歳以上<small>中学生〜大学生</small></span></div>
         <div class="cell"><span class="k">参加費</span><span class="v">無料</span></div>
         <div class="cell"><span class="k">定員</span><span class="v">約25人<small>※選考あり</small></span></div>
         <div class="cell"><span class="k">持ち物</span><span class="v">ノートPC<small>充電器も忘れずに！</small></span></div>
-        <div class="cell"><span class="k">応募締切</span><span class="v">9.7<small class="in">MON</small></span></div>
+        <div class="cell"><span class="k">応募締切</span><span class="v">9.7<small class="in">MON</small><small>受付終了</small></span></div>
         <div class="cell"><span class="k">最優秀賞</span><span class="v">3万円<small>Amazonギフト券</small></span></div>
       </div>
     </div>
@@ -1221,7 +1239,7 @@
         </details>
         <details class="qa">
           <summary>申し込んだら必ず参加できる？</summary>
-          <div class="a">申込締切は2026年9月7日（月）です。定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。<br><b>諸事情により、申込締切と結果連絡日を延長する場合があります。</b>その場合はこのサイトなどでお知らせします。</div>
+          <div class="a"><b>申込締切は2026年9月7日（月）で、参加者の募集は締め切りました。</b>定員は25人前後（2〜3人のチームで8チーム程度）で、応募者多数の場合は、年齢や学校のバランスを調整して、主催者が参加チームを決定します。選考はチーム単位で行うため、決まったチームの人数によって定員を少し超えたり下回ったりすることがあります。結果は9月9日（水）までに、申し込んだすべてのチームへご連絡します。なお、選考の方法・結果についてのお問い合わせにはお答えできません。<br>諸事情により、結果連絡日を延長する場合があります。その場合はこのサイトなどでお知らせします。</div>
         </details>
         <details class="qa">
           <summary>何を持っていけばいい？</summary>
@@ -1312,7 +1330,7 @@
         <div class="ov-row"><div class="l">対象</div><div class="v">広島県内に所在する学校に在籍する、13歳以上の中学生・高校生・高専生・専門学校生・大学生 <small>在籍する学校の所在地で判断します。広島県外の学校に通っている方は、広島県内にお住まいでも対象外です</small><small>使用する生成AIサービスの利用条件により、13歳未満の方は参加できません（中学1年生でも開催日に13歳になっていない場合は対象外）</small><small>小学生、大学院生、および学生でない方は対象外です</small></div></div>
         <div class="ov-row"><div class="l">参加形式</div><div class="v">2〜3人のチームで参加 <small>申込はチーム単位。おひとりでのお申し込みは受け付けていません。中学生は中学生どうし、高校生は高校生どうしで組んでください（区分をまたぐ混成チームは組めません）</small></div></div>
         <div class="ov-row"><div class="l">定員</div><div class="v">25人前後 <small>2〜3人のチームで8チーム程度。応募者多数の場合は、年齢（中学生／高校生／大学生・高専生・専門学校生）や学校のバランスを調整して参加チームを決定します。選考はチーム単位で行うため、人数が定員を若干前後することがあります</small></div></div>
-        <div class="ov-row"><div class="l">申込締切</div><div class="v">2026年9月7日（月） <small>諸事情により延長する場合があります</small></div></div>
+        <div class="ov-row"><div class="l">申込締切</div><div class="v">2026年9月7日（月） <small><b>受付は終了しました</b></small></div></div>
         <div class="ov-row"><div class="l">選考・結果連絡</div><div class="v">2026年9月9日（水） <small>申し込んだすべてのチームに結果をご連絡します。選考の方法・結果に関するお問い合わせにはお答えできません</small><small>諸事情により延長する場合があります。その場合はWebサイト等でお知らせします</small></div></div>
         <div class="ov-row"><div class="l">参加費</div><div class="v">無料 <small>会場までの交通費・昼食代・通信費は各自のご負担です</small></div></div>
         <div class="ov-row"><div class="l">開発</div><div class="v">当日、会場でゼロからつくります <small>開発テーマは当日発表します。<b>事前に作成したコード・成果物の持ち込みは禁止です</b>（一般に公開されているライブラリ・ツール・テンプレートを使うのはOKです）</small></div></div>
@@ -1355,16 +1373,19 @@
   <!-- ============ FINAL CTA ============ -->
   <div class="ticker lm" aria-hidden="true">
     <div class="ticker-in">
-      <span class="tk">ENTRY NOW<b>✦</b>応募締切 2026.9.7 MON<b>✦</b>13歳以上の中学生〜大学生<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
-      <span class="tk">ENTRY NOW<b>✦</b>応募締切 2026.9.7 MON<b>✦</b>13歳以上の中学生〜大学生<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+      <span class="tk">ENTRY CLOSED<b>✦</b>参加者の募集は締め切りました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+      <span class="tk">ENTRY CLOSED<b>✦</b>参加者の募集は締め切りました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
     </div>
   </div>
   <section class="final" id="apply">
     <div class="wrap">
-      <h2>友達を誘って、<br><span class="em">エントリーしよう！</span></h2>
+      <h2>参加者の募集は<br><span class="em">締め切りました</span></h2>
       <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
-      <a class="btn big" href="https://docs.google.com/forms/d/e/1FAIpQLSeR5Z-szACHxYXKmX-PMUy8MHzJys1QhfFfDZW293ubt9phjg/viewform" target="_blank" rel="noopener">参加を申し込む（無料）</a>
-      <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>諸事情により延長する場合があります<br>お申し込みの前に <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をお読みください</div>
+      <div class="closed">
+        <span class="tag">CLOSED</span>
+        <p>たくさんのお申し込みをありがとうございました。<small>新規のお申し込みは受け付けていません。</small></p>
+      </div>
+      <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>選考結果は、申し込んだすべてのチームへご連絡します<br>参加が決まった方は <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をご確認ください</div>
     </div>
   </section>
 
@@ -1432,7 +1453,7 @@
   if(!("IntersectionObserver" in window))return;
   var sel=".sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
     ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,.contact,"+
-    ".final h2,.final .when2,.final .btn,.final .note";
+    ".final h2,.final .when2,.final .closed,.final .note";
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(!e.isIntersecting)return;
