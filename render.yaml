@@ -1,0 +1,19 @@
+# 発表順抽選アプリ（tools/presentation-order）を Render で公開するための設定。
+# 手順は tools/presentation-order/README.md の「インターネットに公開する」を参照。
+services:
+  - type: web
+    name: hiroshima-hackathon-chusen
+    runtime: node
+    plan: free
+    region: singapore # 無料枠で日本から一番近い
+    rootDir: tools/presentation-order
+    buildCommand: npm install
+    startCommand: node server.mjs
+    healthCheckPath: /screen
+    envVars:
+      # 大画面URLの key。Render 上では state.json が再起動で消えるため、
+      # ここで固定しないと再デプロイのたびに大画面のURLが変わってしまう。
+      - key: HOST_KEY
+        generateValue: true
+      - key: NODE_VERSION
+        value: "22"

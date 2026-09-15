@@ -7,6 +7,7 @@ function subscribeState(query, onData, onStatus) {
   let timer = null;
   let stopped = false;
   let gotSse = false;
+  let keepAlive = null;
 
   function handle(text) {
     onStatus(true);
@@ -42,9 +43,16 @@ function subscribeState(query, onData, onStatus) {
   es.onerror = () => { if (gotSse) onStatus(false); };
   setTimeout(() => { if (!gotSse && !stopped) startPolling(); }, 4000);
 
+  // Render の無料枠は一定時間リクエストが来ないとスリープし、エントリー内容が消える。
+  // SSE の ping はサーバーから送るだけでリクエストにならないので、画面が開いている間は定期的に叩いておく。
+  keepAlive = setInterval(() => {
+    if (!stopped) fetch('/api/state?' + query, { cache: 'no-store' }).catch(() => {});
+  }, 240000);
+
   return () => {
     stopped = true;
     if (es) es.close();
     clearTimeout(timer);
+    clearInterval(keepAlive);
   };
 }
