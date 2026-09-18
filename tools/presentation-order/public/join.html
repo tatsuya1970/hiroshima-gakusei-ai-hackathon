@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0347F0">
+<title>発表順エントリー</title>
+<link rel="stylesheet" href="/common.css">
+<style>
+  body { min-height: 100dvh; padding: 20px 16px 40px; }
+  main { max-width: 480px; margin: 0 auto; }
+  .tag { font-size: 11px; padding: 5px 12px; }
+  h1 { font-size: 30px; margin: 12px 0 6px; color: var(--ink-strong); letter-spacing: .02em; }
+  .lead { color: var(--muted); font-weight: 700; font-size: 14px; margin: 0 0 20px; line-height: 1.6; }
+  .card { background: var(--white); border: 1px solid var(--rule); padding: 20px; margin-bottom: 16px; }
+  label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+  input {
+    width: 100%; font: inherit; font-size: 20px; font-weight: 700; padding: 14px;
+    border: 2px solid var(--rule); background: var(--tint); color: var(--ink-strong); border-radius: 0;
+  }
+  input:focus { outline: none; border-color: var(--blue); background: var(--white); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; text-align: right; font-family: var(--mono); }
+  .btn {
+    display: block; width: 100%; border: 0; padding: 16px; font-size: 18px; font-weight: 800;
+    background: var(--blue); color: var(--white); margin-top: 16px; letter-spacing: .06em;
+  }
+  .btn:disabled { background: var(--rule); color: var(--muted); }
+  .btn.ghost { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+  .btn.plain { background: transparent; color: var(--muted); font-size: 14px; padding: 10px; margin-top: 8px; text-decoration: underline; }
+  .row { display: flex; gap: 10px; }
+  .row .btn { flex: 1; }
+  .err { color: #d0183b; font-weight: 700; font-size: 14px; margin-top: 12px; min-height: 1em; }
+  .mine { display: flex; align-items: center; gap: 14px; }
+  .num {
+    flex: none; width: 48px; height: 48px; background: var(--blue); color: var(--white);
+    display: grid; place-items: center; font-weight: 800; font-size: 22px; font-family: var(--mono);
+  }
+  .name { flex: 1; background: var(--lime); padding: 12px 14px; font-weight: 800; font-size: 20px; word-break: break-all; color: var(--ink-strong); }
+  .status { font-size: 13px; color: var(--muted); font-family: var(--mono); font-weight: 700; letter-spacing: .06em; margin-bottom: 10px; }
+  .meter { height: 8px; background: var(--tint-alt); margin-bottom: 8px; }
+  .meter i { display: block; height: 100%; background: var(--blue); transition: width .4s; }
+  .big { text-align: center; padding: 32px 20px; }
+  .big .label { font-weight: 800; color: var(--muted); }
+  .big .rank { font-size: 96px; font-weight: 900; color: var(--blue); line-height: 1.1; font-family: var(--mono); }
+  .big .rank small { font-size: 32px; color: var(--ink-strong); font-family: var(--gothic); }
+  .drawing { text-align: center; padding: 40px 20px; }
+  .drawing .spin {
+    width: 72px; height: 72px; margin: 0 auto 20px; border: 8px solid var(--tint-alt);
+    border-top-color: var(--blue); border-right-color: var(--lime-deep); border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  .drawing p { font-size: 22px; font-weight: 900; margin: 0; }
+  .drawing small { display: block; margin-top: 8px; color: var(--muted); font-weight: 700; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  ol.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  ol.list li { display: flex; gap: 8px; align-items: stretch; }
+  ol.list .n { width: 34px; flex: none; background: var(--blue); color: var(--white); display: grid; place-items: center; font-weight: 800; font-family: var(--mono); }
+  ol.list .t { flex: 1; background: var(--tint); padding: 8px 10px; font-weight: 700; word-break: break-all; }
+  ol.list li.me .t { background: var(--lime); }
+  .offline { position: fixed; left: 0; right: 0; top: 0; background: #d0183b; color: #fff; text-align: center; font-size: 13px; font-weight: 700; padding: 6px; display: none; }
+  .offline.show { display: block; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="offline" id="offline">接続が切れました。再接続しています…</div>
+<main>
+  <span class="tag">PRESENTATION ORDER</span>
+  <h1>発表順エントリー</h1>
+  <p class="lead" id="lead">チーム名を入力してください。全チームそろったら、会場の大画面で発表順を決めます。</p>
+
+  <!-- 入力 -->
+  <section class="card" id="formView" hidden>
+    <form id="form" autocomplete="off">
+      <label for="name">チーム名</label>
+      <input id="name" maxlength="24" enterkeyhint="done" placeholder="例：チーム広島">
+      <div class="hint"><span id="count">0</span>/24</div>
+      <button class="btn" id="submit" type="submit">エントリーする</button>
+      <button class="btn plain" id="cancelEdit" type="button" hidden>変更をやめる</button>
+      <div class="err" id="err"></div>
+    </form>
+  </section>
+
+  <!-- 定員 -->
+  <section class="card" id="fullView" hidden>
+    <p style="margin:0;font-weight:800">定員（<span class="cap"></span>チーム）に達しました。</p>
+    <p style="margin:8px 0 0;color:var(--muted);font-size:14px">エントリーしたのに表示されない場合は、運営スタッフに声をかけてください。</p>
+  </section>
+
+  <!-- エントリー済み -->
+  <section id="doneView" hidden>
+    <div class="card">
+      <div class="status">ENTRY OK</div>
+      <div class="mine"><div class="num" id="myNo"></div><div class="name" id="myName"></div></div>
+      <div class="row">
+        <button class="btn ghost" id="edit" type="button">名前を直す</button>
+        <button class="btn ghost" id="leave" type="button">取り消す</button>
+      </div>
+      <button class="btn" id="another" type="button" hidden>続けて別のチームを送る（デバッグ）</button>
+      <div class="err" id="err2"></div>
+    </div>
+  </section>
+
+  <!-- 抽選中 -->
+  <section class="card drawing" id="drawingView" hidden>
+    <div class="spin"></div>
+    <p>抽選中！</p>
+    <small>会場の大画面に注目してください</small>
+  </section>
+
+  <!-- 結果 -->
+  <section id="resultView" hidden>
+    <div class="card big" id="myRank" hidden>
+      <div class="label">あなたのチームの発表順は</div>
+      <div class="rank"><span id="rank"></span><small>番目</small></div>
+    </div>
+    <div class="card">
+      <div class="status">発表順</div>
+      <ol class="list" id="orderList"></ol>
+    </div>
+  </section>
+
+  <!-- 集まり具合 -->
+  <section class="card" id="progressView" hidden>
+    <div class="status">ENTRY <span id="n"></span> / <span class="cap"></span></div>
+    <div class="meter"><i id="meter"></i></div>
+    <ol class="list" id="entryList"></ol>
+  </section>
+</main>
+<script src="/live.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  // ?debug を付けると、送ったチームを端末に記憶せず、同じ端末から何件でも送れる
+  const DEBUG = new URLSearchParams(location.search).has('debug');
+  const store = {
+    get: (k) => { if (DEBUG) return null; try { return localStorage.getItem(k); } catch { return null; } },
+    set: (k, v) => { if (DEBUG) return; try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} },
+  };
+  if (DEBUG) {
+    $('another').hidden = false;
+    document.querySelector('.tag').textContent = 'PRESENTATION ORDER · DEBUG';
+  }
+  let token = store.get('po_token');
+  let view = null;
+  let editing = false;
+  let unsubscribe = null;
+
+  function connect() {
+    if (unsubscribe) unsubscribe();
+    unsubscribe = subscribeState(
+      token ? 'token=' + encodeURIComponent(token) : '',
+      (v) => { view = v; render(); },
+      (ok) => $('offline').classList.toggle('show', !ok)
+    );
+  }
+
+  async function post(url, body) {
+    const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || '通信に失敗しました');
+    return data;
+  }
+
+  function show(id, on) { $(id).hidden = !on; }
+
+  function fillList(el, names, me) {
+    el.innerHTML = '';
+    names.forEach((n, i) => {
+      const li = document.createElement('li');
+      if (me && n === me) li.className = 'me';
+      li.innerHTML = '<span class="n"></span><span class="t"></span>';
+      li.querySelector('.n').textContent = i + 1;
+      li.querySelector('.t').textContent = n;
+      el.appendChild(li);
+    });
+  }
+
+  function render() {
+    if (!view) return;
+    const you = view.you;
+    const lobby = view.phase === 'lobby';
+    document.querySelectorAll('.cap').forEach((e) => (e.textContent = view.capacity));
+    if (!lobby) editing = false;
+
+    show('formView', lobby && (!you || editing) && (you || view.teams.length < view.capacity));
+    show('fullView', lobby && !you && view.teams.length >= view.capacity);
+    show('doneView', lobby && you && !editing);
+    show('drawingView', view.phase === 'drawing');
+    show('resultView', view.phase === 'done');
+    show('progressView', lobby);
+    show('cancelEdit', editing);
+    $('submit').textContent = editing ? 'この名前に変更する' : 'エントリーする';
+
+    $('lead').textContent =
+      view.phase === 'done' ? '発表順が決まりました。' :
+      view.phase === 'drawing' ? '発表順を抽選しています。' :
+      you ? 'エントリーできました。全チームそろったら、大画面で発表順を決めます。' :
+      'チーム名を入力してください。全チームそろったら、会場の大画面で発表順を決めます。';
+
+    if (you) { $('myNo').textContent = you.no; $('myName').textContent = you.name; }
+
+    $('n').textContent = view.teams.length;
+    $('meter').style.width = (view.teams.length / view.capacity) * 100 + '%';
+    fillList($('entryList'), view.teams, you && you.name);
+
+    if (view.phase === 'done' && view.order) {
+      fillList($('orderList'), view.order, you && you.name);
+      const r = you ? view.order.indexOf(you.name) : -1;
+      show('myRank', r >= 0);
+      $('rank').textContent = r + 1;
+    }
+  }
+
+  $('name').addEventListener('input', () => { $('count').textContent = [...$('name').value].length; });
+
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    $('err').textContent = '';
+    $('submit').disabled = true;
+    try {
+      const res = await post('/api/register', { token, name: $('name').value });
+      const isNew = res.token !== token;
+      token = res.token;
+      store.set('po_token', token);
+      editing = false;
+      $('name').blur();
+      if (isNew) connect(); else render();
+    } catch (err) {
+      $('err').textContent = err.message;
+    } finally {
+      $('submit').disabled = false;
+    }
+  });
+
+  $('edit').addEventListener('click', () => {
+    editing = true;
+    $('name').value = view.you ? view.you.name : '';
+    $('count').textContent = [...$('name').value].length;
+    render();
+    $('name').focus();
+  });
+  $('cancelEdit').addEventListener('click', () => { editing = false; $('err').textContent = ''; render(); });
+
+  $('another').addEventListener('click', () => {
+    token = null;
+    editing = false;
+    $('name').value = '';
+    $('count').textContent = 0;
+    $('err').textContent = '';
+    if (view) { view.you = null; render(); }
+    connect();
+    $('name').focus();
+  });
+
+  $('leave').addEventListener('click', async () => {
+    if (!confirm('エントリーを取り消しますか？')) return;
+    $('err2').textContent = '';
+    try {
+      await post('/api/leave', { token });
+      token = null;
+      store.set('po_token', null);
+      $('name').value = '';
+      $('count').textContent = 0;
+      connect();
+    } catch (err) {
+      $('err2').textContent = err.message;
+    }
+  });
+
+  connect();
+</script>
+</body>
+</html>

@@ -1,7 +1,8 @@
-このフォルダには2つの道具が入っている。
+このフォルダには3つの道具が入っている。
 
 - `create-google-form.gs` — 応募フォーム（Googleフォーム）を生成するApps Script。下の「応募フォームの作り方」参照
 - `md2html.mjs` — 募集要項をPDFにする変換スクリプト。下の「募集要項PDFの作り方」参照
+- `presentation-order/` — 当日の発表順を会場の大画面で抽選するアプリ。`presentation-order/README.md` 参照
 
 ---
 

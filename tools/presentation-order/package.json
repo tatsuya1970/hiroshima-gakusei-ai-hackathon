@@ -1,0 +1,12 @@
+{
+  "name": "presentation-order",
+  "private": true,
+  "type": "module",
+  "description": "ハッカソンの発表順を会場の大画面で抽選するアプリ",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,38 @@
+:root {
+  --blue: #0347f0;
+  --blue-deep: #0030b4;
+  --blue-mid: #2e6bff;
+  --lime: #e6f617;
+  --lime-deep: #c6d400;
+  --tint: #f3f7ff;
+  --tint-alt: #e6eeff;
+  --white: #ffffff;
+  --ink: #1b2230;
+  --ink-strong: #0b1220;
+  --muted: #5d6883;
+  --rule: #d8e2f5;
+  --gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--gothic);
+  color: var(--ink);
+  background-color: var(--tint);
+  background-image:
+    linear-gradient(var(--tint-alt) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tint-alt) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-font-smoothing: antialiased;
+}
+.tag {
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+button { font-family: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; }

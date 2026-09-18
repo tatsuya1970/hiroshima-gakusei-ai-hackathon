@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>発表順抽選</title>
+<link rel="stylesheet" href="/common.css">
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  body { background-color: #dfe7f7; background-image: none; }
+
+  /* 1920x1080 の舞台をウィンドウに合わせて拡大縮小する */
+  #stage {
+    position: absolute; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden;
+    background-color: var(--tint);
+    background-image:
+      linear-gradient(var(--tint-alt) 1px, transparent 1px),
+      linear-gradient(90deg, var(--tint-alt) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .hd-tag { position: absolute; left: 88px; top: 74px; width: 520px; height: 48px; font-size: 20px; display: grid; place-items: center; }
+  .hd-right { position: absolute; right: 88px; top: 70px; font-family: var(--mono); font-weight: 800; font-size: 40px; color: var(--blue); letter-spacing: .04em; }
+  h1 { position: absolute; left: 84px; top: 128px; margin: 0; font-size: 76px; font-weight: 900; color: var(--ink-strong); letter-spacing: .02em; }
+  .lead { position: absolute; left: 88px; top: 250px; margin: 0; font-size: 30px; font-weight: 800; color: var(--muted); }
+  footer { position: absolute; left: 88px; right: 88px; bottom: 44px; display: flex; justify-content: space-between; font-family: var(--mono); font-weight: 700; font-size: 16px; color: var(--muted); letter-spacing: .04em; }
+
+  /* ---- ロビー ---- */
+  #lobby { position: absolute; left: 88px; right: 88px; top: 330px; height: 620px; display: flex; gap: 36px; }
+  .qr-card { width: 500px; flex: none; background: var(--white); border: 1px solid var(--rule); padding: 32px 40px; display: flex; flex-direction: column; align-items: center; }
+  .qr-card .tag { font-size: 16px; padding: 6px 16px; align-self: flex-start; }
+  #qr { width: 380px; height: 380px; margin: 24px 0 20px; display: grid; place-items: center; }
+  #qr svg { width: 100%; height: 100%; }
+  #qr .noqr { font-weight: 800; color: var(--muted); text-align: center; font-size: 22px; }
+  #joinUrl { font-family: var(--mono); font-weight: 800; font-size: 26px; color: var(--blue); word-break: break-all; text-align: center; cursor: pointer; }
+  .entries-wrap { flex: 1; display: flex; flex-direction: column; gap: 22px; }
+  #entries { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 110px; gap: 20px 24px; }
+  .entry { position: relative; display: flex; align-items: center; gap: 22px; padding: 0 28px; background: var(--white); border: 1px solid var(--rule); }
+  .entry .eno { flex: none; width: 58px; height: 58px; display: grid; place-items: center; background: var(--blue); color: var(--white); font-family: var(--mono); font-weight: 800; font-size: 26px; }
+  .entry .ename { flex: 1; min-width: 0; font-size: 36px; font-weight: 900; color: var(--ink-strong); white-space: nowrap; overflow: hidden; }
+  .entry.empty { background: transparent; border: 2px dashed var(--rule); }
+  .entry.empty .eno { background: var(--tint-alt); color: var(--muted); }
+  .entry.empty .ename { font-family: var(--mono); font-size: 22px; color: #9aa6c2; font-weight: 700; letter-spacing: .12em; }
+  .entry.empty .ename::after { content: ''; animation: dots 1.6s steps(4) infinite; }
+  @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+  .entry.pop { animation: pop .7s cubic-bezier(.2, 1.6, .4, 1); }
+  .entry.pop::before { content: ''; position: absolute; inset: -2px; background: var(--lime); animation: flash .9s ease-out forwards; z-index: 0; }
+  .entry > * { position: relative; z-index: 1; }
+  @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes flash { from { opacity: 1; } to { opacity: 0; } }
+  .entry .del { position: absolute; right: 8px; top: 8px; z-index: 2; width: 30px; height: 30px; border: 0; background: var(--tint); color: var(--muted); font-size: 18px; opacity: 0; transition: opacity .2s; }
+  .entry:hover .del { opacity: 1; }
+
+  .start-row { display: flex; align-items: center; gap: 28px; margin-top: auto; }
+  .counter { font-family: var(--mono); font-weight: 800; color: var(--ink-strong); font-size: 30px; white-space: nowrap; }
+  .counter b { font-size: 64px; color: var(--blue); }
+  #startBtn {
+    flex: 1; height: 96px; border: 0; font-size: 40px; font-weight: 900; letter-spacing: .12em;
+    background: var(--lime); color: var(--ink-strong); box-shadow: 0 8px 0 var(--lime-deep);
+    animation: glow 1.4s ease-in-out infinite;
+  }
+  #startBtn:active:not(:disabled) { transform: translateY(6px); box-shadow: 0 2px 0 var(--lime-deep); }
+  #startBtn:disabled { background: var(--tint-alt); color: #9aa6c2; box-shadow: none; animation: none; font-size: 30px; }
+  @keyframes glow { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 22px rgba(198, 212, 0, .9)); } }
+
+  /* ---- 発表順ボード ---- */
+  #board { position: absolute; left: 88px; right: 88px; top: 338px; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 132px; gap: 22px 28px; }
+  .cell { position: relative; display: flex; align-items: center; gap: 34px; padding: 0 38px 0 36px; background: var(--white); border: 1px solid var(--rule); }
+  .cell .no { flex: none; width: 74px; height: 74px; display: grid; place-items: center; background: var(--blue); color: var(--white); font-weight: 800; font-size: 34px; }
+  .cell .nm { flex: 1; min-width: 0; height: 88px; display: grid; place-items: center; background: var(--lime); padding: 0 24px; }
+  .cell .nm span { display: block; max-width: 100%; white-space: nowrap; overflow: hidden; font-size: 36px; font-weight: 900; color: var(--ink-strong); }
+  .cell.empty .nm { background: var(--tint); outline: 2px dashed var(--rule); outline-offset: -2px; }
+  .cell.empty .nm span { color: #b3bdd4; font-family: var(--mono); }
+  .cell.target { box-shadow: 0 0 0 6px var(--blue); animation: target 1s ease-in-out infinite; z-index: 2; }
+  @keyframes target { 50% { box-shadow: 0 0 0 12px rgba(3, 71, 240, .35); } }
+  .cell.landed { animation: landed .6s ease-out; }
+  @keyframes landed { 0% { transform: scale(1.06); background: var(--lime); } 100% { transform: scale(1); } }
+
+  /* ---- ルーレット ---- */
+  #wheel { position: absolute; inset: 0; background: rgba(243, 247, 255, .74); opacity: 0; pointer-events: none; transition: opacity .5s; z-index: 10; }
+  #wheel.show { opacity: 1; }
+  .chip {
+    position: absolute; left: 0; top: 0; width: 270px; height: 70px; display: grid; place-items: center; padding: 0 16px;
+    background: var(--white); border: 3px solid var(--blue); font-weight: 900; font-size: 26px; color: var(--ink-strong);
+    white-space: nowrap; overflow: hidden; will-change: transform;
+  }
+  .chip.hot { background: var(--lime); border-color: var(--ink-strong); }
+  .chip.picked { background: var(--lime); border-color: var(--ink-strong); box-shadow: 0 0 0 8px var(--blue); }
+  .pointer { position: absolute; left: 960px; top: 150px; transform: translateX(-50%); width: 0; height: 0; border-left: 26px solid transparent; border-right: 26px solid transparent; border-top: 40px solid var(--blue); filter: drop-shadow(0 4px 0 var(--blue-deep)); }
+  .wheel-center { position: absolute; left: 960px; top: 590px; transform: translate(-50%, -50%); text-align: center; }
+  .wc-no { font-family: var(--mono); font-size: 150px; font-weight: 900; color: var(--blue); line-height: 1; }
+  .wc-label { font-size: 40px; font-weight: 900; color: var(--ink-strong); margin-top: 6px; }
+  .spot { position: absolute; left: 0; top: 0; width: 872px; height: 132px; z-index: 20; box-shadow: 0 30px 60px rgba(11, 18, 32, .25); pointer-events: none; }
+
+  #confetti { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
+
+  /* ---- 管理パネル（舞台の外） ---- */
+  #gear { position: fixed; left: 10px; top: 10px; z-index: 100; width: 36px; height: 36px; border: 0; background: rgba(255, 255, 255, .6); color: var(--muted); font-size: 20px; opacity: .35; }
+  #gear:hover { opacity: 1; }
+  #clearBtn { position: fixed; right: 10px; top: 10px; z-index: 100; padding: 8px 16px; border: 1px solid var(--rule); background: rgba(255, 255, 255, .8); color: var(--muted); font-weight: 700; font-size: 14px; opacity: .6; }
+  #clearBtn:hover { opacity: 1; color: #d0183b; border-color: #d0183b; }
+  #admin { position: fixed; left: 10px; top: 54px; z-index: 100; width: 340px; background: var(--white); border: 1px solid var(--rule); box-shadow: 0 10px 30px rgba(0, 0, 0, .15); padding: 16px; font-size: 14px; }
+  #admin h3 { margin: 14px 0 6px; font-size: 12px; font-family: var(--mono); color: var(--muted); letter-spacing: .08em; }
+  #admin h3:first-child { margin-top: 0; }
+  #admin button { width: 100%; padding: 8px; margin-top: 6px; border: 1px solid var(--rule); background: var(--tint); font-weight: 700; text-align: left; }
+  #admin button.danger { color: #d0183b; }
+  #admin .inline { display: flex; gap: 6px; }
+  #admin .inline input { flex: 1; min-width: 0; padding: 8px; border: 1px solid var(--rule); font: inherit; }
+  #admin .inline button { width: auto; margin: 0; }
+  #admin .url { display: block; font-family: var(--mono); font-size: 12px; word-break: break-all; }
+  #adminMsg { color: #d0183b; font-weight: 700; margin-top: 8px; min-height: 1em; }
+  .offline { position: fixed; right: 10px; top: 10px; z-index: 100; background: #d0183b; color: #fff; font-weight: 700; padding: 6px 12px; display: none; }
+  .offline.show { display: block; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="tag hd-tag" id="hdTag">PRESENTATION ORDER</div>
+  <div class="hd-right" id="hdRight"></div>
+  <h1 id="title">発表順抽選</h1>
+  <p class="lead" id="lead"></p>
+
+  <section id="lobby" hidden>
+    <div class="qr-card">
+      <span class="tag">SCAN TO ENTRY</span>
+      <div id="qr"></div>
+      <div id="joinUrl" title="クリックで別のURLに切り替え"></div>
+    </div>
+    <div class="entries-wrap">
+      <div id="entries"></div>
+      <div class="start-row">
+        <div class="counter"><b id="count">0</b> / <span id="cap">8</span> TEAMS</div>
+        <button id="startBtn" disabled>抽選スタート</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="board" hidden></section>
+
+  <div id="wheel">
+    <div class="pointer"></div>
+    <div class="wheel-center"><div class="wc-no" id="wcNo"></div><div class="wc-label" id="wcLabel"></div></div>
+  </div>
+
+  <canvas id="confetti" width="1920" height="1080"></canvas>
+
+  <footer><span>HIROSHIMA STUDENT AI HACKATHON 2026</span><span>hiroshima-ai-hackathon.jp</span></footer>
+</div>
+
+<div class="offline" id="offline">サーバーとの接続が切れています</div>
+<button id="gear" title="管理メニュー">⚙</button>
+<button id="clearBtn" title="エントリーと結果をすべて消して最初からにする" hidden>クリア</button>
+<div id="admin" hidden>
+  <h3>代理エントリー</h3>
+  <div class="inline"><input id="addName" maxlength="24" placeholder="チーム名"><button id="addBtn">追加</button></div>
+  <h3>参加用URL（QRに出すもの）</h3>
+  <div id="urlList"></div>
+  <h3>公開大画面（閲覧専用・操作不可）</h3>
+  <a class="url" id="screenUrl" target="_blank" rel="noopener"></a>
+  <h3>デバッグ用スマホ画面（同じ端末から何件でも送れる）</h3>
+  <a class="url" id="debugUrl" target="_blank" rel="noopener"></a>
+  <h3>演出</h3>
+  <button id="soundBtn"></button>
+  <button id="skipBtn">演出をスキップ（S）</button>
+  <button id="fsBtn">全画面（F）</button>
+  <h3>やり直し</h3>
+  <button id="redrawBtn" class="danger">同じチームでもう一度抽選する</button>
+  <button id="resetBtn" class="danger">全リセット（エントリーも消す）</button>
+  <div id="adminMsg"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script src="/live.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const KEY = new URLSearchParams(location.search).get('key') || '';
+  // /screen は閲覧専用（ボタン・管理メニューなし。演出と結果だけ同じように流れる）
+  const IS_HOST = location.pathname === '/host';
+  if (!IS_HOST) {
+    $('gear').hidden = true;
+    $('clearBtn').hidden = false;
+  }
+  const stage = $('stage');
+  let view = null;
+  let pending = null;
+  let animating = false;
+  let animatedDrawId = null;
+  let prevTeams = null;
+  let joinUrls = [];
+  let urlIndex = 0;
+  let fast = false;
+
+  // ---------- 舞台のスケーリング ----------
+  let scale = 1;
+  function fitStage() {
+    scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `scale(${scale})`;
+    stage.style.left = (innerWidth - 1920 * scale) / 2 + 'px';
+    stage.style.top = (innerHeight - 1080 * scale) / 2 + 'px';
+  }
+  addEventListener('resize', fitStage);
+  fitStage();
+  function stageRect(el) {
+    const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: (r.left - s.left) / scale, y: (r.top - s.top) / scale, w: r.width / scale, h: r.height / scale };
+  }
+
+  // 長いチーム名は枠に収まるまで文字を小さくする
+  function fitText(el, max, min = 14) {
+    let size = max;
+    el.style.fontSize = size + 'px';
+    while (el.scrollWidth > el.clientWidth + 1 && size > min) {
+      size -= 1;
+      el.style.fontSize = size + 'px';
+    }
+  }
+
+  const wait = (ms) => new Promise((r) => setTimeout(r, fast ? Math.min(ms, 30) : ms));
+
+  // ---------- 効果音（WebAudio で合成） ----------
+  const Sound = {
+    ctx: null,
+    on: true,
+    init() {
+      if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+    },
+    tone(freq, dur, type = 'square', vol = 0.08, when = 0) {
+      if (!this.on || !this.ctx || fast) return;
+      const t = this.ctx.currentTime + when;
+      const o = this.ctx.createOscillator(), g = this.ctx.createGain();
+      o.type = type;
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(this.ctx.destination);
+      o.start(t);
+      o.stop(t + dur + 0.05);
+    },
+    tick() { this.tone(1500, 0.03, 'square', 0.04); },
+    join() { this.tone(880, 0.12, 'sine', 0.2); this.tone(1320, 0.2, 'sine', 0.16, 0.09); },
+    ready() { [660, 880, 1100, 1320].forEach((f, i) => this.tone(f, 0.15, 'triangle', 0.15, i * 0.07)); },
+    hit() { [523, 659, 784, 1047].forEach((f, i) => this.tone(f, 0.35, 'triangle', 0.2, i * 0.05)); },
+    whoosh() { this.tone(300, 0.25, 'sawtooth', 0.03); },
+    fanfare() {
+      const notes = [[523, 0], [659, 0.13], [784, 0.26], [1047, 0.39], [784, 0.62], [1047, 0.75]];
+      notes.forEach(([f, t], i) => this.tone(f, i === notes.length - 1 ? 1.0 : 0.2, 'square', 0.06, t));
+    },
+  };
+  addEventListener('pointerdown', () => Sound.init());
+
+  // ---------- 通信 ----------
+  async function post(path, body = {}) {
+    const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: KEY, ...body }) });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || '通信に失敗しました');
+    return data;
+  }
+  function connect() {
+    subscribeState(
+      IS_HOST ? 'key=' + encodeURIComponent(KEY) : 'screen=1',
+      (v) => {
+        if (animating) { pending = v; return; }
+        render(v);
+      },
+      (ok) => $('offline').classList.toggle('show', !ok)
+    );
+  }
+
+  // ---------- 参加用URLとQR ----------
+  async function loadInfo() {
+    let urls = [];
+    if (IS_HOST) try { urls = (await post('/api/host/info')).joinUrls; } catch {}
+    const local = ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname);
+    joinUrls = local && urls.length ? urls : [location.origin + '/'];
+    const list = $('urlList');
+    list.innerHTML = '';
+    joinUrls.forEach((u, i) => {
+      const b = document.createElement('button');
+      b.className = 'url';
+      b.textContent = u;
+      b.onclick = () => { urlIndex = i; drawQr(); };
+      list.appendChild(b);
+    });
+    drawQr();
+    // 公開大画面（閲覧専用）のURLを管理メニューに出す
+    const screenUrl = joinUrls[0] + 'screen';
+    $('screenUrl').textContent = screenUrl;
+    $('screenUrl').href = screenUrl;
+    const debugUrl = joinUrls[0] + '?debug';
+    $('debugUrl').textContent = debugUrl;
+    $('debugUrl').href = debugUrl;
+  }
+  function drawQr() {
+    const url = joinUrls[urlIndex] || location.origin + '/';
+    $('joinUrl').textContent = url.replace(/\/$/, '');
+    const box = $('qr');
+    if (typeof qrcode !== 'function') {
+      box.innerHTML = '<div class="noqr">QRコードを表示できません<br>（インターネット未接続）<br>下のURLを入力してください</div>';
+      return;
+    }
+    const qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    box.innerHTML = qr.createSvgTag({ cellSize: 8, margin: 0, scalable: true });
+  }
+  $('joinUrl').onclick = () => { urlIndex = (urlIndex + 1) % joinUrls.length; drawQr(); };
+
+  // ---------- 描画 ----------
+  function render(v) {
+    view = v;
+    $('cap').textContent = v.capacity;
+    $('redrawBtn').disabled = v.phase === 'lobby';
+
+    if (v.phase === 'lobby') {
+      renderLobby(v);
+    } else if (v.phase === 'drawing') {
+      if (v.drawId !== animatedDrawId) runDraw(v);
+    } else {
+      showBoard(v, v.order);
+    }
+  }
+
+  function setHeader(lobby, v) {
+    $('title').textContent = lobby ? '発表順抽選' : '発表順';
+    $('lead').textContent = lobby ? 'スマホでQRコードを読み取り、チーム名を入力してください' : v.note;
+    $('hdTag').textContent = lobby ? 'PRESENTATION ORDER DRAW' : `${v.time}  PRESENTATION`;
+    $('hdRight').textContent = lobby ? `ENTRY ${v.teams.length}/${v.capacity}` : v.time;
+  }
+
+  function renderLobby(v) {
+    animatedDrawId = null;
+    $('board').hidden = true;
+    $('lobby').hidden = false;
+    setHeader(true, v);
+    const box = $('entries');
+    box.innerHTML = '';
+    const fresh = prevTeams ? v.teams.filter((n) => !prevTeams.includes(n)) : [];
+    for (let i = 0; i < v.capacity; i++) {
+      const name = v.teams[i];
+      const el = document.createElement('div');
+      el.className = 'entry' + (name ? '' : ' empty') + (name && fresh.includes(name) ? ' pop' : '');
+      el.innerHTML = '<div class="eno"></div><div class="ename"></div>';
+      el.querySelector('.eno').textContent = i + 1;
+      el.querySelector('.ename').textContent = name || 'WAITING';
+      if (name && IS_HOST) {
+        const del = document.createElement('button');
+        del.className = 'del';
+        del.textContent = '×';
+        del.title = 'このエントリーを削除';
+        del.onclick = async () => {
+          if (!confirm(`「${name}」のエントリーを削除しますか？`)) return;
+          try { await post('/api/host/remove', { index: i }); } catch (e) { alert(e.message); }
+        };
+        el.appendChild(del);
+      }
+      box.appendChild(el);
+      if (name) fitText(el.querySelector('.ename'), 36, 16);
+    }
+    const n = v.teams.length, full = n >= v.capacity;
+    $('count').textContent = n;
+    const btn = $('startBtn');
+    btn.disabled = !full;
+    btn.textContent = full ? '▶ 抽選スタート' : `あと ${v.capacity - n} チーム`;
+    if (fresh.length) Sound.join();
+    if (full && prevTeams && prevTeams.length < v.capacity) setTimeout(() => Sound.ready(), 250);
+    prevTeams = v.teams.slice();
+  }
+
+  function buildBoard(v, names) {
+    $('lobby').hidden = true;
+    $('board').hidden = false;
+    setHeader(false, v);
+    const board = $('board');
+    board.innerHTML = '';
+    const n = (names || v.teams).length;
+    for (let i = 0; i < n; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell empty';
+      cell.innerHTML = '<div class="no"></div><div class="nm"><span>?</span></div>';
+      cell.querySelector('.no').textContent = i + 1;
+      board.appendChild(cell);
+    }
+    if (names) names.forEach((nm, i) => fillCell(i, nm));
+  }
+  function fillCell(i, name) {
+    const cell = $('board').children[i];
+    cell.classList.remove('empty', 'target');
+    const span = cell.querySelector('.nm span');
+    span.textContent = name;
+    fitText(span, 36, 16);
+  }
+  function showBoard(v, names) {
+    prevTeams = null;
+    buildBoard(v, names);
+  }
+
+  // ---------- ルーレット ----------
+  const CX = 960, CY = 590, R = 340;
+  const TOP = -Math.PI / 2;
+  const TAU = Math.PI * 2;
+  const wheel = { chips: [], offset: 0, raf: 0 };
+
+  function wheelLoop() {
+    const n = wheel.chips.length;
+    if (n) {
+      const step = TAU / n;
+      let hot = null, best = Infinity;
+      wheel.chips.forEach((c, i) => {
+        c.a += (i * step - c.a) * 0.12; // 抜けたチップの隙間をなめらかに詰める
+        const th = wheel.offset + c.a;
+        const d = Math.abs(Math.atan2(Math.sin(th - TOP), Math.cos(th - TOP)));
+        if (d < best) { best = d; hot = c; }
+        const s = 1 + 0.18 * Math.max(0, 1 - d / 0.6);
+        c.el.style.transform = `translate(${CX + R * Math.cos(th) - 135}px, ${CY + R * Math.sin(th) - 35}px) scale(${s})`;
+        c.el.style.zIndex = Math.round(s * 100);
+      });
+      wheel.chips.forEach((c) => c.el.classList.toggle('hot', c === hot && !c.el.classList.contains('picked')));
+    }
+    wheel.raf = requestAnimationFrame(wheelLoop);
+  }
+
+  function buildWheel(names) {
+    wheel.chips.forEach((c) => c.el.remove());
+    const step = TAU / names.length;
+    wheel.chips = names.map((name, i) => {
+      const el = document.createElement('div');
+      el.className = 'chip';
+      el.textContent = name;
+      $('wheel').appendChild(el);
+      fitText(el, 26, 12);
+      return { name, el, a: i * step };
+    });
+    wheel.offset = 0;
+    cancelAnimationFrame(wheel.raf);
+    wheelLoop();
+  }
+
+  // offset を from→to へ動かす。チップが針を通過するたびにカチッと鳴らす
+  function spinOffset(to, dur, ease) {
+    return new Promise((resolve) => {
+      const from = wheel.offset;
+      const step = TAU / wheel.chips.length;
+      let last = Math.floor((from - TOP) / step);
+      const t0 = performance.now();
+      const d = fast ? 30 : dur;
+      function frame(now) {
+        const p = Math.min(1, (now - t0) / d);
+        wheel.offset = from + (to - from) * ease(p);
+        const k = Math.floor((wheel.offset - TOP) / step);
+        if (k !== last) { last = k; Sound.tick(); }
+        if (p < 1) requestAnimationFrame(frame);
+        else resolve();
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+  const easeOut = (p) => 1 - Math.pow(1 - p, 4);
+  const easeInOut = (p) => (p < 0.5 ? 8 * p ** 4 : 1 - Math.pow(-2 * p + 2, 4) / 2);
+
+  function spinTo(k, dur, spins) {
+    const n = wheel.chips.length, step = TAU / n;
+    const base = TOP - k * step;
+    const delta = (((base - wheel.offset) % TAU) + TAU) % TAU;
+    return spinOffset(wheel.offset + spins * TAU + delta, dur, easeOut);
+  }
+
+  // 決まったチームを舞台中央に大きく出し、ボードの枠へ飛ばす
+  async function spotlight(rank, name) {
+    const cell = $('board').children[rank];
+    const target = stageRect(cell);
+    const spot = document.createElement('div');
+    spot.className = 'cell spot';
+    spot.innerHTML = '<div class="no"></div><div class="nm"><span></span></div>';
+    spot.querySelector('.no').textContent = rank + 1;
+    spot.querySelector('.nm span').textContent = name;
+    spot.style.width = target.w + 'px';
+    spot.style.height = target.h + 'px';
+    stage.appendChild(spot);
+    fitText(spot.querySelector('.nm span'), 36, 16);
+
+    const sx = CX - target.w / 2, sy = CY - target.h / 2;
+    await spot.animate(
+      [
+        { transform: `translate(${sx}px, ${sy}px) scale(.2)`, opacity: 0 },
+        { transform: `translate(${sx}px, ${sy}px) scale(1.55)`, opacity: 1, offset: 0.7 },
+        { transform: `translate(${sx}px, ${sy}px) scale(1.4)`, opacity: 1 },
+      ],
+      { duration: fast ? 20 : 520, easing: 'ease-out', fill: 'forwards' }
+    ).finished;
+    await wait(500);
+    Sound.whoosh();
+    await spot.animate(
+      [
+        { transform: `translate(${sx}px, ${sy}px) scale(1.4)` },
+        { transform: `translate(${target.x}px, ${target.y}px) scale(1)` },
+      ],
+      { duration: fast ? 20 : 520, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' }
+    ).finished;
+    fillCell(rank, name);
+    cell.classList.remove('landed');
+    void cell.offsetWidth;
+    cell.classList.add('landed');
+    spot.remove();
+  }
+
+  async function runDraw(v) {
+    animating = true;
+    animatedDrawId = v.drawId;
+    fast = false;
+    const order = v.order;
+    buildBoard(v, null);
+    buildWheel(v.teams);
+    $('wcNo').textContent = '';
+    $('wcLabel').textContent = 'シャッフル中…';
+    $('wheel').classList.add('show');
+    await wait(500);
+    await spinOffset(wheel.offset + TAU * 3, 2000, easeInOut);
+
+    for (let r = 0; r < order.length; r++) {
+      const cell = $('board').children[r];
+      cell.classList.add('target');
+      $('wcNo').textContent = r + 1;
+      $('wcLabel').textContent = r === order.length - 1 ? '番目は、最後の…' : '番目は…';
+      await wait(r === 0 ? 600 : 200);
+      const k = wheel.chips.findIndex((c) => c.name === order[r]);
+      const remain = wheel.chips.length;
+      if (remain > 1) await spinTo(k, r === 0 ? 3400 : remain <= 3 ? 2200 : 1300, r === 0 ? 4 : 2);
+      else await wait(600);
+      const chip = wheel.chips[k];
+      chip.el.classList.add('picked');
+      Sound.hit();
+      await wait(350);
+      await spotlight(r, order[r]);
+      chip.el.remove();
+      wheel.chips.splice(k, 1);
+      await wait(r === order.length - 1 ? 0 : 250);
+    }
+
+    $('wheel').classList.remove('show');
+    cancelAnimationFrame(wheel.raf);
+    fast = false;
+    Sound.fanfare();
+    confetti();
+    try { await post('/api/finish', { drawId: v.drawId }); } catch {}
+    animating = false;
+    if (pending) { const p = pending; pending = null; render(p); }
+  }
+
+  // ---------- 紙吹雪 ----------
+  function confetti() {
+    const cv = $('confetti'), ctx = cv.getContext('2d');
+    const colors = ['#0347F0', '#E6F617', '#2E6BFF', '#C6D400', '#0B1220'];
+    const ps = Array.from({ length: 260 }, () => ({
+      x: Math.random() * 1920, y: -20 - Math.random() * 600,
+      vx: (Math.random() - 0.5) * 4, vy: 3 + Math.random() * 5,
+      w: 10 + Math.random() * 12, h: 6 + Math.random() * 8,
+      r: Math.random() * TAU, vr: (Math.random() - 0.5) * 0.3,
+      c: colors[(Math.random() * colors.length) | 0],
+    }));
+    const t0 = performance.now();
+    (function frame(now) {
+      ctx.clearRect(0, 0, 1920, 1080);
+      const alpha = Math.max(0, 1 - (now - t0 - 3500) / 1500);
+      ctx.globalAlpha = alpha;
+      for (const p of ps) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.04; p.r += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (alpha > 0) requestAnimationFrame(frame);
+      else ctx.clearRect(0, 0, 1920, 1080);
+    })(t0);
+  }
+
+  // ---------- 操作 ----------
+  $('startBtn').onclick = async () => {
+    Sound.init();
+    $('startBtn').disabled = true;
+    // 別の画面が先に押していた場合はエラーになるが、状態の更新で演出が始まるので何もしない
+    try { await post('/api/start'); } catch { $('startBtn').disabled = false; }
+  };
+
+  $('clearBtn').onclick = async () => {
+    if (!confirm('エントリーと結果をすべて消して、最初からにしますか？')) return;
+    if (animating) fast = true;
+    try { await post('/api/reset'); } catch (e) { alert(e.message); }
+  };
+
+  function adminMsg(t) { $('adminMsg').textContent = t || ''; }
+  $('gear').onclick = () => { $('admin').hidden = !$('admin').hidden; adminMsg(); };
+  $('addBtn').onclick = async () => {
+    adminMsg();
+    try { await post('/api/host/add', { name: $('addName').value }); $('addName').value = ''; } catch (e) { adminMsg(e.message); }
+  };
+  $('addName').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.isComposing) $('addBtn').click(); });
+  function soundLabel() { $('soundBtn').textContent = '効果音：' + (Sound.on ? 'ON' : 'OFF'); }
+  $('soundBtn').onclick = () => { Sound.on = !Sound.on; soundLabel(); };
+  soundLabel();
+  $('skipBtn').onclick = () => { if (animating) fast = true; };
+  function toggleFs() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(() => {});
+  }
+  $('fsBtn').onclick = toggleFs;
+  $('redrawBtn').onclick = async () => {
+    if (!confirm('同じチームのまま、抽選をやり直しますか？（今の結果は消えます）')) return;
+    if (animating) fast = true;
+    try { await post('/api/host/reset', { keepTeams: true }); } catch (e) { adminMsg(e.message); }
+  };
+  $('resetBtn').onclick = async () => {
+    if (!confirm('エントリーを全部消して最初からにしますか？')) return;
+    if (animating) fast = true;
+    try { await post('/api/host/reset', { keepTeams: false }); } catch (e) { adminMsg(e.message); }
+  };
+  addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT') return;
+    if (e.key === 'f' || e.key === 'F') toggleFs();
+    if ((e.key === 's' || e.key === 'S') && animating) fast = true;
+  });
+
+  loadInfo();
+  connect();
+</script>
+</body>
+</html>

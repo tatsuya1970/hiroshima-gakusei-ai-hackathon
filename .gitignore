@@ -11,3 +11,6 @@
 tools/node_modules/
 tools/*.html
 tools/package-lock.json
+
+# 発表順抽選アプリの保存データ（エントリー内容・ホスト用key）
+tools/presentation-order/state.json
