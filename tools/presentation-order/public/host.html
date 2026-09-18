@@ -98,6 +98,9 @@
   #gear:hover { opacity: 1; }
   #clearBtn { position: fixed; right: 10px; top: 10px; z-index: 100; padding: 8px 16px; border: 1px solid var(--rule); background: rgba(255, 255, 255, .8); color: var(--muted); font-weight: 700; font-size: 14px; opacity: .6; }
   #clearBtn:hover { opacity: 1; color: #d0183b; border-color: #d0183b; }
+  #pptxBtn { position: fixed; right: 10px; bottom: 10px; z-index: 100; padding: 10px 18px; border: 0; background: var(--blue); color: var(--white); font-weight: 800; font-size: 14px; opacity: .85; }
+  #pptxBtn:hover { opacity: 1; }
+  #pptxBtn:disabled { background: var(--muted); }
   #admin { position: fixed; left: 10px; top: 54px; z-index: 100; width: 340px; background: var(--white); border: 1px solid var(--rule); box-shadow: 0 10px 30px rgba(0, 0, 0, .15); padding: 16px; font-size: 14px; }
   #admin h3 { margin: 14px 0 6px; font-size: 12px; font-family: var(--mono); color: var(--muted); letter-spacing: .08em; }
   #admin h3:first-child { margin-top: 0; }
@@ -150,6 +153,7 @@
 <div class="offline" id="offline">サーバーとの接続が切れています</div>
 <button id="gear" title="管理メニュー">⚙</button>
 <button id="clearBtn" title="エントリーと結果をすべて消して最初からにする" hidden>クリア</button>
+<button id="pptxBtn" title="発表順のスライドを .pptx で保存する" hidden>PowerPointで保存</button>
 <div id="admin" hidden>
   <h3>代理エントリー</h3>
   <div class="inline"><input id="addName" maxlength="24" placeholder="チーム名"><button id="addBtn">追加</button></div>
@@ -311,6 +315,7 @@
     view = v;
     $('cap').textContent = v.capacity;
     $('redrawBtn').disabled = v.phase === 'lobby';
+    $('pptxBtn').hidden = v.phase !== 'done';
 
     if (v.phase === 'lobby') {
       renderLobby(v);
@@ -580,6 +585,84 @@
     $('startBtn').disabled = true;
     // 別の画面が先に押していた場合はエラーになるが、状態の更新で演出が始まるので何もしない
     try { await post('/api/start'); } catch { $('startBtn').disabled = false; }
+  };
+
+  // ---------- PowerPoint 保存 ----------
+  // 結果画面（1920x1080 の舞台）と同じ配置で、編集できる図形とテキストのスライドを作る
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('ライブラリを読み込めませんでした（インターネット接続を確認してください）'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function savePptx(v) {
+    if (typeof PptxGenJS !== 'function') await loadScript('https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js');
+    const IN = 13.333 / 1920; // 舞台 1px → インチ
+    const PT = 0.5; // 舞台 1px の文字 → ポイント（13.333in × 72pt / 1920px）
+    const X = (px) => px * IN;
+    const FONT = 'Yu Gothic';
+    const MONO = 'Consolas';
+    const C = { blue: '0347F0', lime: 'E6F617', tint: 'F3F7FF', grid: 'E6EEFF', ink: '0B1220', muted: '5D6883', rule: 'D8E2F5', white: 'FFFFFF' };
+
+    const pptx = new PptxGenJS();
+    pptx.layout = 'LAYOUT_WIDE'; // 16:9（13.333 × 7.5 in）
+    pptx.title = '発表順';
+    const slide = pptx.addSlide();
+    slide.background = { color: C.tint };
+
+    // 方眼
+    for (let x = 64; x < 1920; x += 64) slide.addShape(pptx.ShapeType.line, { x: X(x), y: 0, w: 0, h: 7.5, line: { color: C.grid, width: 0.75 } });
+    for (let y = 64; y < 1080; y += 64) slide.addShape(pptx.ShapeType.line, { x: 0, y: X(y), w: 13.333, h: 0, line: { color: C.grid, width: 0.75 } });
+
+    const text = (t, x, y, w, h, o) => slide.addText(t, { x: X(x), y: X(y), w: X(w), h: X(h), margin: 0, fontFace: FONT, valign: 'middle', ...o });
+
+    // 見出し
+    slide.addShape(pptx.ShapeType.rect, { x: X(88), y: X(74), w: X(520), h: X(48), fill: { color: C.blue }, line: { color: C.blue } });
+    text(`${v.time}  PRESENTATION`, 88, 74, 520, 48, { fontFace: MONO, fontSize: 20 * PT, bold: true, color: C.white, align: 'center', charSpacing: 1 });
+    text(v.time, 1432, 66, 400, 60, { fontFace: MONO, fontSize: 40 * PT, bold: true, color: C.blue, align: 'right' });
+    text('発表順', 84, 132, 1000, 100, { fontSize: 76 * PT, bold: true, color: C.ink });
+    text(v.note, 88, 246, 1744, 50, { fontSize: 30 * PT, bold: true, color: C.muted });
+
+    // チーム名の幅から文字サイズを決める（全角 1em・半角 0.6em で概算し、枠からはみ出さないようにする）
+    const fitSize = (name, maxPx, widthPx) => {
+      const em = [...name].reduce((n, ch) => n + (/[\x20-\x7e]/.test(ch) ? 0.6 : 1), 0);
+      return Math.max(12, Math.min(maxPx, Math.floor(widthPx / em))) * PT;
+    };
+
+    // 発表順ボード（2列 × 4行）
+    const colW = (1920 - 88 * 2 - 28) / 2, rowH = 132;
+    v.order.forEach((name, i) => {
+      const cx = 88 + (i % 2) * (colW + 28);
+      const cy = 338 + Math.floor(i / 2) * (rowH + 22);
+      slide.addShape(pptx.ShapeType.rect, { x: X(cx), y: X(cy), w: X(colW), h: X(rowH), fill: { color: C.white }, line: { color: C.rule, width: 0.75 } });
+      slide.addShape(pptx.ShapeType.rect, { x: X(cx + 36), y: X(cy + 29), w: X(74), h: X(74), fill: { color: C.blue }, line: { color: C.blue } });
+      text(String(i + 1), cx + 36, cy + 29, 74, 74, { fontSize: 34 * PT, bold: true, color: C.white, align: 'center' });
+      const nx = cx + 36 + 74 + 34, nw = colW - (36 + 74 + 34) - 38;
+      slide.addShape(pptx.ShapeType.rect, { x: X(nx), y: X(cy + 22), w: X(nw), h: X(88), fill: { color: C.lime }, line: { color: C.lime } });
+      text(name, nx + 24, cy + 22, nw - 48, 88, { fontSize: fitSize(name, 36, nw - 48), bold: true, color: C.ink, align: 'center' });
+    });
+
+    // フッター
+    text('HIROSHIMA STUDENT AI HACKATHON 2026', 88, 1016, 800, 24, { fontFace: MONO, fontSize: 16 * PT, bold: true, color: C.muted });
+    text('hiroshima-ai-hackathon.jp', 1032, 1016, 800, 24, { fontFace: MONO, fontSize: 16 * PT, bold: true, color: C.muted, align: 'right' });
+
+    const d = new Date();
+    const stamp = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+    await pptx.writeFile({ fileName: `発表順_${stamp}.pptx` });
+  }
+
+  $('pptxBtn').onclick = async () => {
+    if (!view || !view.order) return;
+    const btn = $('pptxBtn');
+    btn.disabled = true;
+    btn.textContent = '作成中…';
+    try { await savePptx(view); } catch (e) { alert(e.message); }
+    btn.disabled = false;
+    btn.textContent = 'PowerPointで保存';
   };
 
   $('clearBtn').onclick = async () => {
