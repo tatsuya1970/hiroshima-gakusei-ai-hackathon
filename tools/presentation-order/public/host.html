@@ -60,6 +60,8 @@
   }
   #startBtn:active:not(:disabled) { transform: translateY(6px); box-shadow: 0 2px 0 var(--lime-deep); }
   #startBtn:disabled { background: var(--tint-alt); color: #9aa6c2; box-shadow: none; animation: none; font-size: 30px; }
+  /* 定員に満たないときはラベルが長くなるので小さめに */
+  #startBtn.sub { font-size: 30px; letter-spacing: .06em; }
   @keyframes glow { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 22px rgba(198, 212, 0, .9)); } }
 
   /* ---- 発表順ボード ---- */
@@ -94,8 +96,8 @@
   #confetti { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
 
   /* ---- 管理パネル（舞台の外） ---- */
-  #gear { position: fixed; left: 10px; top: 10px; z-index: 100; width: 36px; height: 36px; border: 0; background: rgba(255, 255, 255, .6); color: var(--muted); font-size: 20px; opacity: .35; }
-  #gear:hover { opacity: 1; }
+  #gear { position: fixed; left: 10px; top: 10px; z-index: 100; height: 36px; padding: 0 14px; border: 1px solid var(--rule); background: rgba(255, 255, 255, .85); color: var(--muted); font-size: 15px; font-weight: 700; opacity: .75; }
+  #gear:hover { opacity: 1; color: var(--blue); border-color: var(--blue); }
   #clearBtn { position: fixed; right: 10px; top: 10px; z-index: 100; padding: 8px 16px; border: 1px solid var(--rule); background: rgba(255, 255, 255, .8); color: var(--muted); font-weight: 700; font-size: 14px; opacity: .6; }
   #clearBtn:hover { opacity: 1; color: #d0183b; border-color: #d0183b; }
   #pptxBtn { position: fixed; right: 10px; bottom: 10px; z-index: 100; padding: 10px 18px; border: 0; background: var(--blue); color: var(--white); font-weight: 800; font-size: 14px; opacity: .85; }
@@ -151,8 +153,8 @@
 </div>
 
 <div class="offline" id="offline">サーバーとの接続が切れています</div>
-<button id="gear" title="管理メニュー">⚙</button>
-<button id="clearBtn" title="エントリーと結果をすべて消して最初からにする" hidden>クリア</button>
+<button id="gear" title="代理エントリー・やり直し・リセット">⚙ 管理メニュー</button>
+<button id="clearBtn" title="エントリーと結果をすべて消して最初からにする" hidden>リセット</button>
 <button id="pptxBtn" title="発表順のスライドを .pptx で保存する" hidden>PowerPointで保存</button>
 <div id="admin" hidden>
   <h3>代理エントリー</h3>
@@ -180,10 +182,8 @@
   const KEY = new URLSearchParams(location.search).get('key') || '';
   // /screen は閲覧専用（ボタン・管理メニューなし。演出と結果だけ同じように流れる）
   const IS_HOST = location.pathname === '/host';
-  if (!IS_HOST) {
-    $('gear').hidden = true;
-    $('clearBtn').hidden = false;
-  }
+  if (!IS_HOST) $('gear').hidden = true; // /screen に管理メニューは出さない
+  $('clearBtn').hidden = false; // リセットはどちらの画面からも押せるように右上に出す
   const stage = $('stage');
   let view = null;
   let pending = null;
@@ -193,6 +193,9 @@
   let joinUrls = [];
   let urlIndex = 0;
   let fast = false;
+  const MIN_TEAMS = 2; // server.mjs と同じ値
+  let confirming = false; // 定員に満たないまま開始するときの「もう一度押す」待ち
+  let confirmTimer = null;
 
   // ---------- 舞台のスケーリング ----------
   let scale = 1;
@@ -365,8 +368,12 @@
     const n = v.teams.length, full = n >= v.capacity;
     $('count').textContent = n;
     const btn = $('startBtn');
-    btn.disabled = !full;
-    btn.textContent = full ? '▶ 抽選スタート' : `あと ${v.capacity - n} チーム`;
+    // エントリーが変わったら「もう一度押す」の確認待ちは取り消す
+    confirming = false;
+    clearTimeout(confirmTimer);
+    btn.disabled = n < MIN_TEAMS;
+    btn.classList.toggle('sub', !full);
+    btn.textContent = full ? '▶ 抽選スタート' : n < MIN_TEAMS ? `あと ${MIN_TEAMS - n} チーム` : `▶ ${n}チームで抽選スタート`;
     if (fresh.length) Sound.join();
     if (full && prevTeams && prevTeams.length < v.capacity) setTimeout(() => Sound.ready(), 250);
     prevTeams = v.teams.slice();
@@ -582,6 +589,15 @@
   // ---------- 操作 ----------
   $('startBtn').onclick = async () => {
     Sound.init();
+    // 定員に満たないうちは誤って押されやすいので、2回押してもらう
+    if (view && view.teams.length < view.capacity && !confirming) {
+      confirming = true;
+      $('startBtn').textContent = `もう一度押すと${view.teams.length}チームで開始`;
+      clearTimeout(confirmTimer);
+      confirmTimer = setTimeout(() => { if (view && view.phase === 'lobby') renderLobby(view); }, 6000);
+      return;
+    }
+    confirming = false;
     $('startBtn').disabled = true;
     // 別の画面が先に押していた場合はエラーになるが、状態の更新で演出が始まるので何もしない
     try { await post('/api/start'); } catch { $('startBtn').disabled = false; }

@@ -67,7 +67,7 @@
 <main>
   <span class="tag">PRESENTATION ORDER</span>
   <h1>発表順エントリー</h1>
-  <p class="lead" id="lead">チーム名を入力してください。全チームそろったら、会場の大画面で発表順を決めます。</p>
+  <p class="lead" id="lead">チーム名を入力してください。そろったら、会場の大画面で発表順を決めます。</p>
 
   <!-- 入力 -->
   <section class="card" id="formView" hidden>
@@ -194,8 +194,8 @@
     $('lead').textContent =
       view.phase === 'done' ? '発表順が決まりました。' :
       view.phase === 'drawing' ? '発表順を抽選しています。' :
-      you ? 'エントリーできました。全チームそろったら、大画面で発表順を決めます。' :
-      'チーム名を入力してください。全チームそろったら、会場の大画面で発表順を決めます。';
+      you ? 'エントリーできました。そろったら、大画面で発表順を決めます。' :
+      'チーム名を入力してください。そろったら、会場の大画面で発表順を決めます。';
 
     if (you) { $('myNo').textContent = you.no; $('myName').textContent = you.name; }
 

@@ -21,6 +21,7 @@ const STATE_FILE = path.join(DIR, 'state.json');
 const PORT = Number(process.env.PORT) || 3000;
 const PUBLIC_URL = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
 const NAME_MAX = 24;
+const MIN_TEAMS = 2; // 定員に満たなくても、これだけそろえば抽選できる
 
 // 状態はファイルにも保存し、サーバーを再起動してもエントリーが消えないようにする
 let state = loadState();
@@ -215,10 +216,10 @@ const server = http.createServer(async (req, res) => {
     }
 
     // ---- 抽選の開始・演出終了（公開大画面 /screen からも押せるので key 不要） ----
-    // 開始できるのは全チームそろったロビー状態のときだけ。二重に押されても 1 回しか抽選しない
+    // 定員に満たなくても MIN_TEAMS 以上そろっていれば開始できる。二重に押されても 1 回しか抽選しない
     if (p === '/api/start') {
       if (state.phase !== 'lobby') return json(res, 409, { error: 'すでに抽選済みです' });
-      if (state.teams.length !== CONFIG.capacity) return json(res, 409, { error: '全チームのエントリーがそろっていません' });
+      if (state.teams.length < MIN_TEAMS) return json(res, 409, { error: `エントリーが${MIN_TEAMS}チーム以上必要です` });
       state.order = shuffledIndexes(state.teams.length);
       state.phase = 'drawing';
       state.drawId += 1;
