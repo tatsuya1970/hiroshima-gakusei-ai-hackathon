@@ -437,7 +437,6 @@
   @media(max-width:560px){
     .bar .wrap{gap:12px}
     .brand{font-size:.88rem}
-    .bar .btn{padding:.6em 1.1em;font-size:.76rem;white-space:nowrap}
   }
 
   /* ヘッダー内ナビ（広い画面） */
@@ -475,9 +474,6 @@
   .menu-panel a{display:block;padding:.85em 0;font-size:.86rem;font-weight:800;
     color:var(--ink-strong);text-decoration:none;border-bottom:1px solid var(--rule)}
   .menu-panel a:hover{color:var(--blue)}
-  .menu-panel a.ap{grid-column:1/-1;margin-top:1.1em;padding:.95em 1em;text-align:center;
-    background:var(--blue);color:#fff;border:1px solid var(--blue)}
-  .menu-panel a.ap:hover{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
   @media(min-width:1100px){
     .nav{display:flex;align-items:center;gap:14px}
     .bar .date{display:none}
@@ -497,15 +493,6 @@
   .btn.big{font-size:1rem;padding:1.05em 2.5em}
   .btn.sub{background:transparent;color:var(--ink-strong);border-color:var(--ink-strong)}
   .btn.sub:hover{background:var(--ink-strong);color:#fff}
-
-  /* ---------- 募集終了のお知らせ ---------- */
-  .closed{display:flex;flex-wrap:wrap;align-items:center;gap:.6em 1em;
-    background:var(--tint);border:1px solid var(--rule);border-left:5px solid var(--blue);
-    border-radius:2px;padding:1.05em 1.3em}
-  .closed .tag{flex:none;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
-    font-weight:700;background:var(--blue);color:#fff;padding:.4em .8em;border-radius:2px}
-  .closed p{margin:0;font-size:.94rem;font-weight:800;color:var(--ink-strong);line-height:1.85}
-  .closed p small{display:block;margin-top:.3em;font-size:.8rem;font-weight:700;color:var(--muted)}
 
   /* ---------- hero ---------- */
   .hero{position:relative;overflow:hidden;background:var(--tint);padding:clamp(40px,6vw,72px) 0 clamp(56px,7vw,84px)}
@@ -552,34 +539,122 @@
   .hero-photo .tagline{position:absolute;left:0;bottom:4%;background:var(--blue);color:#fff;
     font-weight:800;font-size:.8rem;letter-spacing:.04em;padding:.6em 1em;border-radius:2px}
 
-  .hero .lead{max-width:34em;margin:2.4em 0 0;font-size:clamp(.98rem,2vw,1.08rem);
-    font-weight:700;color:var(--ink);line-height:1.95}
-  .hero .lead b{color:var(--blue)}
-  .hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:1.8em}
-  .hero .cap{width:100%;font-size:.78rem;color:var(--muted);font-weight:700;line-height:1.8}
-  .hero .closed{margin-top:2em;max-width:34em}
+  /* ---------- thanks（開催御礼） ---------- */
+  .thanks{position:relative;overflow:hidden;background:var(--blue);color:#fff;
+    padding:clamp(56px,7.5vw,92px) 0 clamp(60px,8vw,104px)}
+  .thanks .wrap{position:relative;z-index:1}
+  .thanks::before{content:"THANK YOU";position:absolute;left:-.05em;bottom:-.3em;line-height:1;
+    font-family:var(--mono);font-weight:700;letter-spacing:-.04em;white-space:nowrap;
+    font-size:clamp(4.5rem,17vw,12rem);color:transparent;
+    -webkit-text-stroke:1.5px rgba(255,255,255,.14);pointer-events:none}
+  .thanks .en{display:flex;align-items:center;justify-content:center;gap:.9em;
+    font-family:var(--mono);font-size:.84rem;letter-spacing:.22em;color:var(--lime);
+    text-transform:uppercase;font-weight:700}
+  .thanks .en::before{content:"";width:30px;height:3px;background:var(--lime);flex:none}
+  .thanks h2{margin-top:.75em;color:#fff;font-weight:900;line-height:1.24;text-align:center;
+    font-size:clamp(1.6rem,7vw,3.2rem)}
+  /* 広い画面では1行に収まるので改行を消す */
+  @media(min-width:940px){.thanks h2 .nl{display:none}}
+  .thanks h2 .em{background:linear-gradient(transparent 62%,rgba(230,246,23,.9) 62%);
+    padding:0 .1em}
+  .thanks .msg{margin:1.7em auto 0;max-width:40em;font-weight:700;line-height:2;text-align:center;
+    font-size:clamp(.95rem,2vw,1.04rem);color:rgba(255,255,255,.92)}
+  .thanks .when2{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
+    gap:.3em 1.1em;margin:1.6em auto 0;padding-top:1.1em;
+    border-top:1px solid rgba(255,255,255,.45);max-width:32em}
+  .thanks .when2 .mono{font-size:clamp(1.1rem,3.4vw,1.4rem);font-weight:700;color:#fff}
+  .thanks .when2 span:not(.mono){font-size:.84rem;font-weight:700;color:rgba(255,255,255,.85)}
+  .group-photo{margin:clamp(30px,4.4vw,48px) 0 0}
+  .group-photo img{display:block;width:100%;height:auto;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);border-radius:2px}
+  .group-photo figcaption{margin-top:.9em;text-align:center;font-size:.78rem;font-weight:700;
+    letter-spacing:.02em;color:rgba(255,255,255,.82);line-height:1.8}
 
-  /* チラシ下部のライム帯。1pxのすき間を地色で見せて罫線にする */
-  .specband{margin-top:clamp(40px,6vw,64px);background:rgba(11,18,32,.26);
-    display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
-  @media(min-width:760px){.specband{grid-template-columns:repeat(3,1fr)}}
-  @media(min-width:1000px){.specband{grid-template-columns:repeat(6,1fr)}}
-  .specband .cell{background:var(--lime);padding:18px 16px}
-  .specband .k{display:block;font-size:.7rem;font-weight:800;letter-spacing:.08em;
-    color:rgba(11,18,32,.66)}
-  .specband .v{display:block;margin-top:.25em;font-weight:900;color:var(--ink-strong);
-    font-size:1.08rem;line-height:1.35;font-feature-settings:"palt" 1}
-  .specband .v small{display:block;margin-top:.3em;font-size:.68em;font-weight:700;
-    color:rgba(11,18,32,.62);line-height:1.5}
-  .specband .v small.in{display:inline;margin:0 0 0 .35em;font-size:.62em;letter-spacing:.08em}
+  /* ---------- report：当日のテーマ ---------- */
+  .theme{margin-top:clamp(30px,4.2vw,46px);display:flex;flex-wrap:wrap;align-items:center;
+    gap:.5em 1.4em;background:var(--blue);color:#fff;border-radius:2px;
+    padding:clamp(1em,2.6vw,1.45em) clamp(1.2em,3vw,1.8em)}
+  .theme .en{font-family:var(--mono);font-size:.8rem;font-weight:700;letter-spacing:.2em;
+    color:var(--lime);text-transform:uppercase}
+  .theme p{margin:0;font-weight:900;line-height:1.35;letter-spacing:.02em;
+    font-size:clamp(1.35rem,4.6vw,2.05rem);font-feature-settings:"palt" 1}
+  .theme .w{display:inline-block;margin-left:.15em;padding:0 .3em;
+    background:var(--lime);color:var(--ink-strong)}
+  .theme .sub{font-size:.82rem;font-weight:700;line-height:1.8;color:rgba(255,255,255,.88)}
+  @media(min-width:760px){.theme .sub{margin-left:auto;text-align:right}}
+
+  /* ---------- report：受賞作品（作品単位） ---------- */
+  .works{margin-top:var(--gap);display:grid;gap:clamp(54px,6.5vw,88px)}
+  .wk{border-top:1px solid var(--ink-strong);padding-top:24px}
+  /* 賞のラベルは大きく、主役として置く */
+  .wk-labs{display:flex;flex-wrap:wrap;gap:10px}
+  .wk-labs .lab{font-weight:900;font-size:clamp(.86rem,2.4vw,1.08rem);letter-spacing:.08em;
+    color:#fff;background:var(--blue);border-radius:2px;padding:.55em 1.15em;
+    font-feature-settings:"palt" 1}
+  .wk-labs .lab.gold{background:var(--lime);color:var(--ink-strong)}
+  .wk-labs .lab.mid{background:var(--blue-mid)}
+  .wk-labs .lab.deep{background:var(--blue-deep)}
+  .wk-note{display:flex;flex-wrap:wrap;gap:.2em 1.5em;margin:.9em 0 0;font-size:.8rem;
+    font-weight:700;color:var(--muted);line-height:1.8}
+  /* 受賞の写真：切り抜かずに大きく */
+  .wk-hero{margin:24px 0 0}
+  .wk-hero img{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;
+    max-height:min(62vh,560px);border-radius:2px;background:var(--tint-alt)}
+  .wk-team{display:block;margin-top:1.15em;font-size:clamp(1.25rem,3.2vw,1.62rem);
+    font-weight:900;color:var(--ink-strong);line-height:1.3;letter-spacing:.01em}
+  .wk-name{display:block;margin-top:.35em;font-size:clamp(1.02rem,2.4vw,1.22rem);
+    font-weight:900;color:var(--ink-strong);line-height:1.45;letter-spacing:.01em}
+  .wk-name small{font-size:.82em;font-weight:700;color:var(--muted)}
+  /* 作品のスクリーンショットと内容 */
+  .wk-main{margin-top:22px;display:grid;gap:18px}
+  @media(min-width:760px){
+    .wk-main{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:0 32px;align-items:center}
+  }
+  .wk-shot{overflow:hidden;border-radius:2px}
+  .wk-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;
+    background:var(--ink-strong);border:1px solid var(--rule);border-radius:2px;
+    transition:transform .4s cubic-bezier(.22,1,.36,1)}
+  .wk-shot:hover img{transform:scale(1.03)}
+  .wk-txt p{margin:0;font-size:.88rem;font-weight:600;color:var(--muted);line-height:1.95}
+
+  /* そのほかの作品 */
+  .order-note{margin:.9em 0 0;font-size:.82rem;font-weight:700;color:var(--muted);line-height:1.8}
+  .entries{display:grid;gap:30px 24px;grid-template-columns:minmax(0,1fr);margin-top:26px}
+  @media(min-width:680px){.entries{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(min-width:1000px){.entries{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .ent{min-width:0;border-top:1px solid var(--rule);padding-top:18px}
+  .ent .ph{overflow:hidden;border-radius:2px}
+  .ent .ph img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;
+    background:var(--ink-strong);border:1px solid var(--rule);border-radius:2px;
+    transition:transform .4s cubic-bezier(.22,1,.36,1)}
+  .ent:hover .ph img{transform:scale(1.04)}
+  .ent .e-team{display:block;margin-top:.95em;font-size:1.05rem;font-weight:900;
+    color:var(--ink-strong);line-height:1.4}
+  .ent .e-name{display:block;margin-top:.3em;font-size:.92rem;font-weight:900;
+    color:var(--ink-strong);line-height:1.5}
+  .ent .e-name small{font-size:.82em;font-weight:700;color:var(--muted)}
+  .ent p{margin:.7em 0 0;font-size:.82rem;font-weight:600;color:var(--muted);line-height:1.9}
+
+  .gal-head{margin-top:clamp(48px,6vw,76px);font-weight:900;letter-spacing:.02em;
+    font-size:clamp(1.1rem,2.8vw,1.35rem);color:var(--ink-strong);
+    padding-bottom:.7em;border-bottom:1px solid var(--ink-strong)}
+  .gallery{display:grid;gap:22px 20px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:26px}
+  @media(min-width:760px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 24px}}
+  .shot{margin:0;min-width:0}
+  .shot .ph{overflow:hidden;background:var(--tint-alt);border-radius:2px}
+  .shot img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;
+    transition:transform .4s cubic-bezier(.22,1,.36,1)}
+  .shot:hover img{transform:scale(1.05)}
+  .shot figcaption{margin-top:.7em;font-size:.8rem;font-weight:700;color:var(--muted);
+    line-height:1.75}
 
   /* ---------- section base ---------- */
   section{padding:clamp(64px,8vw,110px) 0}
   section.alt{background:var(--tint)}
   .sec-head{max-width:none}
-  .sec-head .en{display:flex;align-items:center;gap:.9em;font-family:var(--mono);font-size:.68rem;
-    letter-spacing:.24em;color:var(--blue);text-transform:uppercase;font-weight:700}
-  .sec-head .en::before{content:"";width:26px;height:3px;background:var(--lime);flex:none}
+  .sec-head .en{display:flex;align-items:center;gap:.9em;font-family:var(--mono);font-size:.84rem;
+    letter-spacing:.22em;color:var(--blue);text-transform:uppercase;font-weight:700}
+  .sec-head .en::before{content:"";width:30px;height:3px;background:var(--lime);flex:none}
   .sec-head h2{font-size:clamp(1.55rem,3.9vw,2.3rem);font-weight:900;margin-top:.7em}
   .sec-head h2 .em{color:var(--blue)}
   .sec-head p{max-width:38em;color:var(--muted);font-weight:600;margin:1.1em 0 0;
@@ -755,27 +830,6 @@
   .sponsors a:hover{opacity:.75}
   .sponsors img{display:block;width:260px;max-width:100%;height:auto}
 
-  /* ---------- final ---------- */
-  /* チラシ下部のブルー帯を、そのままページの締めに使う */
-  .final{background:var(--blue);color:#fff;padding:clamp(72px,9vw,120px) 0}
-  .final h2{color:#fff;font-size:clamp(1.9rem,5.2vw,3.1rem);font-weight:900;line-height:1.24}
-  .final h2 .em{color:var(--lime)}
-  .final .when2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3em 1.1em;
-    margin-top:1.8em;padding-top:1.1em;border-top:1px solid rgba(255,255,255,.45);max-width:32em}
-  .final .when2 .mono{font-size:clamp(1.16rem,3.6vw,1.5rem);font-weight:700;color:#fff}
-  .final .when2 span:not(.mono){font-size:.84rem;font-weight:700;color:rgba(255,255,255,.85)}
-  .final .btn{margin-top:2em;background:var(--lime);border-color:var(--lime);color:var(--ink-strong)}
-  .final .btn:hover{background:#fff;border-color:#fff;color:var(--ink-strong)}
-  .final .closed{margin:2.2em auto 0;max-width:38em;justify-content:center;text-align:center;
-    background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.42);border-left-color:var(--lime)}
-  .final .closed .tag{background:var(--lime);color:var(--ink-strong)}
-  .final .closed p{color:#fff}
-  .final .closed p small{color:rgba(255,255,255,.85)}
-  .final .note{font-size:.8rem;color:rgba(255,255,255,.82);font-weight:600;margin-top:2em;
-    line-height:2;max-width:44em}
-  .final .note a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55)}
-  .final .note a:hover{border-color:#fff}
-
   /* ---------- footer ---------- */
   footer{background:var(--ink-strong);color:#9FADC7;padding:34px 0;font-size:.78rem;font-weight:600}
   footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
@@ -813,17 +867,13 @@
 
   /* hero：ロードイン */
   @media(prefers-reduced-motion:no-preference){
-    .hero-copy>*,.hero-photo .ph-in,.hero .lead,.hero .closed,.hero .cta,.hero .specband{
+    .hero-copy>*,.hero-photo .ph-in{
       opacity:0;transform:translateY(18px);
       animation:rise .75s cubic-bezier(.22,1,.36,1) forwards}
     .hero-copy>*:nth-child(1){animation-delay:.05s}
     .hero-copy>*:nth-child(2){animation-delay:.16s}
     .hero-copy>*:nth-child(3){animation-delay:.3s}
     .hero-photo .ph-in{animation-delay:.22s}
-    .hero .lead{animation-delay:.42s}
-    .hero .closed{animation-delay:.5s}
-    .hero .cta{animation-delay:.6s}
-    .hero .specband{animation-delay:.62s}
   }
   @keyframes rise{to{opacity:1;transform:none}}
 
@@ -871,13 +921,27 @@
   .qa summary{transition:color .15s ease}
   .qa summary:hover{color:var(--blue)}
 
-  /* final：背景に白フチの大型タイポ */
-  .final{position:relative;overflow:hidden}
-  .final .wrap{position:relative;z-index:1}
-  .final::before{content:"ENTRY";position:absolute;right:-.06em;bottom:-.16em;
-    line-height:1;font-family:var(--mono);font-weight:700;letter-spacing:-.04em;
-    font-size:clamp(5.5rem,20vw,14rem);color:transparent;
-    -webkit-text-stroke:1.5px rgba(255,255,255,.18);pointer-events:none}
+  /* ---------- ライトボックス（写真をクリックで大きく表示） ---------- */
+  .zoomable{cursor:zoom-in}
+  .zoomable:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .lb{width:100vw;max-width:100vw;height:100vh;max-height:100vh;margin:0;padding:0;border:0;
+    background:transparent;overflow:hidden}
+  .lb::backdrop{background:rgba(11,18,32,.93)}
+  .lb-in{position:fixed;inset:0;display:grid;place-items:center;
+    padding:clamp(16px,4vw,56px);cursor:zoom-out}
+  .lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:.9em;
+    max-width:100%;max-height:100%;cursor:default}
+  .lb img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100vh - 8rem);
+    border-radius:2px;background:var(--ink-strong)}
+  .lb figcaption{max-width:44em;color:rgba(255,255,255,.88);font-size:.82rem;font-weight:700;
+    line-height:1.8;text-align:center}
+  .lb-close{position:fixed;top:12px;right:12px;width:46px;height:46px;display:grid;
+    place-items:center;font-family:var(--mono);font-size:1rem;color:#fff;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.42);border-radius:2px;
+    cursor:pointer;transition:background .18s ease}
+  .lb-close:hover{background:rgba(255,255,255,.28)}
+  .lb-close:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  html.lb-open{overflow:hidden}
 
   /* スクロールリビール（JSが .rv を付与。JS無効時は常に表示） */
   .rv{opacity:0;transform:translateY(24px);
@@ -893,6 +957,7 @@
     <div class="wrap">
       <div class="brand">広島学生<span class="o">AI</span>ハッカソン 2026</div>
       <nav class="nav" aria-label="ページ内ナビゲーション">
+        <a href="#report">当日の様子</a>
         <a href="#features">特徴</a>
         <a href="#tools">AI・ツール</a>
         <a href="#flow">当日の流れ</a>
@@ -904,10 +969,10 @@
         <a href="#sponsors">協賛</a>
       </nav>
       <div class="date">2026.9.19（土）｜イノベーション・ハブ・ひろしまCamps</div>
-      <a class="btn" href="#apply">募集終了のお知らせ</a>
       <details class="menu">
         <summary aria-label="メニュー"><span class="ico" aria-hidden="true"></span></summary>
         <nav class="menu-panel" aria-label="ページ内ナビゲーション（メニュー）">
+          <a href="#report">当日の様子</a>
           <a href="#features">特徴</a>
           <a href="#tools">AI・ツール</a>
           <a href="#flow">当日の流れ</a>
@@ -917,12 +982,153 @@
           <a href="#overview">開催概要</a>
           <a href="#contact">お問い合わせ</a>
           <a href="#sponsors">協賛</a>
-          <a class="ap" href="#apply">募集終了のお知らせ</a>
         </nav>
       </details>
     </div>
     <div class="progress" aria-hidden="true"></div>
   </header>
+
+  <!-- ============ THANKS ============ -->
+  <section class="thanks" id="thanks">
+    <div class="wrap">
+      <span class="en">Thank you</span>
+      <h2>ご参加<br class="nl"><span class="em">ありがとうございました。</span></h2>
+      <p class="msg">2026年9月19日（土）、広島市中区のイノベーション・ハブ・ひろしまCampsで「広島学生AIハッカソン 2026」を開催しました。中学生・高校生あわせて8チーム（18人）が参加し、たった4時間で、ブラウザで動くWebアプリが8つ生まれました。参加してくれた学生のみなさん、審査員・協賛企業・関係者のみなさま、本当にありがとうございました。</p>
+      <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
+      <figure class="group-photo">
+        <img src="images/report/group.jpg" width="1600" height="1200" alt="賞状を手にした参加者と審査員・スタッフの集合写真" fetchpriority="high" decoding="async">
+        <figcaption>参加者・審査員・スタッフの集合写真（2026.9.19｜ひろしまCamps）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ REPORT ============ -->
+  <section id="report">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="en">Report</span>
+        <h2>当日の<span class="em">様子</span></h2>
+        <p>テーマ発表から4時間。つくって、公開して、発表した一日をふり返ります。</p>
+      </div>
+
+      <div class="theme">
+        <span class="en">Theme</span>
+        <p>テーマは<span class="w">夢</span></p>
+        <span class="sub">当日その場で発表された、全チーム共通のお題です</span>
+      </div>
+
+      <div class="works">
+
+        <article class="wk">
+          <div class="wk-labs">
+            <span class="lab gold">最優秀賞</span>
+            <span class="lab mid">オーディエンス賞</span>
+            <span class="lab deep">AI特別賞</span>
+          </div>
+          <p class="wk-note"><span>オーディエンス賞：参加者・観覧者の投票で1位</span><span>AI特別賞：AIが選んだ賞</span></p>
+          <figure class="wk-hero">
+            <img src="images/report/award-best.jpg" width="1600" height="825" alt="最優秀賞を受賞したMUGEN RAYと審査員" loading="lazy" decoding="async">
+          </figure>
+          <b class="wk-team">MUGEN RAY</b>
+          <span class="wk-name"><small>作品名：</small>MUGEN DREAMS</span>
+          <div class="wk-main">
+            <div class="wk-shot"><img src="images/report/work-mugen-dreams.jpg" width="1200" height="750" alt="MUGEN DREAMS の画面。夢の内容を入力してキャラクターを錬成する" loading="lazy" decoding="async"></div>
+            <div class="wk-txt">
+              <p>見た夢のことばを入力すると、AIがキャラクターカードを錬成。レアリティ付きで図鑑にたまっていき、カードどうしのバトル、キーボードで歩ける3Dの展示回廊、QRコードでのカード交換まで楽しめます。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="wk">
+          <div class="wk-labs">
+            <span class="lab">優秀賞</span>
+          </div>
+          <figure class="wk-hero">
+            <img src="images/report/award-excellence.jpg" width="1179" height="608" alt="優秀賞を受賞したLunA" loading="lazy" decoding="async">
+          </figure>
+          <b class="wk-team">LunA</b>
+          <span class="wk-name"><small>作品名：</small>DREAM JOURNAL &amp; WORLD</span>
+          <div class="wk-main">
+            <div class="wk-shot"><img src="images/report/work-dream-journal.jpg" width="1200" height="750" alt="DREAM JOURNAL &amp; WORLD の画面。夢を記録するメニュー" loading="lazy" decoding="async"></div>
+            <div class="wk-txt">
+              <p>夢を書いて記録すると、その内容から自分だけの街に建物が増えていく夢日記アプリ。できあがった街は3Dマップで歩いて探索でき、今日の夢占いや夢図鑑、実績集めも楽しめます。</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+
+      <div class="gal-head">そのほかの作品</div>
+      <p class="order-note">並び順は、当日の発表順です。</p>
+      <div class="entries">
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-arielogic.jpg" width="1200" height="750" alt="Dreamia の画面。今日見た夢を記録するフォーム" loading="lazy" decoding="async"></div>
+          <b class="e-team">Arielogic</b>
+          <span class="e-name"><small>作品名：</small>Dreamia</span>
+          <p>見た夢をことばにして残す夢日記アプリ。季節・時間帯・場所・心情などを選択肢から選んで夢を整理でき、テーマカラーも変えられます。記録は自分の端末（ログイン時はクラウド）に保存。</p>
+        </article>
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-sakuragaoka.jpg" width="1200" height="750" alt="夢の果てのクロニクルの画面。タイトル画面" loading="lazy" decoding="async"></div>
+          <b class="e-team">桜が丘</b>
+          <span class="e-name"><small>作品名：</small>夢の果てのクロニクル</span>
+          <p>夢の世界を旅するRPG。「忘れられた図書館」「雲上の庭園」「午前零時の汽車」などの夢に入り、集めた記憶は夢日記にたまっていきます。相棒はふわふわの案内人「ネム」。</p>
+        </article>
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-phoenix.jpg" width="1200" height="750" alt="Backrooms - Fire Phoenix Edition の画面。スタート画面" loading="lazy" decoding="async"></div>
+          <b class="e-team">ファイヤーフェニックス</b>
+          <span class="e-name"><small>作品名：</small>Backrooms - Fire Phoenix Edition</span>
+          <p>不気味な迷宮をさまよう3Dの脱出ホラー。鉄バットやライトを拾い、空腹と体力を見ながら「バケモン」から逃げ、夢から目覚めることを目指します。</p>
+        </article>
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-chami.jpg" width="1200" height="750" alt="夢からの脱出の画面。タイトル画面" loading="lazy" decoding="async"></div>
+          <b class="e-team">ちゃみ風</b>
+          <span class="e-name"><small>作品名：</small>夢からの脱出</span>
+          <p>3Dの家の中を調べて4つのかぎを集め、制限時間内に脱出する謎解きゲーム。マウスでもキーボードでも動かせて、小さい子でも遊べるやさしい操作です。</p>
+        </article>
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-makkorinz.jpg" width="1200" height="750" alt="3D メガシティ チェイスの画面。スタート画面" loading="lazy" decoding="async"></div>
+          <b class="e-team">マッコリンズ</b>
+          <span class="e-name"><small>作品名：</small>3D メガシティ チェイス</span>
+          <p>上空のマネードローンが落とす1万円の札束を集めながら、警察ヘリとパトカーの追跡を逃げ切る3Dアクション。自販機でドリンクを買うと移動スピードが上がります。</p>
+        </article>
+        <article class="ent">
+          <div class="ph"><img src="images/report/entry-ogamitsuruta.jpg" width="1200" height="750" alt="献立 &amp; カラダ管理プロの画面。1ヶ月の献立カレンダー" loading="lazy" decoding="async"></div>
+          <b class="e-team">オガミツルタ</b>
+          <span class="e-name"><small>作品名：</small>献立 &amp; カラダ管理プロ</span>
+          <p>1ヶ月分の献立を朝・昼・夕まで自動で組み立てるアプリ。卵・乳・小麦など9品目のアレルゲンを除外でき、タンパク質や鉄分などの栄養と「理想のカラダ目標」に合わせて献立が調整されます。</p>
+        </article>
+      </div>
+
+      <div class="gal-head">ハッカソンのようす</div>
+      <div class="gallery">
+        <figure class="shot">
+          <div class="ph"><img src="images/report/opening.jpg" width="1600" height="1200" alt="開会・オリエンテーションのようす" loading="lazy" decoding="async"></div>
+          <figcaption>開会・オリエンテーション</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="ph"><img src="images/report/dev-room.jpg" width="1179" height="663" alt="開発タイムの会場全体のようす" loading="lazy" decoding="async"></div>
+          <figcaption>開発タイム。会場ぜんたいが集中モードに</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="ph"><img src="images/report/dev-team.jpg" width="1600" height="1200" alt="1台のノートPCを囲んで開発する3人のようす" loading="lazy" decoding="async"></div>
+          <figcaption>開発タイム。1台の画面を囲んで話し合う</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="ph"><img src="images/report/dev-screen.jpg" width="1600" height="1200" alt="モニターとノートPCを前に開発する2人のようす" loading="lazy" decoding="async"></div>
+          <figcaption>開発タイム。AIと会話しながら形にしていく</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="ph"><img src="images/report/presentation-1.jpg" width="1600" height="1200" alt="スクリーンの前で発表する参加者" loading="lazy" decoding="async"></div>
+          <figcaption>発表。スクリーンで実際に動かして見せる</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="ph"><img src="images/report/presentation-2.jpg" width="1600" height="1200" alt="発表を見守る参加者と審査員" loading="lazy" decoding="async"></div>
+          <figcaption>発表。会場ぜんたいで作品を見る</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ HERO ============ -->
   <section class="hero">
@@ -946,22 +1152,6 @@
             <span class="tagline">AIと一緒に、想像をカタチに。</span>
           </div>
         </div>
-      </div>
-      <p class="lead"><b>AIに詳しくなくても大丈夫！</b>2〜3人のチームで、AIと会話しながらアイデアを実際に「動くWebアプリ」に。4時間で、つくって、試して、発表しよう！対象は広島県内の学校に通う13歳以上の中学生から大学生まで。</p>
-      <div class="closed">
-        <span class="tag">CLOSED</span>
-        <p>参加者の募集は締め切りました。たくさんのお申し込みをありがとうございました。<small>選考結果は、申し込んだすべてのチームへご連絡します。</small></p>
-      </div>
-      <div class="cta">
-        <a class="btn big sub" href="#flow">当日の流れを見る</a>
-      </div>
-      <div class="specband">
-        <div class="cell"><span class="k">参加条件</span><span class="v">13歳以上<small>中学生〜大学生</small></span></div>
-        <div class="cell"><span class="k">参加費</span><span class="v">無料</span></div>
-        <div class="cell"><span class="k">定員</span><span class="v">約25人<small>※選考あり</small></span></div>
-        <div class="cell"><span class="k">持ち物</span><span class="v">ノートPC<small>充電器も忘れずに！</small></span></div>
-        <div class="cell"><span class="k">応募締切</span><span class="v">9.7<small class="in">MON</small><small>受付終了</small></span></div>
-        <div class="cell"><span class="k">最優秀賞</span><span class="v">3万円<small>Amazonギフト券</small></span></div>
       </div>
     </div>
   </section>
@@ -1384,25 +1574,13 @@
     </div>
   </section>
 
-  <!-- ============ FINAL CTA ============ -->
+  <!-- ============ CLOSING ============ -->
   <div class="ticker lm" aria-hidden="true">
     <div class="ticker-in">
-      <span class="tk">ENTRY CLOSED<b>✦</b>参加者の募集は締め切りました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
-      <span class="tk">ENTRY CLOSED<b>✦</b>参加者の募集は締め切りました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>2〜3人チームで参加<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+      <span class="tk">THANK YOU!<b>✦</b>ご参加ありがとうございました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>広島学生AIハッカソン 2026<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
+      <span class="tk">THANK YOU!<b>✦</b>ご参加ありがとうございました<b>✦</b>2026.9.19 SAT 開催<b>✦</b>広島学生AIハッカソン 2026<b>✦</b>会場：ひろしまCamps<b>✦</b></span>
     </div>
   </div>
-  <section class="final" id="apply">
-    <div class="wrap">
-      <h2>参加者の募集は<br><span class="em">締め切りました</span></h2>
-      <div class="when2"><span class="mono">2026.9.19 SAT</span><span>イノベーション・ハブ・ひろしまCamps</span></div>
-      <div class="closed">
-        <span class="tag">CLOSED</span>
-        <p>たくさんのお申し込みをありがとうございました。<small>新規のお申し込みは受け付けていません。</small></p>
-      </div>
-      <div class="note">申込締切：2026年9月7日（月）／選考結果のご連絡：9月9日（水）<br>選考結果は、申し込んだすべてのチームへご連絡します<br>参加が決まった方は <a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>／<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">利用ガイドライン（PDF）</a> をご確認ください</div>
-    </div>
-  </section>
-
   <footer>
     <div class="wrap">
       <div><a href="pdf/terms.pdf" target="_blank" rel="noopener">参加規約（PDF）</a>　｜　<a href="pdf/ai-guideline.pdf" target="_blank" rel="noopener">生成AI・開発サービス 利用ガイドライン（PDF）</a>　｜　<a href="#contact">お問い合わせ</a></div>
@@ -1462,12 +1640,50 @@
     });
   }
 
+  /* 写真をクリックすると、もとの大きさで表示する（ライトボックス） */
+  (function(){
+    var sel=".group-photo img,.wk-hero img,.wk-shot img,.ent .ph img,.gallery .shot img";
+    var imgs=[].slice.call(document.querySelectorAll(sel));
+    var dlg=document.createElement("dialog");
+    if(!imgs.length||!dlg.showModal)return;
+    dlg.className="lb";
+    dlg.innerHTML='<div class="lb-in"><figure><img alt=""><figcaption></figcaption></figure></div>'+
+      '<button class="lb-close" type="button" aria-label="閉じる">✕</button>';
+    document.body.appendChild(dlg);
+    var big=dlg.querySelector("img"),cap=dlg.querySelector("figcaption");
+    function show(img){
+      big.src=img.currentSrc||img.src;
+      big.alt=img.alt||"";
+      var fig=img.closest("figure"),fc=fig&&fig.querySelector("figcaption");
+      cap.textContent=fc?fc.textContent:(img.alt||"");
+      dlg.showModal();
+      document.documentElement.classList.add("lb-open");
+    }
+    imgs.forEach(function(img){
+      img.classList.add("zoomable");
+      img.tabIndex=0;
+      img.setAttribute("role","button");
+      img.setAttribute("aria-label",(img.alt||"写真")+"を大きく表示");
+      img.addEventListener("click",function(){show(img)});
+      img.addEventListener("keydown",function(e){
+        if(e.key==="Enter"||e.key===" "){e.preventDefault();show(img)}
+      });
+    });
+    dlg.addEventListener("click",function(e){
+      if(!e.target.closest("figure"))dlg.close();
+    });
+    dlg.addEventListener("close",function(){
+      document.documentElement.classList.remove("lb-open");
+      big.removeAttribute("src");
+    });
+  })();
+
   /* スクロールリビール：JS無効・reduced-motion環境では何もしない（常に表示） */
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   if(!("IntersectionObserver" in window))return;
-  var sel=".sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
-    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,.contact,"+
-    ".final h2,.final .when2,.final .closed,.final .note";
+  var sel=".thanks .en,.thanks h2,.thanks .msg,.thanks .when2,.group-photo,.wk,.ent,.shot,"+
+    ".gal-head,.sec-head,.feat,.tools .t-sub,.tools .row,.tools .t-hint,.tools .t-note,.tools .t-box,"+
+    ".tt-row,.prize-hero,.judge h3,.jd,.ugoite,.mem,.org,.qa,.ov-row,.contact";
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(!e.isIntersecting)return;
