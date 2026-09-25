@@ -14,3 +14,6 @@ tools/package-lock.json
 
 # 発表順抽選アプリの保存データ（エントリー内容・ホスト用key）
 tools/presentation-order/state.json
+
+# 当日写真の原本 (最大 5MB/枚)。サイトで使う縮小版は images/report/ に置いている
+pics/
